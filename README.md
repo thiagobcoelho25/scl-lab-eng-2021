@@ -2,7 +2,7 @@
 sistema de controle de lanchonete "Claudio`s Lances", para o trabalho de Engenharia de Software do prof° Rafael Vargas.
 
 ## Propostas
-- A proposta desenvolvida com o Sistema de Controle de Lanchonete é, a partir de um software, automatizar/informatizar a lanchonete, agilizando os processos e mantendo a segurança e integridade da empresa com seus clientes.
+A proposta desenvolvida com o Sistema de Controle de Lanchonete é, a partir de um software, automatizar/informatizar a lanchonete, agilizando os processos e mantendo a segurança e integridade da empresa com seus clientes.
 
 - Deverão ser gerados relatórios de relacionados aos cadastros básicos, bem como os eventos.
 
