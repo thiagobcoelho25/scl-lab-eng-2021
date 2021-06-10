@@ -17,13 +17,11 @@ import edu.ifes.ci.si.les.scl.model.enums.EntregavelStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 
 @Data
-@Setter
-@Getter
 @AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 @Entity
 public class Bairro implements Serializable{
@@ -33,7 +31,6 @@ public class Bairro implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
 	
 	@NotBlank(message = "Nao pode ser vazio")
 	@Size(min = 1, max = 40, message = "Deve ter entre 1 e 40 caracteres")
