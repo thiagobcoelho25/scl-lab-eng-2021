@@ -14,8 +14,6 @@ public class Pedido implements Serializable{
 
 	private Usuario usuario;
 
-	private Endereco endereco;
-
 	private Collection<Cliente> cliente;
 
 	private Pagamento pagamento;
