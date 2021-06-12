@@ -2,17 +2,13 @@ package edu.ifes.ci.si.les.scl.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 import com.sun.istack.NotNull;
 
@@ -45,8 +41,9 @@ public class Entrega implements Serializable{
 	@Enumerated(EnumType.STRING)
 	private StatusEntrega status;
 	
-	@OneToMany
-	@Column(name = "pedido_id")
-	private List<Pedido> dados = new ArrayList<Pedido>();
+	//@OneToMany
+	//@Column(name = "pedido_id")
+	//private List<Pedido> dados = new ArrayList<Pedido>();
+	
 
 }

@@ -10,6 +10,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -36,12 +37,21 @@ public class Funcionario extends Usuario implements Serializable{
 	@Column(length = 20)
 	@NotBlank(message = "Cargo do Funcionario deve ser preenchido")
     @Size(min = 2, max = 20, message = "Cargo do Funcionario deve ter entre 2 a 20 caracteres")
-	private String Cargo;
+	private String cargo;
 	
 	@DecimalMin(value = "0.00")
 	@Digits(integer = 6, fraction = 2)
 	private Double salario;
 	
 	private String foto;
+	
+	@Builder
+    public Funcionario(Integer id, String nome, String rua, Integer numero, Bairro bairro, String login, String senha, String cargo, Double salario) {
+        super(id, nome, rua, numero, bairro);
+        this.login = login;
+        this.senha = senha;
+        this.salario = salario;
+        this.cargo = cargo;
+    }
 
 }

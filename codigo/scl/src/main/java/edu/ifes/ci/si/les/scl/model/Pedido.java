@@ -1,13 +1,25 @@
 package edu.ifes.ci.si.les.scl.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.*;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.validation.constraints.NotBlank;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Data
 @Setter
@@ -33,22 +45,22 @@ public class Pedido implements Serializable{
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date data;
 
-//	@NotBlank(message = "Usuário deve ser difinido")
-//	@ManyToOne
-//	@JoinColumn(name = "usuario_id", nullable = false)
-//	private Usuario usuario;
+	@NotBlank(message = "Usuário deve ser difinido")
+	@ManyToOne
+	@JoinColumn(name = "usuario_id", nullable = false)
+	private Usuario usuario;
 
 	@ManyToOne
 	@JoinColumn(name = "cliente_id", nullable = false)
 	private Cliente cliente;
 
-//	@OneToOne(cascade = CascadeType.ALL)
-//	@JoinColumn(name = "pagamento_id", referencedColumnName = "id")
-//	private Pagamento pagamento;
+	@OneToOne
+	@JoinColumn(name = "pagamento_id", referencedColumnName = "id")
+	private Pagamento pagamento;
 
-//	@ManyToOne
-//	@JoinColumn(name = "entrega_id")
-//	private Entrega entrega;
+	@ManyToOne
+	@JoinColumn(name = "entrega_id")
+	private Entrega entrega;
 
 //	@Builder
 //	public Pedido(Integer id, Date data, Usuario user, Cliente cliente/*, Pagamento pagamento, Entrega entrega*/) {

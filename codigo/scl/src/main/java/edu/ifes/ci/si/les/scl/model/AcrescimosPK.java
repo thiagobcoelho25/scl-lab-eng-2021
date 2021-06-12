@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 
 @Data
-@EqualsAndHashCode(of = {"itenspedido", "ingrediente"})
+@EqualsAndHashCode(of = {"itensPedido", "ingrediente"})
 @Embeddable
 public class AcrescimosPK implements Serializable {
 
