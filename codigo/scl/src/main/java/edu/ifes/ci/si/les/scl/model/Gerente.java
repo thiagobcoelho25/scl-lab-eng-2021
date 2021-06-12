@@ -1,6 +1,7 @@
 package edu.ifes.ci.si.les.scl.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

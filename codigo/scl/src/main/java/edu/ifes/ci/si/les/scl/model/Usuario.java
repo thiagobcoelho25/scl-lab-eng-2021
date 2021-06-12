@@ -1,13 +1,9 @@
 package edu.ifes.ci.si.les.scl.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -47,5 +43,8 @@ public abstract class Usuario implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "bairro_id")
 	private Bairro bairro;
+
+//	@OneToMany(mappedBy = "usuario")
+//	private Collection<Pedido> pedidos;
 
 }

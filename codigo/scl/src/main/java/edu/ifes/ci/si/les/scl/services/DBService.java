@@ -1,27 +1,19 @@
 package edu.ifes.ci.si.les.scl.services;
 
 import java.text.ParseException;
+import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Date;
 
+import edu.ifes.ci.si.les.scl.model.*;
+import edu.ifes.ci.si.les.scl.model.enums.StatusEntrega;
+import edu.ifes.ci.si.les.scl.model.enums.TipoFormaPagamento;
+import edu.ifes.ci.si.les.scl.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import edu.ifes.ci.si.les.scl.model.Bairro;
-import edu.ifes.ci.si.les.scl.model.Cliente;
-import edu.ifes.ci.si.les.scl.model.Estoque;
-import edu.ifes.ci.si.les.scl.model.Gerente;
-import edu.ifes.ci.si.les.scl.model.Ingrediente;
-import edu.ifes.ci.si.les.scl.model.Produto;
-import edu.ifes.ci.si.les.scl.model.ProdutosIngredientes;
 import edu.ifes.ci.si.les.scl.model.enums.EntregavelStatus;
 import edu.ifes.ci.si.les.scl.model.enums.TipoIngrediente;
-import edu.ifes.ci.si.les.scl.repositories.BairroRepository;
-import edu.ifes.ci.si.les.scl.repositories.ClienteRepository;
-import edu.ifes.ci.si.les.scl.repositories.EstoqueRepository;
-import edu.ifes.ci.si.les.scl.repositories.GerenteRepository;
-import edu.ifes.ci.si.les.scl.repositories.IngredienteRepository;
-import edu.ifes.ci.si.les.scl.repositories.ProdutoRepository;
-import edu.ifes.ci.si.les.scl.repositories.ProdutosIngredientesRepository;
 
 @Service
 public class DBService {
@@ -40,6 +32,16 @@ public class DBService {
 	private ProdutosIngredientesRepository produtosIngredientesRepository;
 	@Autowired
 	private ProdutoRepository produtoRepository;
+	@Autowired
+	private PedidoRepository pedidoRepository;
+	@Autowired
+	private ItensPedidoRepository itensPedidoRepository;
+	@Autowired
+	private AcrescimosRepository acrescimosRepository;
+//	@Autowired
+//	private PagamentoRepository pagamentoRepository;
+//	@Autowired
+//	private EntregaRepository entregaRepository;
 	
 	public void instantiateTestDatabase() throws ParseException{
 		//Instancia Estoque
@@ -67,6 +69,18 @@ public class DBService {
 		ProdutosIngredientes pi1 = new ProdutosIngredientes(p1, ingred1, 1, TipoIngrediente.secundario);
 		ProdutosIngredientes pi2 = new ProdutosIngredientes(p1, ingred2, 1, TipoIngrediente.principal);
 		ProdutosIngredientes pi3 = new ProdutosIngredientes(p2, ingred1, 2, TipoIngrediente.principal);
+
+		//Instancia Pedido
+//		Pagamento pag1 = new Pagamento(null, 100.0, 0.0, TipoFormaPagamento.cartao);
+//		Entrega entrega1 = new Entrega(null, LocalDateTime.now(), StatusEntrega.naoEntregue);
+		Pedido pd1 = new Pedido(null, new Date(), c1);
+
+		//Instancia ItensPedido
+		ItensPedido ip1 = new ItensPedido(null, p1, pd1);
+
+		//Instancia Acrescimos
+		Acrescimos ac1 = new Acrescimos(ip1, ingred1, 2);
+
 		
 		//------------------------------------------------------------------------------------------
 		bairroRep.saveAll(Arrays.asList(b1,b2));
@@ -76,6 +90,11 @@ public class DBService {
 		ingredienteRepository.saveAll(Arrays.asList(ingred1,ingred2));
 		produtoRepository.saveAll(Arrays.asList(p1,p2));
 		produtosIngredientesRepository.saveAll(Arrays.asList(pi1,pi2,pi3));
+//		entregaRepository.save(entrega1);
+//		pagamentoRepository.save(pag1);
+		pedidoRepository.save(pd1);
+		itensPedidoRepository.save(ip1);
+		acrescimosRepository.save(ac1);
 	}
 	
 }
