@@ -9,3 +9,6 @@ buildNumber.properties
 .mvn/timing.properties
 # https://github.com/takari/maven-wrapper#usage-without-binary-jar
 .mvn/wrapper/maven-wrapper.jar
+/codigo/frontend/frontend-scl/nbproject/private/
+/codigo/frontend/frontend-scl/build/
+/codigo/frontend/frontend-scl/dist/
