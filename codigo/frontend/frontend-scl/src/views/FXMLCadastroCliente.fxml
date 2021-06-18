@@ -5,23 +5,26 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../Style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="438.0" prefWidth="581.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="64.0" layoutY="35.0" text="Código:" />
-      <Label layoutX="65.0" layoutY="81.0" text="Nome:" />
-      <Label layoutX="65.0" layoutY="126.0" text="Rua:" />
-      <Label layoutX="64.0" layoutY="167.0" text="Bairro:" />
-      <Label layoutX="64.0" layoutY="213.0" text="Número:" />
-      <Label layoutX="65.0" layoutY="269.0" text="Ponto de Referência:" />
-      <TextField layoutX="192.0" layoutY="34.0" prefHeight="30.0" prefWidth="217.0" styleClass="text-field" />
-      <TextField layoutX="191.0" layoutY="80.0" prefHeight="30.0" prefWidth="217.0" />
-      <TextField layoutX="191.0" layoutY="125.0" prefHeight="30.0" prefWidth="217.0" />
-      <TextField layoutX="192.0" layoutY="212.0" prefHeight="30.0" prefWidth="217.0" />
-      <TextField layoutX="242.0" layoutY="268.0" prefHeight="30.0" prefWidth="226.0" />
-      <ComboBox layoutX="191.0" layoutY="168.0" prefHeight="25.0" prefWidth="217.0" />
-      <Button layoutX="84.0" layoutY="316.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="107.0" styleClass="buttonConfirm" text="Inserir" />
-      <Button layoutX="246.0" layoutY="316.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="107.0" styleClass="buttonPadrao" text="Alterar" />
-      <Button layoutX="408.0" layoutY="316.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="107.0" styleClass="buttonDecline" text="Remover" />
+      <Label layoutX="64.0" layoutY="88.0" text="Código:" />
+      <Label layoutX="65.0" layoutY="134.0" text="Nome:" />
+      <Label layoutX="65.0" layoutY="179.0" text="Rua:" />
+      <Label layoutX="64.0" layoutY="220.0" text="Bairro:" />
+      <Label layoutX="64.0" layoutY="266.0" text="Número:" />
+      <Label layoutX="65.0" layoutY="322.0" text="Ponto de Referência:" />
+      <TextField layoutX="192.0" layoutY="87.0" prefHeight="30.0" prefWidth="217.0" styleClass="text-field" />
+      <TextField layoutX="191.0" layoutY="133.0" prefHeight="30.0" prefWidth="217.0" />
+      <TextField layoutX="191.0" layoutY="178.0" prefHeight="30.0" prefWidth="217.0" />
+      <TextField layoutX="192.0" layoutY="265.0" prefHeight="30.0" prefWidth="217.0" />
+      <TextField layoutX="242.0" layoutY="321.0" prefHeight="30.0" prefWidth="226.0" />
+      <ComboBox layoutX="191.0" layoutY="221.0" prefHeight="25.0" prefWidth="217.0" />
+      <Button layoutX="84.0" layoutY="369.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="107.0" styleClass="buttonConfirm" text="Inserir" />
+      <Button layoutX="246.0" layoutY="369.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="107.0" styleClass="buttonPadrao" text="Alterar" />
+      <Button layoutX="408.0" layoutY="369.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="107.0" styleClass="buttonDecline" text="Remover" />
+      <Label layoutX="14.0" layoutY="14.0" text="Cadastro Cliente" />
+      <Line endX="586.5" layoutX="14.0" layoutY="50.0" startX="-100.0" />
    </children>
 </AnchorPane>
