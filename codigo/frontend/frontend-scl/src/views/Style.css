@@ -27,6 +27,8 @@
 .buttonPadrao{
 	-fx-padding: 5 22 5 22;  
     -fx-border-color: black;
+	-fx-background-radius: 5;
+	-fx-border-radius: 5;
     -fx-border-width: 2;
 	-fx-background-color: linear-gradient(to top, gray 10%, white 95%);
     -fx-font-family: "Tw Cen MT";
@@ -37,6 +39,8 @@
 .buttonConfirm {
     -fx-padding: 5 22 5 22;   
     -fx-border-color: black;
+	-fx-background-radius: 5;
+	-fx-border-radius: 5;
     -fx-border-width: 2;
 	-fx-background-color: linear-gradient(to top, #01FF1A 10%, white 95%);
     -fx-font-family: "Tw Cen MT", Tw Cen MT, Tw Cen MT, Tw Cen MT;
@@ -48,6 +52,8 @@
 .buttonDecline {
     -fx-padding: 5 22 5 22;   
     -fx-border-color: black;
+	-fx-background-radius: 5;
+	-fx-border-radius: 5;
     -fx-border-width: 2;
     -fx-background-color: linear-gradient(to top, #FF0000 10%, white 95%);
     -fx-font-family: "Tw Cen MT", Tw Cen MT, Tw Cen MT, Tw Cen MT;
@@ -64,6 +70,11 @@
 .buttonDecline:hover {
     -fx-background-color: #e63c3c;
 }
+
+.buttonPadrao:hover {
+    -fx-background-color: gray;
+}
+
 
 .button:pressed, .button:default:hover:pressed {
     -fx-background-color: white;
