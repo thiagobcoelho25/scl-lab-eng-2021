@@ -6,16 +6,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="303.0" prefWidth="480.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.1">
+<AnchorPane id="AnchorPane" prefHeight="303.0" prefWidth="480.0" styleClass="background" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TextField layoutX="240.0" layoutY="49.0" />
-      <Text layoutX="71.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Codigo" wrappingWidth="42.53125" />
-      <Text layoutX="71.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingrediente" wrappingWidth="63.53125" />
+      <TextField layoutX="240.0" layoutY="49.0" styleClass="combo-box-popup" />
+      <Text layoutX="66.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label" text="Código:" wrappingWidth="83.0" />
+      <Text layoutX="68.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label" text="Ingrediente:" wrappingWidth="105.0" />
       <ComboBox layoutX="240.0" layoutY="98.0" prefWidth="150.0" />
-      <Text layoutX="71.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantidade" wrappingWidth="63.53125" />
-      <TextField layoutX="240.0" layoutY="162.0" prefHeight="25.0" prefWidth="43.0" />
-      <Button layoutX="124.0" layoutY="234.0" mnemonicParsing="false" text="Inserir" />
-      <Button layoutX="289.0" layoutY="234.0" mnemonicParsing="false" text="Deletar" />
+      <Text layoutX="71.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label" text="Quantidade:" wrappingWidth="105.0" />
+      <TextField layoutX="240.0" layoutY="162.0" prefHeight="25.0" prefWidth="43.0" styleClass="text-field" />
+      <Button layoutX="107.0" layoutY="234.0" mnemonicParsing="false" styleClass="buttonConfirm" text="Inserir" />
+      <Button layoutX="269.0" layoutY="234.0" mnemonicParsing="false" styleClass="buttonDecline" text="Deletar" />
    </children>
 </AnchorPane>
