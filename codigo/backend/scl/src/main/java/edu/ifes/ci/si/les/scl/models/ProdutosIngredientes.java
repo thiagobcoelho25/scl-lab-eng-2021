@@ -1,11 +1,9 @@
-package edu.ifes.ci.si.les.scl.model;
+package edu.ifes.ci.si.les.scl.models;
 
 import java.io.Serializable;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import edu.ifes.ci.si.les.scl.model.enums.TipoIngrediente;
 import lombok.AllArgsConstructor;
@@ -27,7 +25,6 @@ public class ProdutosIngredientes implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	@JsonIgnore
 	@EmbeddedId
 	private ProdutosIngredientesPK id = new ProdutosIngredientesPK();
 	

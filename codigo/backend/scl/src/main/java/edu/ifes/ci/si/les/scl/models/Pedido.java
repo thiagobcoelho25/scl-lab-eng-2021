@@ -1,4 +1,4 @@
-package edu.ifes.ci.si.les.scl.model;
+package edu.ifes.ci.si.les.scl.models;
 
 import java.io.Serializable;
 import java.util.Date;
