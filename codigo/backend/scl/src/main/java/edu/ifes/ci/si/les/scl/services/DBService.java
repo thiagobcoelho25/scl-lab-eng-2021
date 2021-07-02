@@ -70,6 +70,14 @@ public class DBService {
 	private EntregaRepository entregaRepository;
 	
 	public void instantiateTestDatabase() throws ParseException{
+		
+		Ingrediente ingred1 = new Ingrediente(null, "Carne de Boi", 10.0);
+		Ingrediente ingred2 = new Ingrediente(null, "Batata", 5.0);
+		Ingrediente ingred3 = new Ingrediente(null, "Frango Empanado", 8.0);
+		
+		Estoque estoq1 = new Estoque(null, 50,ingred1);
+		Estoque estoq2 = new Estoque(null, 10,ingred2);
+		/*
 		//Instancia Estoque
 		Estoque estoq1 = new Estoque(null, 50);
 		Estoque estoq2 = new Estoque(null, 10);
@@ -78,7 +86,7 @@ public class DBService {
 		Ingrediente ingred1 = new Ingrediente(null, "Carne de Boi", 10.0, estoq2);
 		Ingrediente ingred2 = new Ingrediente(null, "Batata", 5.0, estoq1);
 		Ingrediente ingred3 = new Ingrediente(null, "Frango Empanado", 8.0, null);
-		
+		*/
 		//Instancia Bairro
 		Bairro b1 = new Bairro(null, "BNH", 0.0, EntregavelStatus.nao);
 		Bairro b2 = new Bairro(null, "Aeroporto", 5.0, EntregavelStatus.sim);
@@ -126,15 +134,18 @@ public class DBService {
 
 		//Instancia Acrescimos
 		Acrescimos ac1 = new Acrescimos(ip5, ingred2, 1);
-
+		
 		
 		//------------------------------------------------------------------------------------------
 		bairroRep.saveAll(Arrays.asList(b1,b2,b3));
 		clienteRepository.saveAll(Arrays.asList(c1,c2,c3));
 		gerenteRepository.save(g1);
 		funcionarioRepository.saveAll(Arrays.asList(func1,func2));
-		estoqueRepository.saveAll(Arrays.asList(estoq1,estoq2));
+		
 		ingredienteRepository.saveAll(Arrays.asList(ingred1,ingred2,ingred3));
+		estoqueRepository.saveAll(Arrays.asList(estoq1,estoq2));
+		//estoqueRepository.saveAll(Arrays.asList(estoq1,estoq2));
+		//ingredienteRepository.saveAll(Arrays.asList(ingred1,ingred2,ingred3));
 		produtoRepository.saveAll(Arrays.asList(p1,p2));
 		produtosIngredientesRepository.saveAll(Arrays.asList(pi1,pi2,pi3));
 		pagamentoRepository.saveAll(Arrays.asList(pag1,pag2,pag3));

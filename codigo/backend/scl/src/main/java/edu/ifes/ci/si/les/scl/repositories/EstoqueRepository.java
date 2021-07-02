@@ -7,5 +7,5 @@ import edu.ifes.ci.si.les.scl.models.Estoque;
 
 @Repository
 public interface EstoqueRepository extends JpaRepository<Estoque, Integer>{
-
+	
 }

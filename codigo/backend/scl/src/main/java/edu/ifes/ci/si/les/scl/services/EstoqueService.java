@@ -22,4 +22,5 @@ public class EstoqueService {
 	public Estoque find(Integer id) {
 		return estoqueRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Estoque não existe"));
 	}
+	
 }

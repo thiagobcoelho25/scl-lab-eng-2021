@@ -1,11 +1,19 @@
 package edu.ifes.ci.si.les.scl.models;
 
-import lombok.*;
-
-import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Data
 @Setter
@@ -21,7 +29,7 @@ public class Acrescimos implements Serializable{
 	@EmbeddedId
 	private AcrescimosPK id = new AcrescimosPK();
 
-	@NotBlank(message = "A quantidade deve ser definida")
+	@NotNull(message = "A quantidade deve ser definida")
 	@Min(value = 1, message = "A quantidade deve ser maior que zero")
 	private Integer quantidade;
 

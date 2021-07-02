@@ -3,6 +3,7 @@ package edu.ifes.ci.si.les.scl.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,12 +20,13 @@ public class EstoqueController {
 	private EstoqueService estoqueService;
 	
 	@GetMapping
-	public List<Estoque> listAll(){
-		return estoqueService.listAll();
+	public ResponseEntity<List<Estoque>> listAll(){
+		return ResponseEntity.ok().body(estoqueService.listAll());
 	}
 	
-	@GetMapping("/{estoqueId}")
-	public Estoque find(@PathVariable Integer estoqueId) {
-		return estoqueService.find(estoqueId);
+	@GetMapping("/{id}")
+	public ResponseEntity<Estoque> find(@PathVariable Integer id) {
+		return ResponseEntity.ok().body(estoqueService.find(id));
 	}
+	
 }

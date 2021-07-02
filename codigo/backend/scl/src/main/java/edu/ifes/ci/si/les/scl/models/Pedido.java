@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -45,7 +45,7 @@ public class Pedido implements Serializable{
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date data;
 
-	@NotBlank(message = "Usuário deve ser difinido")
+	@NotNull(message = "Usuário deve ser difinido")
 	@ManyToOne
 	@JoinColumn(name = "usuario_id", nullable = false)
 	private Usuario usuario;

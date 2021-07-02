@@ -3,10 +3,10 @@ package edu.ifes.ci.si.les.scl.models;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
@@ -14,6 +14,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -43,8 +44,14 @@ public class Ingrediente implements Serializable{
 	@Digits(integer = 6, fraction = 2)
 	private Double valor;
 	
-	@OneToOne
-	@JoinColumn(name = "estoque_id")
+	@OneToOne(mappedBy = "ingrediente", fetch = FetchType.LAZY)
 	private Estoque estoque;
+	
+	@Builder
+	public Ingrediente(Integer id, String nome, Double valor) {
+		this.id = id;
+		this.nome = nome;
+		this.valor = valor;
+	}
 
 }
