@@ -6,6 +6,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import edu.ifes.ci.si.les.scl.exceptions.BusinessRuleException;
+import edu.ifes.ci.si.les.scl.exceptions.ConstraintException;
+import edu.ifes.ci.si.les.scl.exceptions.DataIntegrityException;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpHeaders;
@@ -65,5 +68,25 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		StandardError err = new StandardError(OffsetDateTime.now(), HttpStatus.INTERNAL_SERVER_ERROR.value(),"Error no Banco:",e.getMessage(),request.getRequestURI());
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(err);
 	}
+
+	@ExceptionHandler(ConstraintException.class)
+	public ResponseEntity<StandardError> constraintError(ConstraintException e, HttpServletRequest request){
+		StandardError err = new StandardError(OffsetDateTime.now(), HttpStatus.BAD_REQUEST.value(),"Constraint nao respeitada",e.getMessage(),request.getRequestURI());
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
+	}
+
+	@ExceptionHandler(BusinessRuleException.class)
+	public ResponseEntity<StandardError> businessRule(BusinessRuleException e, HttpServletRequest request){
+		StandardError err = new StandardError(OffsetDateTime.now(), HttpStatus.CONFLICT.value(),"Regra de negócio nao respeitada",e.getMessage(),request.getRequestURI());
+		return ResponseEntity.status(HttpStatus.CONFLICT).body(err);
+	}
+
+	@ExceptionHandler(DataIntegrityException.class)
+	public ResponseEntity<StandardError> dataIntegrity(DataIntegrityException e, HttpServletRequest request){
+		StandardError err = new StandardError(OffsetDateTime.now(), HttpStatus.BAD_REQUEST.value(),"Erro Integridade dos dados",e.getMessage(),request.getRequestURI());
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
+	}
+
+
 
 }

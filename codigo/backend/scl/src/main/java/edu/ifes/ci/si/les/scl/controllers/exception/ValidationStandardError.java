@@ -1,5 +1,6 @@
 package edu.ifes.ci.si.les.scl.controllers.exception;
 
+import java.io.Serializable;
 import java.time.OffsetDateTime;
 import java.util.List;
 
@@ -13,7 +14,7 @@ import lombok.Setter;
 @JsonInclude(Include.NON_NULL)
 @Setter
 @Getter
-public class ValidationStandardError {
+public class ValidationStandardError implements Serializable {
 	
 	private OffsetDateTime timestamp;
 	private Integer status;
