@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import edu.ifes.ci.si.les.scl.exceptions.DataIntegrityException;
 import edu.ifes.ci.si.les.scl.exceptions.ObjectNotFoundException;
 import lombok.AllArgsConstructor;
 
@@ -56,6 +57,13 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		
 		StandardError err = new StandardError(OffsetDateTime.now(), HttpStatus.NOT_FOUND.value(),"Não Encontrado",e.getMessage(),request.getRequestURI());
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);
+	}
+	
+	@ExceptionHandler(DataIntegrityException.class)
+	public ResponseEntity<StandardError> dataIntegrity(DataIntegrityException e, HttpServletRequest request){
+		
+		StandardError err = new StandardError(OffsetDateTime.now(), HttpStatus.INTERNAL_SERVER_ERROR.value(),"Error no Banco:",e.getMessage(),request.getRequestURI());
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(err);
 	}
 
 }

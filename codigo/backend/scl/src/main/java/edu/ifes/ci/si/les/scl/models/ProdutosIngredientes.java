@@ -4,19 +4,22 @@ import java.io.Serializable;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import edu.ifes.ci.si.les.scl.model.enums.TipoIngrediente;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Data
-@Setter
+//@Data
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
@@ -24,12 +27,14 @@ import lombok.Setter;
 public class ProdutosIngredientes implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-
+	
+	@JsonIgnore
 	@EmbeddedId
 	private ProdutosIngredientesPK id = new ProdutosIngredientesPK();
 	
 	private Integer quantidade;
-
+	
+	@Enumerated(EnumType.STRING)
 	private TipoIngrediente tipo;
 	
 	@Builder
@@ -39,5 +44,21 @@ public class ProdutosIngredientes implements Serializable{
 		this.quantidade = quantidade;
 		this.tipo = tipoIngrediente;
 	}
+	
+	@JsonIgnore
+    public Produto getProduto() {
+        return id.getProduto();
+    }
 
+    public void setProduto(Produto produto) {
+        id.setProduto(produto);
+    }
+    
+    public Ingrediente getIngrediente() {
+        return id.getIngrediente();
+    }
+
+    public void setIngrediente(Ingrediente ingrediente) {
+        id.setIngrediente(ingrediente);
+    }
 }

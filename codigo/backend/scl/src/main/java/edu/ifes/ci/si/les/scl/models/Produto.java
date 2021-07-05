@@ -2,8 +2,9 @@ package edu.ifes.ci.si.les.scl.models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,15 +13,14 @@ import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Data
-@Setter
+//@Data
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
@@ -37,8 +37,8 @@ public class Produto implements Serializable{
 
 	private Double precoFinal;
 	
-	@OneToMany(mappedBy = "id.produto")
-	private List<ProdutosIngredientes> ingredientes = new ArrayList<>();
+	@OneToMany(mappedBy = "id.produto", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Collection<ProdutosIngredientes> ingredientes = new ArrayList<>();
 	
 	@Builder
 	public Produto(Integer id, String nome, Double precoFinal) {
@@ -46,5 +46,5 @@ public class Produto implements Serializable{
 		this.nome = nome;
 		this.precoFinal = precoFinal;
 	}
-
+	
 }

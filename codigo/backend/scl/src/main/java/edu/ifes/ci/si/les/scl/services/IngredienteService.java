@@ -30,7 +30,7 @@ public class IngredienteService {
 		return ingredienteRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Ingrediente não existe"));
 	}
 	
-	public Ingrediente insert(Ingrediente ingrediente) {
+	public Ingrediente insert(Ingrediente ingrediente){
 		ingrediente.setId(null);
 		ingrediente.setEstoque(null);
 		return ingredienteRepository.save(ingrediente);
