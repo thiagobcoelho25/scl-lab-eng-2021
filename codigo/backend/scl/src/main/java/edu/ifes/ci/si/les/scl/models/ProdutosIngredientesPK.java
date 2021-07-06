@@ -6,14 +6,12 @@ import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 
-@Setter
-@Getter
-@EqualsAndHashCode(of = {"ingrediente", "produto"})
 @Embeddable
+@Data
+@EqualsAndHashCode(of = {"ingrediente", "produto"})
 public class ProdutosIngredientesPK implements Serializable{
 
 	private static final long serialVersionUID = 1L;

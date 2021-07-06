@@ -6,9 +6,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import edu.ifes.ci.si.les.scl.exceptions.BusinessRuleException;
-import edu.ifes.ci.si.les.scl.exceptions.ConstraintException;
-import edu.ifes.ci.si.les.scl.exceptions.DataIntegrityException;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpHeaders;
@@ -22,6 +19,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import edu.ifes.ci.si.les.scl.exceptions.BusinessRuleException;
+import edu.ifes.ci.si.les.scl.exceptions.ConstraintException;
 import edu.ifes.ci.si.les.scl.exceptions.DataIntegrityException;
 import edu.ifes.ci.si.les.scl.exceptions.ObjectNotFoundException;
 import lombok.AllArgsConstructor;
@@ -61,13 +60,6 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		StandardError err = new StandardError(OffsetDateTime.now(), HttpStatus.NOT_FOUND.value(),"Não Encontrado",e.getMessage(),request.getRequestURI());
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);
 	}
-	
-	@ExceptionHandler(DataIntegrityException.class)
-	public ResponseEntity<StandardError> dataIntegrity(DataIntegrityException e, HttpServletRequest request){
-		
-		StandardError err = new StandardError(OffsetDateTime.now(), HttpStatus.INTERNAL_SERVER_ERROR.value(),"Error no Banco:",e.getMessage(),request.getRequestURI());
-		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(err);
-	}
 
 	@ExceptionHandler(ConstraintException.class)
 	public ResponseEntity<StandardError> constraintError(ConstraintException e, HttpServletRequest request){
@@ -83,8 +75,8 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(DataIntegrityException.class)
 	public ResponseEntity<StandardError> dataIntegrity(DataIntegrityException e, HttpServletRequest request){
-		StandardError err = new StandardError(OffsetDateTime.now(), HttpStatus.BAD_REQUEST.value(),"Erro Integridade dos dados",e.getMessage(),request.getRequestURI());
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
+		StandardError err = new StandardError(OffsetDateTime.now(), HttpStatus.INTERNAL_SERVER_ERROR.value(),"Erro Integridade dos dados",e.getMessage(),request.getRequestURI());
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(err);
 	}
 
 

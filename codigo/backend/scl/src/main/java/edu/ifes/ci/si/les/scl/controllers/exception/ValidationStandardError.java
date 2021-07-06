@@ -16,6 +16,8 @@ import lombok.Setter;
 @Getter
 public class ValidationStandardError implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+	
 	private OffsetDateTime timestamp;
 	private Integer status;
 	private String error;

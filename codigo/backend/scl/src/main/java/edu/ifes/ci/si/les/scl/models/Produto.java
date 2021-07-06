@@ -13,18 +13,15 @@ import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-//@Data
-@Getter
-@Setter
+@Entity
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
-@Entity
 public class Produto implements Serializable{
 
 	private static final long serialVersionUID = 1L;
