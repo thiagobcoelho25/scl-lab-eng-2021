@@ -44,4 +44,8 @@ public class Produto implements Serializable{
 		this.precoFinal = precoFinal;
 	}
 	
+	public void setIngredientes(Collection<ProdutosIngredientes> ingredientes) {
+	       this.ingredientes = ingredientes;
+	     }
+	
 }

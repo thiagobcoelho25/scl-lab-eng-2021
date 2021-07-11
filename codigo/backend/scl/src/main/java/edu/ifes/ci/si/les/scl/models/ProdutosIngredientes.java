@@ -43,7 +43,7 @@ public class ProdutosIngredientes implements Serializable{
 	}
 	
 	@JsonIgnore
-    public Produto getProduto() {
+	public Produto getProduto() {
         return id.getProduto();
     }
 

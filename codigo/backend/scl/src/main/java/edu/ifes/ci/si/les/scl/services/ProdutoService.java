@@ -45,12 +45,20 @@ public class ProdutoService {
 		return produtoRepository.save(produto);
 	}
 	
+	//Resolução do Problema no StackOverFlow: https://stackoverflow.com/questions/5587482/hibernate-a-collection-with-cascade-all-delete-orphan-was-no-longer-referenc
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public Produto update(Produto produto) {
+		
 		for (ProdutosIngredientes item : produto.getIngredientes()) {
 			item.setProduto(produto);
 		}
-		return produtoRepository.save(produto);
+		
+		Produto newProd = produtoRepository.findById(produto.getId()).get();
+		newProd.getIngredientes().clear();
+		newProd.getIngredientes().addAll(produto.getIngredientes());
+		newProd.setPrecoFinal(produto.getPrecoFinal());
+		
+		return produtoRepository.save(newProd);
 	}
 
 	public void delete(Integer id) {
