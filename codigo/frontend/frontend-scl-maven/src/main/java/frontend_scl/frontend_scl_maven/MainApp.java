@@ -1,4 +1,4 @@
-package frontend.scl;
+package frontend_scl.frontend_scl_maven;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -6,10 +6,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-
-public class FrontendScl extends Application {
-    
-    @Override
+public class MainApp extends Application {
+	
+	@Override
     public void start(Stage primaryStage) throws Exception {
        
         Parent root = FXMLLoader.load(getClass().getResource("/views/FXMLMain.fxml"));
@@ -20,11 +19,7 @@ public class FrontendScl extends Application {
          
     }
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         launch(args);
     }
-    
 }
