@@ -30,6 +30,7 @@ public class Bairro implements Serializable{
 	private Integer id;
 	
 	@NotBlank(message = "Nao pode ser vazio")
+	@NotNull(message = "Nao pode ser nulo")
 	@Size(min = 1, max = 40, message = "Deve ter entre 1 e 40 caracteres")
 	private String nome;
 	

@@ -1,7 +1,6 @@
 package edu.ifes.ci.si.les.scl.controllers.exception;
 
 import java.io.Serializable;
-import java.time.OffsetDateTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,7 +15,7 @@ public class StandardError implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	private OffsetDateTime timestamp;
+	private Long timestamp;
 	private Integer status;
 	private String error;
 	private String message;
