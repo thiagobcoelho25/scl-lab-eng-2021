@@ -15,33 +15,33 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import exception.StandardError;
-import model.Bairro;
+import model.Cliente;
 
-public class BairroService {
-	private final String url = "http://localhost:8080/scl/bairros";
+public class ClienteService {
+	private final String url = "http://localhost:8080/scl/Clientes";
 	
 	private final Client client = ClientBuilder.newClient(); 
 	
-	public List<Bairro> listAll(){
+	public List<Cliente> listAll(){
 		try {
             WebTarget target = client.target(url);
             String json = target.request().get(String.class);
             ObjectMapper mapper = new ObjectMapper();
-            TypeReference<List<Bairro>> mapType = new TypeReference<List<Bairro>>() {
+            TypeReference<List<Cliente>> mapType = new TypeReference<List<Cliente>>() {
             };
-            List<Bairro> lista = mapper.readValue(json, mapType);
+            List<Cliente> lista = mapper.readValue(json, mapType);
             return lista;
         } catch (IOException ex) {
-            Logger.getLogger(BairroService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClienteService.class.getName()).log(Level.SEVERE, null, ex);
         }
 		return null;
 	}
 
-	public String insert(Bairro bairro) {
+	public String insert(Cliente cliente) {
 		try {
             WebTarget target = client.target(url);
             ObjectMapper mapper = new ObjectMapper();
-            String json = mapper.writeValueAsString(bairro);
+            String json = mapper.writeValueAsString(cliente);
             Response response = target.request().post(Entity.entity(json, "application/json;charset=UTF-8"));
             if (response.getStatus() != Response.Status.OK.getStatusCode()) {
                 String stringError = response.readEntity(String.class);
@@ -49,16 +49,16 @@ public class BairroService {
                 return standardError.getMessage();
             }
         } catch (IOException ex) {
-            Logger.getLogger(BairroService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClienteService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "";
 	}
 	
-	public String update(Bairro bairro) {
+	public String update(Cliente cliente) {
         try {
-            WebTarget target = client.target(url+"/"+bairro.getId());
+            WebTarget target = client.target(url+cliente.getId());
             ObjectMapper mapper = new ObjectMapper();
-            String json = mapper.writeValueAsString(bairro);
+            String json = mapper.writeValueAsString(cliente);
             Response response = target.request().put(Entity.entity(json, "application/json;charset=UTF-8"));
             if (response.getStatus() != Response.Status.OK.getStatusCode()) {
                 String stringError = response.readEntity(String.class);
@@ -66,7 +66,7 @@ public class BairroService {
                 return standardError.getMessage();
             }
         } catch (IOException ex) {
-            Logger.getLogger(BairroService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClienteService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "";
     }
@@ -82,7 +82,7 @@ public class BairroService {
                 return standardError.getMessage();
             }
         } catch (IOException ex) {
-            Logger.getLogger(BairroService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClienteService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "";
     }
