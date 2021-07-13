@@ -46,7 +46,7 @@ public class BairroService {
             if (response.getStatus() != Response.Status.OK.getStatusCode()) {
                 String stringError = response.readEntity(String.class);
                 StandardError standardError = mapper.readValue(stringError, StandardError.class);
-                return standardError.getMessage();
+                return construçãoStandardError(standardError);
             }
         } catch (IOException ex) {
             Logger.getLogger(BairroService.class.getName()).log(Level.SEVERE, null, ex);
@@ -63,7 +63,7 @@ public class BairroService {
             if (response.getStatus() != Response.Status.OK.getStatusCode()) {
                 String stringError = response.readEntity(String.class);
                 StandardError standardError = mapper.readValue(stringError, StandardError.class);
-                return standardError.getMessage();
+                return construçãoStandardError(standardError);
             }
         } catch (IOException ex) {
             Logger.getLogger(BairroService.class.getName()).log(Level.SEVERE, null, ex);
@@ -79,11 +79,22 @@ public class BairroService {
             if (response.getStatus() != Response.Status.NO_CONTENT.getStatusCode()) {
                 String stringError = response.readEntity(String.class);
                 StandardError standardError = mapper.readValue(stringError, StandardError.class);
-                return standardError.getMessage();
+                return construçãoStandardError(standardError);
             }
         } catch (IOException ex) {
             Logger.getLogger(BairroService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "";
     }
+
+	public String construçãoStandardError(StandardError standardError) {
+		return standardError.getMessage() == null ? standardError.getTimestamp() + "\n"
+				+ standardError.getStatus() + "\n"
+				+ standardError.getError() + "\n"
+				+ standardError.getCampos() + "\n" : standardError.getTimestamp() + "\n"
+				+ standardError.getMessage() + "\n"
+				+ standardError.getPath() + "\n"
+				+ standardError.getStatus() + "\n"
+				+ standardError.getError() + "\n";
+	}
 }

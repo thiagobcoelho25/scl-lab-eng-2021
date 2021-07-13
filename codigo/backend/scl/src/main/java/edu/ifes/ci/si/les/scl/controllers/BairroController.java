@@ -29,10 +29,7 @@ public class BairroController {
     }
 
     @PostMapping()
-    public ResponseEntity<Bairro> insert(@Valid @RequestBody Bairro bairro, BindingResult br){
-        if(br.hasErrors()){
-            throw new ConstraintException(br.getAllErrors().get(0).toString());
-        }
+    public ResponseEntity<Bairro> insert(@Valid @RequestBody Bairro bairro){
         return ResponseEntity.ok().body(bairroService.insert(bairro));
     }
 

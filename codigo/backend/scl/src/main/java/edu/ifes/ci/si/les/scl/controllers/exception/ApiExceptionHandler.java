@@ -1,6 +1,5 @@
 package edu.ifes.ci.si.les.scl.controllers.exception;
 
-import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +44,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		
 		ValidationStandardError problema = new ValidationStandardError();
 		problema.setStatus(status.value());
-		problema.setTimestamp(OffsetDateTime.now());
+		problema.setTimestamp(System.currentTimeMillis());
 		problema.setError("Um ou mais campos estão inválidos. Faça o preenchimento correto e tente novamente.");
 		problema.setCampos(campos);
 		
@@ -57,25 +56,25 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(ObjectNotFoundException.class)
 	public ResponseEntity<StandardError> objectNotFound(ObjectNotFoundException e, HttpServletRequest request){
 		
-		StandardError err = new StandardError(OffsetDateTime.now(), HttpStatus.NOT_FOUND.value(),"Não Encontrado",e.getMessage(),request.getRequestURI());
+		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.NOT_FOUND.value(),"Não Encontrado",e.getMessage(),request.getRequestURI());
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);
 	}
 
 	@ExceptionHandler(ConstraintException.class)
 	public ResponseEntity<StandardError> constraintError(ConstraintException e, HttpServletRequest request){
-		StandardError err = new StandardError(OffsetDateTime.now(), HttpStatus.BAD_REQUEST.value(),"Constraint nao respeitada",e.getMessage(),request.getRequestURI());
+		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(),"Constraint nao respeitada",e.getMessage(),request.getRequestURI());
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
 	}
 
 	@ExceptionHandler(BusinessRuleException.class)
 	public ResponseEntity<StandardError> businessRule(BusinessRuleException e, HttpServletRequest request){
-		StandardError err = new StandardError(OffsetDateTime.now(), HttpStatus.CONFLICT.value(),"Regra de negócio nao respeitada",e.getMessage(),request.getRequestURI());
+		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.CONFLICT.value(),"Regra de negócio nao respeitada",e.getMessage(),request.getRequestURI());
 		return ResponseEntity.status(HttpStatus.CONFLICT).body(err);
 	}
 
 	@ExceptionHandler(DataIntegrityException.class)
 	public ResponseEntity<StandardError> dataIntegrity(DataIntegrityException e, HttpServletRequest request){
-		StandardError err = new StandardError(OffsetDateTime.now(), HttpStatus.INTERNAL_SERVER_ERROR.value(),"Erro Integridade dos dados",e.getMessage(),request.getRequestURI());
+		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.INTERNAL_SERVER_ERROR.value(),"Erro Integridade dos dados",e.getMessage(),request.getRequestURI());
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(err);
 	}
 
