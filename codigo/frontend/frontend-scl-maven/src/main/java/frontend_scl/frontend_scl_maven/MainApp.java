@@ -15,7 +15,11 @@ public class MainApp extends Application {
         Scene scene = new Scene(root);
         
         primaryStage.setScene(scene);
-        //primaryStage.setResizable(false);
+        primaryStage.setWidth(1000);
+        //primaryStage.setWidth(739);
+        //primaryStage.setHeight(486);
+        primaryStage.setHeight(950);
+        primaryStage.setResizable(false);
         primaryStage.show();
          
     }

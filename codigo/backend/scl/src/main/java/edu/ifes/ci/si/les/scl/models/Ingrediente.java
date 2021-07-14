@@ -2,6 +2,7 @@ package edu.ifes.ci.si.les.scl.models;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,6 +12,7 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
@@ -37,10 +39,11 @@ public class Ingrediente implements Serializable{
 	private String nome;
 	
 	@DecimalMin(value = "0.00")
-	@Digits(integer = 6, fraction = 2)
+	@NotNull(message = "Valor do Empréstimo deve ser preenchido")
+	@Digits(integer = 6, fraction = 2, message = "valor deve estar entre 6.2 digitos")
 	private Double valor;
 	
-	@OneToOne(mappedBy = "ingrediente", fetch = FetchType.LAZY)
+	@OneToOne(mappedBy = "ingrediente", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private Estoque estoque;
 	
 	@Builder

@@ -15,52 +15,50 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import exception.StandardError;
-import model.Bairro;
-import model.Funcionario;
+import model.Cliente;
 
-public class FuncionarioService {
-	private final String url = "http://localhost:8080/scl/funcionario";
+public class ClienteService {
+	private final String url = "http://localhost:8080/scl/clientes";
 	
-	private final Client client = ClientBuilder.newClient();
+	private final Client client = ClientBuilder.newClient(); 
 	
-	
-	public List<Funcionario> listAll() {
+	public List<Cliente> listAll(){
 		try {
             WebTarget target = client.target(url);
             String json = target.request().get(String.class);
             ObjectMapper mapper = new ObjectMapper();
-            TypeReference<List<Funcionario>> mapType = new TypeReference<List<Funcionario>>() {
+            TypeReference<List<Cliente>> mapType = new TypeReference<List<Cliente>>() {
             };
-            List<Funcionario> lista = mapper.readValue(json, mapType);
+            List<Cliente> lista = mapper.readValue(json, mapType);
             return lista;
         } catch (IOException ex) {
-            Logger.getLogger(BairroService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClienteService.class.getName()).log(Level.SEVERE, null, ex);
         }
 		return null;
 	}
-	
-	public String insert(Funcionario funcionario) {
+
+	public String insert(Cliente cliente) {
 		try {
             WebTarget target = client.target(url);
             ObjectMapper mapper = new ObjectMapper();
-            String json = mapper.writeValueAsString(funcionario);
+            String json = mapper.writeValueAsString(cliente);
             Response response = target.request().post(Entity.entity(json, "application/json;charset=UTF-8"));
             if (response.getStatus() != Response.Status.CREATED.getStatusCode()) {
                 String stringError = response.readEntity(String.class);
                 StandardError standardError = mapper.readValue(stringError, StandardError.class);
-                return standardError.getMessage();
+                return construçãoStandardError(standardError);
             }
         } catch (IOException ex) {
-            Logger.getLogger(BairroService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClienteService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "";
 	}
 	
-	public String update(Funcionario funcionario) {
+	public String update(Cliente cliente) {
         try {
-            WebTarget target = client.target(url);
+            WebTarget target = client.target(url+cliente.getId());
             ObjectMapper mapper = new ObjectMapper();
-            String json = mapper.writeValueAsString(funcionario);
+            String json = mapper.writeValueAsString(cliente);
             Response response = target.request().put(Entity.entity(json, "application/json;charset=UTF-8"));
             if (response.getStatus() != Response.Status.OK.getStatusCode()) {
                 String stringError = response.readEntity(String.class);
@@ -68,7 +66,7 @@ public class FuncionarioService {
                 return construçãoStandardError(standardError);
             }
         } catch (IOException ex) {
-            Logger.getLogger(BairroService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClienteService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "";
     }
@@ -84,7 +82,7 @@ public class FuncionarioService {
                 return construçãoStandardError(standardError);
             }
         } catch (IOException ex) {
-            Logger.getLogger(BairroService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClienteService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "";
     }
@@ -99,7 +97,4 @@ public class FuncionarioService {
 				+ standardError.getStatus() + "\n"
 				+ standardError.getError() + "\n";
 	}
-	
-	
-
 }

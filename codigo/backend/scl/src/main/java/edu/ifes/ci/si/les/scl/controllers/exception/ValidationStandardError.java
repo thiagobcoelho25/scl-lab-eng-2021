@@ -1,7 +1,6 @@
 package edu.ifes.ci.si.les.scl.controllers.exception;
 
 import java.io.Serializable;
-import java.time.OffsetDateTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -18,7 +17,7 @@ public class ValidationStandardError implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private OffsetDateTime timestamp;
+	private Long timestamp;
 	private Integer status;
 	private String error;
 	private String path;

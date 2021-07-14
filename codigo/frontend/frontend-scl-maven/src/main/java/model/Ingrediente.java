@@ -3,16 +3,16 @@ package model;
 import java.io.Serializable;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import model.enums.EntregavelStatus;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
-public class Bairro implements Serializable{
+public class Ingrediente implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -20,13 +20,15 @@ public class Bairro implements Serializable{
 	
 	private String nome;
 	
-	private Double frete;
+	private Double valor;
 	
-	private EntregavelStatus entregavel;
+	private Estoque estoque;
 	
-
-	public String toString() {
-		
-		return this.nome;
+	@Builder
+	public Ingrediente(Integer id, String nome, Double valor) {
+		this.id = id;
+		this.nome = nome;
+		this.valor = valor;
 	}
+
 }

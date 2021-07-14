@@ -1,20 +1,22 @@
-package exception;
+package model;
 
 import java.io.Serializable;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Campo implements Serializable {
+@EqualsAndHashCode(of = {"id"})
+public class Estoque implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	private String nome;
-	private String mensagem;
-
-
+	private Integer id;
+	
+	private Integer quantidade;
+	
 }
