@@ -38,7 +38,6 @@ public class BairroService {
     }
 
     public Bairro update(Bairro bairro){
-        findById(bairro.getId());
         try {
             return bairroRepository.save(bairro);
         }catch(DataIntegrityException e){

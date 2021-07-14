@@ -55,14 +55,11 @@ public class IngredienteService {
 	
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public Ingrediente update(Ingrediente ingrediente) {
-		if(ingrediente.getEstoque() != null) {
-			Estoque estoque = estoqueRepository.getById(ingrediente.getEstoque().getId());
-			estoque.setIngrediente(ingrediente);
-			ingrediente.setEstoque(estoque);
-		} else {
-			ingrediente.setEstoque(null);
-		}
-		return ingredienteRepository.save(ingrediente);
+		Estoque estoque = ingrediente.getEstoque();
+		ingrediente.setEstoque(null);
+		ingrediente = ingredienteRepository.save(ingrediente);
+		ingrediente.setEstoque(estoque);
+		return ingrediente;
 	}
 	
 	public void delete(Integer id) {

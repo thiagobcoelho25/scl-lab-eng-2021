@@ -43,7 +43,7 @@ public class Ingrediente implements Serializable{
 	@Digits(integer = 6, fraction = 2, message = "valor deve estar entre 6.2 digitos")
 	private Double valor;
 	
-	@OneToOne(mappedBy = "ingrediente", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne(mappedBy = "ingrediente", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
 	private Estoque estoque;
 	
 	@Builder

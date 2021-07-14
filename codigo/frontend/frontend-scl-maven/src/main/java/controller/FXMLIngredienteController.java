@@ -5,6 +5,8 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -58,6 +60,16 @@ public class FXMLIngredienteController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		carregarTableViewIngrediente();
+		
+		//So aceita no TextField Numeros com 0 a 7, com um '.' e 0 a 2 apos '.';
+		textFieldValor.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d{0,6}([\\.]\\d{0,2})?")) {
+                	textFieldValor.setText(oldValue);
+                }
+            }
+        });
 		
 		tableViewIngrediente.getSelectionModel().selectedItemProperty()
 		.addListener((observable, oldValue, newValue) -> selecionarItemTableViewIngrediente(newValue));
