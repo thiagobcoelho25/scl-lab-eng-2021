@@ -6,13 +6,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import model.enums.EntregavelStatus;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
-public class Bairro implements Serializable{
+
+public abstract class Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -20,12 +20,10 @@ public class Bairro implements Serializable{
 	
 	private String nome;
 	
-	private Double frete;
+	private String rua;
+
+	private Integer numero;
 	
-	private EntregavelStatus entregavel;
-	
-	public String toString() {
-		return this.nome;
-	}
+	private Bairro bairro;
 
 }

@@ -18,7 +18,7 @@ import exception.StandardError;
 import model.Bairro;
 
 public class BairroService {
-	private final String url = "http://localhost:8080/scl/bairros";
+private final String url = "http://localhost:8080/scl/bairros";
 	
 	private final Client client = ClientBuilder.newClient(); 
 	
@@ -46,11 +46,55 @@ public class BairroService {
             if (response.getStatus() != Response.Status.OK.getStatusCode()) {
                 String stringError = response.readEntity(String.class);
                 StandardError standardError = mapper.readValue(stringError, StandardError.class);
-                return standardError.getMessage();
+                return construçãoStandardError(standardError);
             }
         } catch (IOException ex) {
             Logger.getLogger(BairroService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "";
+	}
+	
+	public String update(Bairro bairro) {
+        try {
+            WebTarget target = client.target(url+"/"+bairro.getId());
+            ObjectMapper mapper = new ObjectMapper();
+            String json = mapper.writeValueAsString(bairro);
+            Response response = target.request().put(Entity.entity(json, "application/json;charset=UTF-8"));
+            if (response.getStatus() != Response.Status.OK.getStatusCode()) {
+                String stringError = response.readEntity(String.class);
+                StandardError standardError = mapper.readValue(stringError, StandardError.class);
+                return construçãoStandardError(standardError);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(BairroService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "";
+    }
+	
+	public String delete(Integer id) {
+        try {
+            WebTarget target = client.target(url + id);
+            ObjectMapper mapper = new ObjectMapper();
+            Response response = target.request().delete();
+            if (response.getStatus() != Response.Status.NO_CONTENT.getStatusCode()) {
+                String stringError = response.readEntity(String.class);
+                StandardError standardError = mapper.readValue(stringError, StandardError.class);
+                return construçãoStandardError(standardError);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(BairroService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "";
+    }
+
+	public String construçãoStandardError(StandardError standardError) {
+		return standardError.getMessage() == null ? standardError.getTimestamp() + "\n"
+				+ standardError.getStatus() + "\n"
+				+ standardError.getError() + "\n"
+				+ standardError.getCampos() + "\n" : standardError.getTimestamp() + "\n"
+				+ standardError.getMessage() + "\n"
+				+ standardError.getPath() + "\n"
+				+ standardError.getStatus() + "\n"
+				+ standardError.getError() + "\n";
 	}
 }
