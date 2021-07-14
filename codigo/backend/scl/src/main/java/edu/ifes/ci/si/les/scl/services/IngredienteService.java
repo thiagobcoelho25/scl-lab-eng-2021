@@ -33,33 +33,46 @@ public class IngredienteService {
 	}
 	
 	public Ingrediente insert(Ingrediente ingrediente){
-		ingrediente.setId(null);
-		ingrediente.setEstoque(null);
-		return ingredienteRepository.save(ingrediente);
+		try {
+			ingrediente.setId(null);
+			ingrediente.setEstoque(null);
+			return ingredienteRepository.save(ingrediente);
+		} catch (DataIntegrityViolationException e) {
+			throw new DataIntegrityException("Não foi possivel Inserir o objeto Ingrediente");
+		}
 	}
 	
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public Ingrediente insertEstoqueIngrediente(Ingrediente ingrediente) {
 		Estoque estoqueFromRequest = ingrediente.getEstoque();
 		
-		if(estoqueFromRequest.getId() == null) {
-			estoqueFromRequest.setIngrediente(ingrediente);
-			ingrediente.setEstoque(estoqueRepository.save(estoqueFromRequest));
-		}else {
-			Estoque estoqueFromDB = ingredienteRepository.findById(ingrediente.getId()).get().getEstoque();
-			estoqueFromDB.setQuantidade(estoqueFromDB.getQuantidade() + estoqueFromRequest.getQuantidade());
-			ingrediente.setEstoque(estoqueRepository.save(estoqueFromDB));
+		try {
+			if(estoqueFromRequest.getId() == null) {
+				estoqueFromRequest.setIngrediente(ingrediente);
+				ingrediente.setEstoque(estoqueRepository.save(estoqueFromRequest));
+			}else {
+				Estoque estoqueFromDB = ingredienteRepository.findById(ingrediente.getId()).get().getEstoque();
+				estoqueFromDB.setQuantidade(estoqueFromDB.getQuantidade() + estoqueFromRequest.getQuantidade());
+				ingrediente.setEstoque(estoqueRepository.save(estoqueFromDB));
+			}
+			return ingrediente;
+		} catch (DataIntegrityViolationException e) {
+			throw new DataIntegrityException("Não foi possivel Inserir o objeto Estoque em Ingrediente");
 		}
-		return ingrediente;
 	}
 	
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public Ingrediente update(Ingrediente ingrediente) {
-		Estoque estoque = ingrediente.getEstoque();
-		ingrediente.setEstoque(null);
-		ingrediente = ingredienteRepository.save(ingrediente);
-		ingrediente.setEstoque(estoque);
-		return ingrediente;
+		
+		try {
+			Estoque estoque = ingrediente.getEstoque();
+			ingrediente.setEstoque(null);
+			ingrediente = ingredienteRepository.save(ingrediente);
+			ingrediente.setEstoque(estoque);
+			return ingrediente;
+		} catch (DataIntegrityViolationException e) {
+			throw new DataIntegrityException("Não foi possivel Atualizar o objeto Ingrediente");
+		}
 	}
 	
 	public void delete(Integer id) {
