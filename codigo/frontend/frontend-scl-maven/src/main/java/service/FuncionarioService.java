@@ -16,37 +16,39 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import exception.StandardError;
 import model.Bairro;
+import model.Funcionario;
 
-public class BairroService {
-private final String url = "http://localhost:8080/scl/bairros";
+public class FuncionarioService {
+	private final String url = "http://localhost:8080/scl/funcionario";
 	
-	private final Client client = ClientBuilder.newClient(); 
+	private final Client client = ClientBuilder.newClient();
 	
-	public List<Bairro> listAll(){
+	
+	public List<Funcionario> listAll() {
 		try {
             WebTarget target = client.target(url);
             String json = target.request().get(String.class);
             ObjectMapper mapper = new ObjectMapper();
-            TypeReference<List<Bairro>> mapType = new TypeReference<List<Bairro>>() {
+            TypeReference<List<Funcionario>> mapType = new TypeReference<List<Funcionario>>() {
             };
-            List<Bairro> lista = mapper.readValue(json, mapType);
+            List<Funcionario> lista = mapper.readValue(json, mapType);
             return lista;
         } catch (IOException ex) {
             Logger.getLogger(BairroService.class.getName()).log(Level.SEVERE, null, ex);
         }
 		return null;
 	}
-
-	public String insert(Bairro bairro) {
+	
+	public String insert(Funcionario funcionario) {
 		try {
             WebTarget target = client.target(url);
             ObjectMapper mapper = new ObjectMapper();
-            String json = mapper.writeValueAsString(bairro);
+            String json = mapper.writeValueAsString(funcionario);
             Response response = target.request().post(Entity.entity(json, "application/json;charset=UTF-8"));
-            if (response.getStatus() != Response.Status.OK.getStatusCode()) {
+            if (response.getStatus() != Response.Status.CREATED.getStatusCode()) {
                 String stringError = response.readEntity(String.class);
                 StandardError standardError = mapper.readValue(stringError, StandardError.class);
-                return construçãoStandardError(standardError);
+                return standardError.getMessage();
             }
         } catch (IOException ex) {
             Logger.getLogger(BairroService.class.getName()).log(Level.SEVERE, null, ex);
@@ -54,11 +56,11 @@ private final String url = "http://localhost:8080/scl/bairros";
         return "";
 	}
 	
-	public String update(Bairro bairro) {
+	public String update(Funcionario funcionario) {
         try {
             WebTarget target = client.target(url);
             ObjectMapper mapper = new ObjectMapper();
-            String json = mapper.writeValueAsString(bairro);
+            String json = mapper.writeValueAsString(funcionario);
             Response response = target.request().put(Entity.entity(json, "application/json;charset=UTF-8"));
             if (response.getStatus() != Response.Status.OK.getStatusCode()) {
                 String stringError = response.readEntity(String.class);
@@ -86,7 +88,7 @@ private final String url = "http://localhost:8080/scl/bairros";
         }
         return "";
     }
-
+	
 	public String construçãoStandardError(StandardError standardError) {
 		return standardError.getMessage() == null ? standardError.getTimestamp() + "\n"
 				+ standardError.getStatus() + "\n"
@@ -97,4 +99,7 @@ private final String url = "http://localhost:8080/scl/bairros";
 				+ standardError.getStatus() + "\n"
 				+ standardError.getError() + "\n";
 	}
+	
+	
+
 }

@@ -23,6 +23,7 @@ public class Bairro implements Serializable{
 	private Double frete;
 	
 	private EntregavelStatus entregavel;
+	
 
 	public String toString() {
 		
