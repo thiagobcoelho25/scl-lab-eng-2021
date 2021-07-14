@@ -4,6 +4,7 @@ package edu.ifes.ci.si.les.scl.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import edu.ifes.ci.si.les.scl.exceptions.DataIntegrityException;
@@ -32,16 +33,16 @@ public class BairroService {
         bairro.setId(null);
         try {
             return bairroRepository.save(bairro);
-        }catch (DataIntegrityException e){
-            throw new DataIntegrityException("Campos obrigatórios do Bairro nao foram preenchidos: ");
+        }catch (DataIntegrityViolationException e){
+            throw new DataIntegrityException("Não foi possivel Inserir o objeto Bairro");
         }
     }
 
     public Bairro update(Bairro bairro){
         try {
             return bairroRepository.save(bairro);
-        }catch(DataIntegrityException e){
-            throw new DataIntegrityException("Campos obrigatórios do Bairro nao foram preenchidos: ");
+        }catch(DataIntegrityViolationException e){
+            throw new DataIntegrityException("CNão foi possivel Atualizar o objeto Bairro");
         }
 
     }
@@ -50,7 +51,7 @@ public class BairroService {
         if(bairroRepository.findById(id) != null) {
             try {
                 bairroRepository.deleteById(id);
-            } catch (DataIntegrityException e){
+            } catch (DataIntegrityViolationException e){
                 throw new DataIntegrityException("Não foi possivel Excluir o objeto Bairro");
             }
         }

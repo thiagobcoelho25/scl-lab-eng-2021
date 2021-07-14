@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import edu.ifes.ci.si.les.scl.exceptions.DataIntegrityException;
 import edu.ifes.ci.si.les.scl.exceptions.ObjectNotFoundException;
 import edu.ifes.ci.si.les.scl.models.Gerente;
 import edu.ifes.ci.si.les.scl.repositories.GerenteRepository;
@@ -39,7 +40,7 @@ public class GerenteService {
 		try {
 			gerenteRepository.deleteById(id);	
 		}catch (DataIntegrityViolationException e) {
-			throw new ObjectNotFoundException("Gerente não existe");
+			throw new DataIntegrityException("Gerente não existe");
 		}
 	}
 	

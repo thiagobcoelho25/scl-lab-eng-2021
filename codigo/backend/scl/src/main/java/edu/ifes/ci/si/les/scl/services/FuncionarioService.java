@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import edu.ifes.ci.si.les.scl.exceptions.DataIntegrityException;
 import edu.ifes.ci.si.les.scl.exceptions.ObjectNotFoundException;
 import edu.ifes.ci.si.les.scl.models.Funcionario;
 import edu.ifes.ci.si.les.scl.repositories.FuncionarioRepository;
@@ -38,7 +39,7 @@ public class FuncionarioService {
 		try {
 			funcionarioRepository.deleteById(id);	
 		}catch (DataIntegrityViolationException e) {
-			throw new ObjectNotFoundException("Funcionario não existe");
+			throw new DataIntegrityException("Funcionario não existe");
 		}
 	}
 	
