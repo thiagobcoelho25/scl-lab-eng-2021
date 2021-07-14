@@ -1,17 +1,36 @@
 package controller;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import model.Ingrediente;
 import service.IngredienteService;
 
 public class FXMLIngredienteController implements Initializable{
+	
+	@FXML
+	private TableView<Ingrediente> tableViewIngrediente;
+
+	@FXML
+	private TableColumn<Ingrediente, Integer> tableColumnCodigo;
+
+	@FXML
+	private TableColumn<Ingrediente, String> tableColumnNome;
+
+	@FXML
+	private TableColumn<Ingrediente, Double> tableColumnValor;
 	
 	@FXML
     private TextField textFieldCodigo;
@@ -32,21 +51,88 @@ public class FXMLIngredienteController implements Initializable{
     private Button buttonDeletar;
 	
 	private final IngredienteService ingredienteService = new IngredienteService();
-
+	
+	private List<Ingrediente> listIngredientes;
+	private ObservableList<Ingrediente> observableListIngredientes;
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		carregarTableViewIngrediente();
 		
+		tableViewIngrediente.getSelectionModel().selectedItemProperty()
+		.addListener((observable, oldValue, newValue) -> selecionarItemTableViewIngrediente(newValue));
+	}
+	
+	public void carregarTableViewIngrediente() {
+		tableColumnCodigo.setCellValueFactory(new PropertyValueFactory<>("id"));
+		tableColumnNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+		tableColumnValor.setCellValueFactory(new PropertyValueFactory<>("valor"));
+
+		listIngredientes = ingredienteService.listAll();
+
+		observableListIngredientes = FXCollections.observableArrayList(listIngredientes);
+		tableViewIngrediente.setItems(observableListIngredientes);
+		tableViewIngrediente.refresh();
+	}
+	
+	public void selecionarItemTableViewIngrediente(Ingrediente ingrediente) {
+		if (ingrediente != null) {
+			textFieldCodigo.setText(ingrediente.getId().toString());
+			textFieldNome.setText(ingrediente.getNome());
+			textFieldValor.setText(String.valueOf(ingrediente.getValor()));
+		} else {
+			textFieldCodigo.setText("");
+			textFieldNome.setText("");
+			textFieldValor.setText("");
+		}
 	}
 	
 	@FXML
     public void handleButtonConfirmar() {
-        	Ingrediente ingrediente = new Ingrediente();
+		if ((tableViewIngrediente.getSelectionModel().getSelectedItem()) == null) {
+			Ingrediente ingrediente = new Ingrediente();
         	ingrediente.setNome(textFieldNome.getText());
         	ingrediente.setValor(Double.parseDouble(textFieldValor.getText()));
         	ingrediente.setEstoque(null);
+        	
         	String resultado = ingredienteService.insert(ingrediente); 
         	exibirMensagemErro(resultado);
+        	carregarTableViewIngrediente();
+        	
+        	tableViewIngrediente.getSelectionModel().select(null);
+		}
     }
+	
+	@FXML
+	public void handleButtonAlterar() throws IOException {
+		Ingrediente ingrediente = tableViewIngrediente.getSelectionModel().getSelectedItem();
+		if (ingrediente != null) {
+			String resultado = ingredienteService.update(ingrediente);
+			exibirMensagemErro(resultado);
+			
+			carregarTableViewIngrediente();
+		} else {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setContentText("Por favor, escolha um bairro na Tabela!");
+			alert.show();
+		}
+		
+	}
+	
+	@FXML
+	public void handleButtonDelete() throws IOException {
+		Ingrediente ingrediente = tableViewIngrediente.getSelectionModel().getSelectedItem();
+		if (ingrediente != null) {
+			String resultado = ingredienteService.delete(ingrediente.getId());
+			exibirMensagemErro(resultado);
+			
+			carregarTableViewIngrediente();
+		} else {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setContentText("Por favor, escolha um bairro na Tabela!");
+			alert.show();
+		}	
+	}
 	
 	public void exibirMensagemErro(String resultado) {
         if (!resultado.equals("")) {

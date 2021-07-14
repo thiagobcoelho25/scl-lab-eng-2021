@@ -23,114 +23,125 @@ import service.BairroService;
 public class FXMLBairroController implements Initializable {
 
 	@FXML
-    private TableView<Bairro> tableViewBairro;
-    
+	private TableView<Bairro> tableViewBairro;
+
 	@FXML
-    private TableColumn<Bairro, Integer> tableColumnCodigo;
-    
-    @FXML
-    private TableColumn<Bairro, String> tableColumnNome;
-	
-    @FXML
-    private TextField textFieldCodigo;
-	
+	private TableColumn<Bairro, Integer> tableColumnCodigo;
+
 	@FXML
-    private TextField textFieldNome;
-	
+	private TableColumn<Bairro, String> tableColumnNome;
+
 	@FXML
-    private TextField textFieldFrete;
-	
+	private TextField textFieldCodigo;
+
+	@FXML
+	private TextField textFieldNome;
+
+	@FXML
+	private TextField textFieldFrete;
+
 	@FXML
 	private CheckBox checkbox;
-	
+
 	@FXML
-    private Button buttonConfirmar;
-	
+	private Button buttonConfirmar;
+
 	@FXML
-    private Button buttonAlterar;
-	
+	private Button buttonAlterar;
+
 	@FXML
-    private Button buttonDeletar;
-	
+	private Button buttonDeletar;
+
 	private final BairroService bairroService = new BairroService();
-	
+
 	private List<Bairro> listBairros;
-    private ObservableList<Bairro> observableListBairros;
-	
+	private ObservableList<Bairro> observableListBairros;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		carregarTableViewBairro(); 
-		
-		
-		
-		 tableViewBairro.getSelectionModel().selectedItemProperty().addListener(
-	               (observable, oldValue, newValue) -> selecionarItemTableViewBairro(newValue));
-		 
-		 
+		carregarTableViewBairro();
+
+		tableViewBairro.getSelectionModel().selectedItemProperty()
+				.addListener((observable, oldValue, newValue) -> selecionarItemTableViewBairro(newValue));
+
 	}
-	
-	 public void carregarTableViewBairro() {
-	        tableColumnCodigo.setCellValueFactory(new PropertyValueFactory<>("id"));
-	        tableColumnNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
 
-	        listBairros = bairroService.listAll();
+	public void carregarTableViewBairro() {
+		tableColumnCodigo.setCellValueFactory(new PropertyValueFactory<>("id"));
+		tableColumnNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
 
-	        observableListBairros = FXCollections.observableArrayList(listBairros);
-	        tableViewBairro.setItems(observableListBairros);
-	        tableViewBairro.refresh();
-	    }
+		listBairros = bairroService.listAll();
+
+		observableListBairros = FXCollections.observableArrayList(listBairros);
+		tableViewBairro.setItems(observableListBairros);
+		tableViewBairro.refresh();
+	}
 
 	@FXML
-    public void handleButtonConfirmar() {
-		if((tableViewBairro.getSelectionModel().getSelectedItem()) == null) {
-			 Bairro bairro = new Bairro();
-        	bairro.setNome(textFieldNome.getText());
-        	bairro.setFrete(Double.parseDouble(textFieldFrete.getText()));
-        	bairro.setEntregavel(checkbox.isSelected() ? EntregavelStatus.sim : EntregavelStatus.nao);
-        	
-        	String resultado = bairroService.insert(bairro); 
-        	exibirMensagemErro(resultado);
-        	carregarTableViewBairro();
-	 }	
-    }
-	
+	public void handleButtonConfirmar() {
+		if ((tableViewBairro.getSelectionModel().getSelectedItem()) == null) {
+			Bairro bairro = new Bairro();
+			bairro.setNome(textFieldNome.getText());
+			bairro.setFrete(Double.parseDouble(textFieldFrete.getText()));
+			bairro.setEntregavel(checkbox.isSelected() ? EntregavelStatus.sim : EntregavelStatus.nao);
+
+			String resultado = bairroService.insert(bairro);
+			exibirMensagemErro(resultado);
+			carregarTableViewBairro();
+		}
+	}
+
 	public void selecionarItemTableViewBairro(Bairro bairro) {
-        if (bairro != null) {
-            textFieldCodigo.setText(bairro.getId().toString());
-            textFieldNome.setText(bairro.getNome());
-            textFieldFrete.setText(String.valueOf(bairro.getFrete()));
-            checkbox.setSelected(bairro.getEntregavel() == EntregavelStatus.sim ? true : false);
-        } else {
-            textFieldCodigo.setText("");
-            textFieldNome.setText("");
-            textFieldFrete.setText("");
-            checkbox.setSelected(false);
-        }
-    }
+		if (bairro != null) {
+			textFieldCodigo.setText(bairro.getId().toString());
+			textFieldNome.setText(bairro.getNome());
+			textFieldFrete.setText(String.valueOf(bairro.getFrete()));
+			checkbox.setSelected(bairro.getEntregavel() == EntregavelStatus.sim ? true : false);
+		} else {
+			textFieldCodigo.setText("");
+			textFieldNome.setText("");
+			textFieldFrete.setText("");
+			checkbox.setSelected(false);
+		}
+	}
+
+	@FXML
+	public void handleButtonAlterar() throws IOException {
+		Bairro bairro = tableViewBairro.getSelectionModel().getSelectedItem();
+		if (bairro != null) {
+			String resultado = bairroService.update(bairro);
+			exibirMensagemErro(resultado);
+			
+			carregarTableViewBairro();
+		} else {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setContentText("Por favor, escolha um bairro na Tabela!");
+			alert.show();
+		}
+		
+	}
 	
-	
-	
-		@FXML
-	    public void handleButtonAlterar() throws IOException {
-	        Bairro bairro = tableViewBairro.getSelectionModel().getSelectedItem();
-	        System.out.println(bairro.toString());
-	        if (bairro != null) {
-	                bairroService.update(bairro);
-	                carregarTableViewBairro();
-	            
-	        } else {
-	            Alert alert = new Alert(Alert.AlertType.ERROR);
-	            alert.setContentText("Por favor, escolha um bairro na Tabela!");
-	            alert.show();
-	        }
-	    }
-	
-	
+	@FXML
+	public void handleButtonDelete() throws IOException {
+		Bairro bairro = tableViewBairro.getSelectionModel().getSelectedItem();
+		if (bairro != null) {
+			String resultado = bairroService.delete(bairro.getId());
+			exibirMensagemErro(resultado);
+			
+			carregarTableViewBairro();
+		} else {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setContentText("Por favor, escolha um bairro na Tabela!");
+			alert.show();
+		}
+		
+	}
+
 	public void exibirMensagemErro(String resultado) {
-        if (!resultado.equals("")) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText(resultado);
-            alert.show();
-        }
-    }
+		if (!resultado.equals("")) {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setContentText(resultado);
+			alert.show();
+		}
+	}
 }

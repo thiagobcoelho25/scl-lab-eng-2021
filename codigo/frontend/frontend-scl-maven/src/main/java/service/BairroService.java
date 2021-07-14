@@ -56,7 +56,7 @@ public class BairroService {
 	
 	public String update(Bairro bairro) {
         try {
-            WebTarget target = client.target(url+"/"+bairro.getId());
+            WebTarget target = client.target(url);
             ObjectMapper mapper = new ObjectMapper();
             String json = mapper.writeValueAsString(bairro);
             Response response = target.request().put(Entity.entity(json, "application/json;charset=UTF-8"));
@@ -73,7 +73,7 @@ public class BairroService {
 	
 	public String delete(Integer id) {
         try {
-            WebTarget target = client.target(url + id);
+            WebTarget target = client.target(url + "/" + id);
             ObjectMapper mapper = new ObjectMapper();
             Response response = target.request().delete();
             if (response.getStatus() != Response.Status.NO_CONTENT.getStatusCode()) {

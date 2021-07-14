@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="421.0" prefWidth="723.0" styleClass="background" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLBairroController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="421.0" prefWidth="723.0" styleClass="background" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLBairroController">
    <children>
       <SplitPane dividerPositions="0.437219730941704" layoutX="14.0" layoutY="59.0" prefHeight="344.0" prefWidth="694.0">
         <items>
@@ -37,7 +37,7 @@
                   <Text layoutX="31.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label" text="Entregável:" wrappingWidth="100.0" />
                   <Button fx:id="buttonAlterar" layoutX="147.0" layoutY="282.0" mnemonicParsing="false" onAction="#handleButtonAlterar" prefHeight="31.0" prefWidth="92.0" styleClass="buttonPadrao" text="Alterar" />
                   <Button fx:id="buttonConfirmar" layoutX="35.0" layoutY="282.0" mnemonicParsing="false" onAction="#handleButtonConfirmar" prefHeight="31.0" prefWidth="92.0" styleClass="buttonConfirm" text="Inserir" />
-                  <Button layoutX="259.0" layoutY="282.0" mnemonicParsing="false" styleClass="buttonDecline" text="Deletar" />
+                  <Button fx:id="buttonDeletar" layoutX="259.0" layoutY="282.0" mnemonicParsing="false" onAction="#handleButtonDelete" styleClass="buttonDecline" text="Deletar" />
                </children>
             </AnchorPane>
         </items>
