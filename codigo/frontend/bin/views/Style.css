@@ -1,0 +1,158 @@
+.background {
+    -fx-background-color: #bdb9b9;
+    -fx-border-style: solid;
+
+    
+    
+}
+
+
+.label {
+
+    -fx-font-size: 14pt;
+    -fx-font-family: "Comic Sans";
+    -fx-text-fill: Black;
+    -fx-opacity: 1;
+    
+}
+
+
+.text-field {
+    -fx-background-color: white;
+    -fx-font-size: 10pt;
+    -fx-font-family: "Comic Sans";
+}
+
+
+.buttonPadrao{
+	-fx-padding: 5 22 5 22;  
+    -fx-border-color: black;
+	-fx-background-radius: 5;
+	-fx-border-radius: 5;
+    -fx-border-width: 2;
+	-fx-background-color: linear-gradient(to top, gray 10%, white 95%);
+    -fx-font-family: "Tw Cen MT";
+    -fx-font-size: 11pt;
+    -fx-text-fill: black;
+}
+
+.buttonConfirm {
+    -fx-padding: 5 22 5 22;   
+    -fx-border-color: black;
+	-fx-background-radius: 5;
+	-fx-border-radius: 5;
+    -fx-border-width: 2;
+	-fx-background-color: linear-gradient(to top, #01FF1A 10%, white 95%);
+    -fx-font-family: "Tw Cen MT", Tw Cen MT, Tw Cen MT, Tw Cen MT;
+    -fx-font-size: 11pt;
+    -fx-text-fill: black;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.buttonDecline {
+    -fx-padding: 5 22 5 22;   
+    -fx-border-color: black;
+	-fx-background-radius: 5;
+	-fx-border-radius: 5;
+    -fx-border-width: 2;
+    -fx-background-color: linear-gradient(to top, #FF0000 10%, white 95%);
+    -fx-font-family: "Tw Cen MT", Tw Cen MT, Tw Cen MT, Tw Cen MT;
+    -fx-font-size: 11pt;
+    -fx-text-fill: black;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+
+.buttonConfirm:hover {
+    -fx-background-color: #3ed927;
+}
+
+.buttonDecline:hover {
+    -fx-background-color: #e63c3c;
+}
+
+.buttonPadrao:hover {
+    -fx-background-color: gray;
+}
+
+
+.button:pressed, .button:default:hover:pressed {
+    -fx-background-color: white;
+    -fx-text-fill: #1d1d1d;
+}
+
+.button:disabled, .button:default:disabled {
+    -fx-opacity: 0.4;
+    -fx-background-color: #1d1d1d;
+    -fx-text-fill: white;
+}
+
+.button:default {
+    -fx-background-color: -fx-focus-color;
+    -fx-text-fill: #ffffff;
+}
+
+.button:default:hover {
+    -fx-background-color: derive(-fx-focus-color,30%);
+}
+
+.imagemFuncionario {
+    -fx-border-width: 2;
+    -fx-border-style: solid;
+    -fx-border-color: black;
+}
+
+.paneIngredientesPrincipais {
+    -fx-background-color: rgb(255,255,191);
+    -fx-border-width: 2;
+    -fx-border-style: solid;
+    -fx-border-color: black;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+.buttonListarIngredientes {
+    -fx-background-color: rgb(60,199,251);
+    -fx-border-width: 2;
+    -fx-border-style: solid;
+    -fx-border-color: black;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+.buttonPlus {
+    -fx-background-color: #01FF1A;
+    -fx-border-width: 2;
+    -fx-border-style: solid;
+    -fx-border-color: black;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+}
+
+.buttonLess {
+    -fx-background-color: #FF0000;
+    -fx-border-width: 2;
+    -fx-border-style: solid;
+    -fx-border-color: black;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+}
+
+.panePrecoFinal {
+    -fx-background-color: rgb(134,222,251);
+    -fx-border-width: 2;
+    -fx-border-style: solid;
+    -fx-border-color: black;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+.text-field-Ingrediente {
+    -fx-background-color: white;
+    -fx-font-size: 10pt;
+    -fx-font-family: "Comic Sans";
+    -fx-padding: 5px;
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
+    -fx-background-radius: 20px;
+}

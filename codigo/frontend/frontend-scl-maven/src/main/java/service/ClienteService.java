@@ -18,7 +18,7 @@ import exception.StandardError;
 import model.Cliente;
 
 public class ClienteService {
-	private final String url = "http://localhost:8080/scl/Clientes";
+	private final String url = "http://localhost:8080/scl/clientes";
 	
 	private final Client client = ClientBuilder.newClient(); 
 	
@@ -43,10 +43,10 @@ public class ClienteService {
             ObjectMapper mapper = new ObjectMapper();
             String json = mapper.writeValueAsString(cliente);
             Response response = target.request().post(Entity.entity(json, "application/json;charset=UTF-8"));
-            if (response.getStatus() != Response.Status.OK.getStatusCode()) {
+            if (response.getStatus() != Response.Status.CREATED.getStatusCode()) {
                 String stringError = response.readEntity(String.class);
                 StandardError standardError = mapper.readValue(stringError, StandardError.class);
-                return standardError.getMessage();
+                return construçãoStandardError(standardError);
             }
         } catch (IOException ex) {
             Logger.getLogger(ClienteService.class.getName()).log(Level.SEVERE, null, ex);
@@ -63,7 +63,7 @@ public class ClienteService {
             if (response.getStatus() != Response.Status.OK.getStatusCode()) {
                 String stringError = response.readEntity(String.class);
                 StandardError standardError = mapper.readValue(stringError, StandardError.class);
-                return standardError.getMessage();
+                return construçãoStandardError(standardError);
             }
         } catch (IOException ex) {
             Logger.getLogger(ClienteService.class.getName()).log(Level.SEVERE, null, ex);
@@ -73,17 +73,28 @@ public class ClienteService {
 	
 	public String delete(Integer id) {
         try {
-            WebTarget target = client.target(url + id);
+            WebTarget target = client.target(url + "/" + id);
             ObjectMapper mapper = new ObjectMapper();
             Response response = target.request().delete();
             if (response.getStatus() != Response.Status.NO_CONTENT.getStatusCode()) {
                 String stringError = response.readEntity(String.class);
                 StandardError standardError = mapper.readValue(stringError, StandardError.class);
-                return standardError.getMessage();
+                return construçãoStandardError(standardError);
             }
         } catch (IOException ex) {
             Logger.getLogger(ClienteService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "";
     }
+	
+	public String construçãoStandardError(StandardError standardError) {
+		return standardError.getMessage() == null ? standardError.getTimestamp() + "\n"
+				+ standardError.getStatus() + "\n"
+				+ standardError.getError() + "\n"
+				+ standardError.getCampos() + "\n" : standardError.getTimestamp() + "\n"
+				+ standardError.getMessage() + "\n"
+				+ standardError.getPath() + "\n"
+				+ standardError.getStatus() + "\n"
+				+ standardError.getError() + "\n";
+	}
 }

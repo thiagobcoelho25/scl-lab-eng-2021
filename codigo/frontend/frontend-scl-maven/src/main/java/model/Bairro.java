@@ -24,4 +24,8 @@ public class Bairro implements Serializable{
 	
 	private EntregavelStatus entregavel;
 
+	public String toString() {
+		
+		return this.nome;
+	}
 }
