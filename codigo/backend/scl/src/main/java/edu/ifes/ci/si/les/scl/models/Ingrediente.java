@@ -2,6 +2,7 @@ package edu.ifes.ci.si.les.scl.models;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -42,7 +43,7 @@ public class Ingrediente implements Serializable{
 	@Digits(integer = 6, fraction = 2, message = "valor deve estar entre 6.2 digitos")
 	private Double valor;
 	
-	@OneToOne(mappedBy = "ingrediente", fetch = FetchType.LAZY)
+	@OneToOne(mappedBy = "ingrediente", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private Estoque estoque;
 	
 	@Builder
