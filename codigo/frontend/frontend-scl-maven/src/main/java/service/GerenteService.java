@@ -15,33 +15,34 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import exception.StandardError;
-import model.Cliente;
+import model.Gerente;
 
-public class ClienteService {
-	private final String url = "http://localhost:8080/scl/clientes";
+
+public class GerenteService {
+	private final String url = "http://localhost:8080/scl/gerente";
 	
 	private final Client client = ClientBuilder.newClient(); 
 	
-	public List<Cliente> listAll(){
+	public List<Gerente> listAll(){
 		try {
             WebTarget target = client.target(url);
             String json = target.request().get(String.class);
             ObjectMapper mapper = new ObjectMapper();
-            TypeReference<List<Cliente>> mapType = new TypeReference<List<Cliente>>() {
+            TypeReference<List<Gerente>> mapType = new TypeReference<List<Gerente>>() {
             };
-            List<Cliente> lista = mapper.readValue(json, mapType);
+            List<Gerente> lista = mapper.readValue(json, mapType);
             return lista;
         } catch (IOException ex) {
-            Logger.getLogger(ClienteService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GerenteService.class.getName()).log(Level.SEVERE, null, ex);
         }
 		return null;
 	}
 
-	public String insert(Cliente cliente) {
+	public String insert(Gerente gerente) {
 		try {
             WebTarget target = client.target(url);
             ObjectMapper mapper = new ObjectMapper();
-            String json = mapper.writeValueAsString(cliente);
+            String json = mapper.writeValueAsString(gerente);
             Response response = target.request().post(Entity.entity(json, "application/json;charset=UTF-8"));
             if (response.getStatus() != Response.Status.CREATED.getStatusCode()) {
                 String stringError = response.readEntity(String.class);
@@ -49,16 +50,16 @@ public class ClienteService {
                 return construçãoStandardError(standardError);
             }
         } catch (IOException ex) {
-            Logger.getLogger(ClienteService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GerenteService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "";
 	}
 	
-	public String update(Cliente cliente) {
+	public String update(Gerente gerente) {
         try {
-            WebTarget target = client.target(url);
+            WebTarget target = client.target(url+gerente.getId());
             ObjectMapper mapper = new ObjectMapper();
-            String json = mapper.writeValueAsString(cliente);
+            String json = mapper.writeValueAsString(gerente);
             Response response = target.request().put(Entity.entity(json, "application/json;charset=UTF-8"));
             if (response.getStatus() != Response.Status.OK.getStatusCode()) {
                 String stringError = response.readEntity(String.class);
@@ -66,7 +67,7 @@ public class ClienteService {
                 return construçãoStandardError(standardError);
             }
         } catch (IOException ex) {
-            Logger.getLogger(ClienteService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GerenteService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "";
     }
@@ -82,7 +83,7 @@ public class ClienteService {
                 return construçãoStandardError(standardError);
             }
         } catch (IOException ex) {
-            Logger.getLogger(ClienteService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GerenteService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "";
     }
