@@ -119,6 +119,12 @@ public class FXMLIngredienteController implements Initializable{
 	public void handleButtonAlterar() throws IOException {
 		Ingrediente ingrediente = tableViewIngrediente.getSelectionModel().getSelectedItem();
 		if (ingrediente != null) {
+			
+			ingrediente.setNome(textFieldNome.getText());
+			ingrediente.setValor(textFieldValor.getText() != "" 
+        			? Double.valueOf(textFieldValor.getText())
+        			: Double.valueOf("0.0"));
+			
 			String resultado = ingredienteService.update(ingrediente);
 			exibirMensagemErro(resultado);
 			

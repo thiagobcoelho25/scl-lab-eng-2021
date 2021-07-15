@@ -15,7 +15,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import exception.StandardError;
-import model.Bairro;
 import model.Funcionario;
 
 public class FuncionarioService {
@@ -26,7 +25,7 @@ public class FuncionarioService {
 	
 	public List<Funcionario> listAll() {
 		try {
-            WebTarget target = client.target(url);
+            WebTarget target = client.target(url)	;
             String json = target.request().get(String.class);
             ObjectMapper mapper = new ObjectMapper();
             TypeReference<List<Funcionario>> mapType = new TypeReference<List<Funcionario>>() {

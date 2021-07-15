@@ -42,6 +42,7 @@ public class BairroController {
 
     @PutMapping()
     public ResponseEntity<Bairro> update(@Valid @RequestBody Bairro bairro){
+    	System.out.println(bairro);
         return ResponseEntity.ok().body(bairroService.update(bairro));
     }
 

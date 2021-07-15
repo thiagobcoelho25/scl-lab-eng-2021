@@ -109,6 +109,13 @@ public class FXMLBairroController implements Initializable {
 	public void handleButtonAlterar() throws IOException {
 		Bairro bairro = tableViewBairro.getSelectionModel().getSelectedItem();
 		if (bairro != null) {
+			
+			bairro.setEntregavel(checkbox.isSelected() ? EntregavelStatus.sim : EntregavelStatus.nao);
+			bairro.setFrete(textFieldFrete.getText() != "" 
+					? Double.valueOf(textFieldFrete.getText())
+					: Double.valueOf("0.0"));
+			bairro.setNome(textFieldNome.getText());
+			
 			String resultado = bairroService.update(bairro);
 			exibirMensagemErro(resultado);
 			

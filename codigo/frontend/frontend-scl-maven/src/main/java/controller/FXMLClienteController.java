@@ -112,6 +112,14 @@ public class FXMLClienteController implements Initializable {
 	    public void handleButtonAlterar() throws IOException {
 	        Cliente cliente = tableViewCliente.getSelectionModel().getSelectedItem();
 	        if (cliente != null) {
+	        		cliente.setBairro(comboBoxBairro.getSelectionModel().getSelectedItem());
+	        		cliente.setNome(textFieldNome.getText());
+	        		cliente.setNumero(textFieldNumero.getText() != "" 
+	        				? Integer.valueOf(textFieldNumero.getText()) 
+	        				: Integer.valueOf("0"));
+	        		cliente.setPontoReferencia(textFieldReferencia.getText());
+	        		cliente.setRua(textFieldRua.getText());
+	        		
 	                String resultado = clienteService.update(cliente);
 	                exibirMensagemErro(resultado);
 	                carregarTableViewCliente();

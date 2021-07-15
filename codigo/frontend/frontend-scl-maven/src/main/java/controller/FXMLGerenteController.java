@@ -116,6 +116,16 @@ public class FXMLGerenteController implements Initializable {
 	    public void handleButtonAlterar() throws IOException {
 	        Gerente gerente = tableViewGerente.getSelectionModel().getSelectedItem();
 	        if (gerente != null) {
+	        	
+	        	gerente.setBairro(comboBoxBairro.getSelectionModel().getSelectedItem());
+	        	gerente.setLogin(textFieldLogin.getText());
+	        	gerente.setNome(textFieldNome.getText());
+	        	gerente.setNumero(textFieldNumero.getText() != "" 
+    				? Integer.valueOf(textFieldNumero.getText()) 
+    				: Integer.valueOf("0"));
+	        	gerente.setRua(textFieldRua.getText());
+	        	gerente.setSenha(textFieldSenha.getText());
+	        	
 	                String resultado = gerenteService.update(gerente);
 	                exibirMensagemErro(resultado);
 	                carregarTableViewGerente();

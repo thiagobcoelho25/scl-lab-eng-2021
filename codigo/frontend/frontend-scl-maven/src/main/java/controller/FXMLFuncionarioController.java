@@ -81,7 +81,6 @@ public class FXMLFuncionarioController implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
 		carregarComboBoxBairros();
 		
 		carregarTableViewFuncionario();
@@ -107,6 +106,18 @@ public class FXMLFuncionarioController implements Initializable {
     public void handleButtonAlterar() throws IOException {
         Funcionario funcionario = tableViewFuncionario.getSelectionModel().getSelectedItem();
         if (funcionario != null) {
+        	
+        	funcionario.setBairro(comboBoxBairro.getSelectionModel().getSelectedItem());
+        	funcionario.setCargo(textFieldCargo.getText());
+        	funcionario.setNome(textFieldNome.getText());
+        	funcionario.setNumero(textFieldNumero.getText() != "" 
+    				? Integer.valueOf(textFieldNumero.getText()) 
+    				: Integer.valueOf("0"));
+        	funcionario.setRua(textFieldRua.getText());
+        	funcionario.setSalario(textFieldSalario.getText() != "" 
+        			? Double.valueOf(textFieldSalario.getText())
+        			: Double.valueOf("0.0"));
+        	
                 String resultado = funcionarioService.update(funcionario);
                 exibirMensagemErro(resultado);
                 carregarTableViewFuncionario();
