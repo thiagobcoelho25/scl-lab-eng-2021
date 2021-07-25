@@ -8,6 +8,7 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -73,7 +74,7 @@ public class FXMLMainController implements Initializable {
     }
     
     public void handleCadastroProduto() throws IOException{
-        AnchorPane anchor = (AnchorPane)FXMLLoader.load(getClass().getResource("/views/FXMLCadastroProduto.fxml"));
+        AnchorPane anchor = (AnchorPane)FXMLLoader.load(getClass().getResource("/views/FXMLCadastroProdutoWithScroll.fxml"));
         
         AnchorPanePrincipal.getChildren().setAll(anchor);
     

@@ -74,19 +74,12 @@ public class DBService {
 		Ingrediente ingred1 = new Ingrediente(null, "Carne de Boi", 10.0);
 		Ingrediente ingred2 = new Ingrediente(null, "Batata", 5.0);
 		Ingrediente ingred3 = new Ingrediente(null, "Frango Empanado", 8.0);
+		Ingrediente ingred4 = new Ingrediente(null, "Macarrao", 5.0);
 		
 		Estoque estoq1 = new Estoque(null, 50,ingred1);
 		Estoque estoq2 = new Estoque(null, 10,ingred2);
-		/*
-		//Instancia Estoque
-		Estoque estoq1 = new Estoque(null, 50);
-		Estoque estoq2 = new Estoque(null, 10);
 		
-		//Instancia Ingrediente
-		Ingrediente ingred1 = new Ingrediente(null, "Carne de Boi", 10.0, estoq2);
-		Ingrediente ingred2 = new Ingrediente(null, "Batata", 5.0, estoq1);
-		Ingrediente ingred3 = new Ingrediente(null, "Frango Empanado", 8.0, null);
-		*/
+		
 		//Instancia Bairro
 		Bairro b1 = new Bairro(null, "BNH", 0.0, EntregavelStatus.nao);
 		Bairro b2 = new Bairro(null, "Aeroporto", 5.0, EntregavelStatus.sim);
@@ -105,11 +98,14 @@ public class DBService {
 		//Instancia Produto
 		Produto p1 = new Produto(null, "Hamburgue", 25.0);
 		Produto p2 = new Produto(null, "Fritas & Frango", 13.0);
+		Produto p3 = new Produto(null, "Yakisoba", 13.0);
 		
 		//Instancia ProdutosIngredientes
 		ProdutosIngredientes pi1 = new ProdutosIngredientes(p1, ingred1, 1, TipoIngrediente.principal);
 		ProdutosIngredientes pi2 = new ProdutosIngredientes(p2, ingred2, 1, TipoIngrediente.principal);
 		ProdutosIngredientes pi3 = new ProdutosIngredientes(p2, ingred3, 2, TipoIngrediente.secundario);
+		ProdutosIngredientes pi4 = new ProdutosIngredientes(p3, ingred3, 2, TipoIngrediente.principal);
+		ProdutosIngredientes pi5 = new ProdutosIngredientes(p3, ingred4, 2, TipoIngrediente.secundario);
 
 		//Instancia Pedido
 		Pagamento pag1 = new Pagamento(null, 38.0, 0.0, TipoFormaPagamento.cartao);
@@ -142,12 +138,12 @@ public class DBService {
 		gerenteRepository.save(g1);
 		funcionarioRepository.saveAll(Arrays.asList(func1,func2));
 		
-		ingredienteRepository.saveAll(Arrays.asList(ingred1,ingred2,ingred3));
+		ingredienteRepository.saveAll(Arrays.asList(ingred1,ingred2,ingred3,ingred4));
 		estoqueRepository.saveAll(Arrays.asList(estoq1,estoq2));
 		//estoqueRepository.saveAll(Arrays.asList(estoq1,estoq2));
 		//ingredienteRepository.saveAll(Arrays.asList(ingred1,ingred2,ingred3));
-		produtoRepository.saveAll(Arrays.asList(p1,p2));
-		produtosIngredientesRepository.saveAll(Arrays.asList(pi1,pi2,pi3));
+		produtoRepository.saveAll(Arrays.asList(p1,p2,p3));
+		produtosIngredientesRepository.saveAll(Arrays.asList(pi1,pi2,pi3,pi4,pi5));
 		pagamentoRepository.saveAll(Arrays.asList(pag1,pag2,pag3));
 		entregaRepository.saveAll(Arrays.asList(entrega1,entrega2,entrega3));
 		pedidoRepository.saveAll(Arrays.asList(pd1,pd2,pd3));

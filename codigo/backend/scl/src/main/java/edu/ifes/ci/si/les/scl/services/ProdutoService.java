@@ -64,7 +64,7 @@ public class ProdutoService {
 		try {
 			produtoRepository.deleteById(id);
 		} catch (DataIntegrityViolationException e) {
-			throw new DataIntegrityException("Produto não existe");
+			throw new DataIntegrityException("Produto não pode ser existe");
 		}
 	}
 }
