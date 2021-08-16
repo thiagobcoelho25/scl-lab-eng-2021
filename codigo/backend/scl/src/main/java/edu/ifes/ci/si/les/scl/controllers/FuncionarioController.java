@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +38,7 @@ public class FuncionarioController {
 		return ResponseEntity.ok().body(funcionarioService.find(id));
 	}
 	
-	@PostMapping
+	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Funcionario> insert(@Valid @RequestBody Funcionario funcionario){
 		return ResponseEntity.status(HttpStatus.CREATED).body(funcionarioService.insert(funcionario));
 	}

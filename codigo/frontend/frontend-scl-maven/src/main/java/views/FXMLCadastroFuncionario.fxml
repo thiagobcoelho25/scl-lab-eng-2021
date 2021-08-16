@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Point3D?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
@@ -17,7 +18,11 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="759.0" prefWidth="848.0" styleClass="background" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLFuncionarioController">
 <children>
-    <TextField fx:id="textFieldCodigo" layoutX="523.0" layoutY="66.0" prefHeight="28.0" prefWidth="273.0" styleClass="combo-box-popup" />
+    <TextField fx:id="textFieldCodigo" alignment="CENTER" editable="false" layoutX="523.0" layoutY="66.0" prefHeight="28.0" prefWidth="273.0" text="Gerado Automaticamente">
+         <styleClass>
+            <String fx:value="combo-box-popup" />
+            <String fx:value="text-field-Codigo-Obj" />
+         </styleClass></TextField>
     <Text layoutX="420.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label" text="Código:" wrappingWidth="83.0" />
     <Button fx:id="btnAlterar" layoutX="708.0" layoutY="591.0" mnemonicParsing="false" onAction="#handleButtonAlterar" prefHeight="31.0" prefWidth="92.0" styleClass="buttonPadrao" text="Alterar" AnchorPane.rightAnchor="48.0" />
     <Label layoutX="402.0" layoutY="14.0" text="Cadastro Funcionário" />
@@ -67,8 +72,8 @@
             <TextField fx:id="textFieldSalario" prefHeight="30.0" prefWidth="147.0" styleClass="combo-box-popup" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-      <ImageView fx:id="imageViewFoto" fitHeight="150.0" fitWidth="200.0" layoutX="420.0" layoutY="518.0" pickOnBounds="true" preserveRatio="true" />
-      <Button layoutX="640.0" layoutY="518.0" mnemonicParsing="false" text="Foto" />
+      <ImageView fx:id="imageViewFoto" fitHeight="150.0" fitWidth="200.0" layoutX="420.0" layoutY="518.0" pickOnBounds="true" preserveRatio="true" styleClass="imagemFuncionario" />
+      <Button fx:id="btnFoto" layoutX="640.0" layoutY="518.0" mnemonicParsing="false" onAction="#onBtnFotoClicked" text="Foto" />
       <TableView fx:id="tableViewFuncionario" layoutX="8.0" layoutY="59.0" prefHeight="629.0" prefWidth="380.0">
         <columns>
           <TableColumn fx:id="colunaID" prefWidth="98.0" text="ID" />

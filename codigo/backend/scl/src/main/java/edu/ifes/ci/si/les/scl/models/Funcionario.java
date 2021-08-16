@@ -43,6 +43,7 @@ public class Funcionario extends Usuario implements Serializable{
 	@Digits(integer = 6, fraction = 2)
 	private Double salario;
 	
+	@Size(max = 2000000)
 	private String foto;
 	
 	@Builder

@@ -28,12 +28,13 @@ public class Funcionario extends Usuario implements Serializable {
 	private String foto;
 	
 	@Builder
-    public Funcionario(Integer id, String nome, String rua, Integer numero, Bairro bairro, String login, String senha, String cargo, Double salario) {
+    public Funcionario(Integer id, String nome, String rua, Integer numero, Bairro bairro, String login, String senha, String cargo, Double salario, String foto) {
         super(id, nome, rua, numero, bairro);
         this.login = login;
         this.senha = senha;
         this.salario = salario;
         this.cargo = cargo;
+        this.foto = foto;
     }
 
 }

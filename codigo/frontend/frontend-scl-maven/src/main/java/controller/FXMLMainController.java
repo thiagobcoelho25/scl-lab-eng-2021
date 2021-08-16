@@ -14,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 
 /**
  * FXML Controller class
@@ -36,6 +37,10 @@ public class FXMLMainController implements Initializable {
     private MenuItem Ingrediente;
     @FXML
     private AnchorPane AnchorPanePrincipal;
+    @FXML
+    private AnchorPane AnchorPanePai;
+    @FXML
+    private VBox VBoxPai;
 
     /**
      * Initializes the controller class.
@@ -43,6 +48,7 @@ public class FXMLMainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+    	
     }    
     
     public void handleCadastroGerente() throws IOException{

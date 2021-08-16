@@ -40,11 +40,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLMainController">
+<VBox fx:id="VBoxPai" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLMainController">
   <children>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <AnchorPane fx:id="AnchorPanePai" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
-          <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="640.0">
+          <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="640.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <menus>
               <Menu mnemonicParsing="false" text="Cadastrar">
                 <items>
@@ -58,7 +58,7 @@
               </Menu>
             </menus>
           </MenuBar>
-            <AnchorPane fx:id="AnchorPanePrincipal" layoutY="27.0" prefHeight="372.0" prefWidth="640.0" styleClass="background">
+            <AnchorPane fx:id="AnchorPanePrincipal" layoutY="27.0" prefHeight="372.0" prefWidth="640.0" styleClass="background" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                <children>
                   <Label layoutX="66.0" layoutY="82.0" prefHeight="141.0" prefWidth="529.0" text="Bem-Vindo!" textFill="#9a9898">
                      <font>

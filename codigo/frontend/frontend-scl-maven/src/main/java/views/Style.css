@@ -156,3 +156,8 @@
     -fx-background-insets: 5px;
     -fx-background-radius: 20px;
 }
+
+.text-field-Codigo-Obj {
+	-fx-background-color: linear-gradient(to top, rgb(128, 128, 128) 10%, white 95%);
+	-fx-text-alignment: center;
+}
