@@ -1,11 +1,6 @@
-package edu.ifes.ci.si.les.scl.models;
+package model;
 
 import java.io.Serializable;
-
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -23,16 +18,13 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
-@Entity
 public class Acrescimos implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
+	@JsonIgnore
 	private AcrescimosPK id = new AcrescimosPK();
 
-	@NotNull(message = "A quantidade deve ser definida")
-	@Min(value = 1, message = "A quantidade deve ser maior que zero")
 	private Integer quantidade;
 
 	@Builder

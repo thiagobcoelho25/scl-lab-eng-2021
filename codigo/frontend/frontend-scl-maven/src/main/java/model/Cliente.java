@@ -28,5 +28,9 @@ public class Cliente implements Serializable{
 	private String pontoReferencia;
 	
 	private Bairro bairro;
+	
+	public String toString() {
+		return this.nome;
+	}
 
 }
