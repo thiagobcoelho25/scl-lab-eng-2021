@@ -20,11 +20,9 @@ public class Pagamento implements Serializable{
 	
 	private Integer id;
 	
-	private Double valor;
-
-	private Double desconto;
-
-	private TipoFormaPagamento formaDePagamento;
+	private Pedido pedido;
+	
+	//private Pedido pedido;
 	
 //	@OneToOne
 //	@JoinColumn(name = "pedido_id")
