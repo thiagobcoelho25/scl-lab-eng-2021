@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 
+import edu.ifes.ci.si.les.scl.model.enums.PagamentoStatus;
 import edu.ifes.ci.si.les.scl.model.enums.TipoFormaPagamento;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -43,6 +44,9 @@ public class Pagamento implements Serializable{
 
 	@Enumerated(EnumType.STRING)
 	private TipoFormaPagamento formaDePagamento;
+	
+	@Enumerated(EnumType.STRING)
+	private PagamentoStatus pagamentoStatus;
 	
 //	@OneToOne
 //	@JoinColumn(name = "pedido_id")

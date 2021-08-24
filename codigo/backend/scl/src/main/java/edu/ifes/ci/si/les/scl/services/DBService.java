@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.ifes.ci.si.les.scl.model.enums.EntregavelStatus;
+import edu.ifes.ci.si.les.scl.model.enums.PagamentoStatus;
 import edu.ifes.ci.si.les.scl.model.enums.StatusEntrega;
 import edu.ifes.ci.si.les.scl.model.enums.TipoFormaPagamento;
 import edu.ifes.ci.si.les.scl.model.enums.TipoIngrediente;
@@ -108,15 +109,15 @@ public class DBService {
 		ProdutosIngredientes pi5 = new ProdutosIngredientes(p3, ingred4, 2, TipoIngrediente.secundario);
 
 		//Instancia Pedido
-		Pagamento pag1 = new Pagamento(null, 38.0, 0.0, TipoFormaPagamento.cartao);
+		Pagamento pag1 = new Pagamento(null, 38.0, 0.0, TipoFormaPagamento.cartao, PagamentoStatus.pago);
 		Entrega entrega1 = new Entrega(null, LocalDateTime.now(), StatusEntrega.naoEntregue);
 		Pedido pd1 = new Pedido(null, new Date(), func1, c1, pag1, entrega1);
 		
-		Pagamento pag2 = new Pagamento(null, 56.0, 0.0, TipoFormaPagamento.cartao);
+		Pagamento pag2 = new Pagamento(null, 56.0, 0.0, TipoFormaPagamento.cartao, PagamentoStatus.naoPago);
 		Entrega entrega2 = new Entrega(null, LocalDateTime.now(), StatusEntrega.naoEntregue);
 		Pedido pd2 = new Pedido(null, new Date(), g1, c2, pag2, entrega1);
 		
-		Pagamento pag3 = new Pagamento(null, 21.0, 3.0, TipoFormaPagamento.cartao);
+		Pagamento pag3 = new Pagamento(null, 21.0, 3.0, TipoFormaPagamento.cartao, PagamentoStatus.pago);
 		Entrega entrega3 = new Entrega(null, LocalDateTime.now(), StatusEntrega.entregue);
 		Pedido pd3 = new Pedido(null, new Date(), func1, c3, pag3, entrega3);
 		
