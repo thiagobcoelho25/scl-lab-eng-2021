@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="575.0" styleClass="background" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLProdutoController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="575.0" styleClass="background" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLProdutoController">
     <children>
       <SplitPane dividerPositions="0.37521815008726006" layoutY="50.0" prefHeight="760.0" prefWidth="575.0">
         <items>
@@ -86,11 +86,11 @@
                   <Pane layoutX="13.0" layoutY="604.0" prefHeight="96.0" prefWidth="336.0" styleClass="panePrecoFinal">
                      <children>
                         <Label layoutX="40.0" layoutY="2.0" text="Custo" />
-                        <TextField layoutX="14.0" layoutY="29.0" prefHeight="55.0" prefWidth="95.0" promptText="Gerado Automaticamente" styleClass="combo-box-popup" />
+                        <TextField fx:id="textFieldCusto" layoutX="14.0" layoutY="29.0" prefHeight="55.0" prefWidth="95.0" promptText="Gerado Automaticamente" styleClass="combo-box-popup" />
                         <Label layoutX="146.0" layoutY="1.0" text="Lucro" />
                         <TextField layoutX="121.0" layoutY="29.0" prefHeight="55.0" prefWidth="95.0" promptText="Gerado Automaticamente" styleClass="combo-box-popup" />
                         <Label layoutX="233.0" layoutY="2.0" text="Preço Final" />
-                        <TextField layoutX="230.0" layoutY="29.0" prefHeight="55.0" prefWidth="95.0" promptText="Preço Final" styleClass="combo-box-popup" />
+                        <TextField fx:id="textFieldPreçoFinal" layoutX="230.0" layoutY="29.0" prefHeight="55.0" prefWidth="95.0" promptText="Preço Final" styleClass="combo-box-popup" />
                      </children>
                   </Pane>
                   <Label layoutX="75.0" layoutY="375.0" text="Ingredientes Secundários" />

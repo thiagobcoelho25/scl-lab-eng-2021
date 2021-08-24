@@ -55,6 +55,23 @@ private final String url = "http://localhost:8080/scl/ingredientes";
         return "";
 	}
 	
+	public String insertEstoque(Ingrediente ingrediente) {
+		try {
+            WebTarget target = client.target(url + "/estoque");
+            ObjectMapper mapper = new ObjectMapper();
+            String json = mapper.writeValueAsString(ingrediente);
+            Response response = target.request().post(Entity.entity(json, "application/json;charset=UTF-8"));
+            if (response.getStatus() != Response.Status.CREATED.getStatusCode()) {
+                String stringError = response.readEntity(String.class);
+                StandardError standardError = mapper.readValue(stringError, StandardError.class);
+                return construçãoStandardError(standardError);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(BairroService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "";
+	}
+	
 	public String update(Ingrediente ingrediente) {
         try {
             WebTarget target = client.target(url);
