@@ -56,10 +56,10 @@
                         <MenuItem fx:id="Ingrediente" mnemonicParsing="false" onAction="#handleCadastroIngredientes" text="Ingrediente" />
                 </items>
               </Menu>
-                  <Menu fx:id="Estoque" mnemonicParsing="false" onAction="#handleCadastroEstoque" text="Casos de Uso">
-                    <items>
-                      <MenuItem fx:id="Estoque" mnemonicParsing="false" onAction="#handleCadastroEstoque" text="Cadastrar Estoque" />
-                    </items>
+                  <Menu mnemonicParsing="false" text="Pedido">
+                     <items>
+                        <MenuItem fx:id="RealizarPedido" mnemonicParsing="false" onAction="#handleRealizarPedido" text="RealizarPedido" />
+                     </items>
                   </Menu>
             </menus>
           </MenuBar>

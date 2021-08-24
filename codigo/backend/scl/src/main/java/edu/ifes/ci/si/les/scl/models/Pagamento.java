@@ -8,6 +8,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 
@@ -45,11 +47,8 @@ public class Pagamento implements Serializable{
 	@Enumerated(EnumType.STRING)
 	private TipoFormaPagamento formaDePagamento;
 	
-	@Enumerated(EnumType.STRING)
-	private PagamentoStatus pagamentoStatus;
-	
-//	@OneToOne
-//	@JoinColumn(name = "pedido_id")
-//	private Pedido pedido;
+	@OneToOne
+	@JoinColumn(name = "pedido_id")
+	private Pedido pedido;
 
 }

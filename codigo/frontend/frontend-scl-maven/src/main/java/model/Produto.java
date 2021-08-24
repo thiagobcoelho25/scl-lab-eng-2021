@@ -37,4 +37,8 @@ public class Produto implements Serializable{
 	       this.ingredientes = ingredientes;
 	     }
 	
+	public String toString() {
+		return this.nome + " = R$ " + this.precoFinal.toString();
+	}
+	
 }
