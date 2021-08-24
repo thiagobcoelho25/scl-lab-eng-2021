@@ -6,6 +6,8 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -29,6 +31,8 @@ public class ProdutosIngredientes implements Serializable{
 	@EmbeddedId
 	private ProdutosIngredientesPK id = new ProdutosIngredientesPK();
 	
+	@Max(value = 999, message = "Não pode ser maior que 999")
+	@Min(value = 1, message = "Não pode ser menor que 1")
 	private Integer quantidade;
 	
 	@Enumerated(EnumType.STRING)

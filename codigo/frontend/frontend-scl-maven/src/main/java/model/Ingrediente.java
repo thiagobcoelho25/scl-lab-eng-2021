@@ -30,5 +30,8 @@ public class Ingrediente implements Serializable{
 		this.nome = nome;
 		this.valor = valor;
 	}
-
+	
+	public String toString() {
+		return this.nome;
+	}
 }

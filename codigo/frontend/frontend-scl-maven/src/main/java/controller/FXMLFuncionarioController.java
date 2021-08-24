@@ -1,28 +1,14 @@
 package controller;
 
-import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
-import java.awt.image.WritableRaster;
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.nio.file.Files;
 import java.util.Base64;
 import java.util.List;
 import java.util.ResourceBundle;
-
-import javax.imageio.ImageIO;
-import javax.imageio.stream.IIOByteBuffer;
-import javax.imageio.stream.ImageInputStream;
-import javax.imageio.stream.ImageOutputStream;
-
-import org.apache.tomcat.util.http.fileupload.FileUtils;
-
-import com.sun.glass.ui.CommonDialogs.ExtensionFilter;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

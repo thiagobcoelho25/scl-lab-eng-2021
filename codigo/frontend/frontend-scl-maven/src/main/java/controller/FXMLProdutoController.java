@@ -22,6 +22,7 @@ import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 import model.Ingrediente;
@@ -56,6 +57,15 @@ public class FXMLProdutoController implements Initializable {
 	
 	@FXML
 	private TextField textFieldQuantidadeSecundario;
+	
+	@FXML
+	private TextField textFieldCusto;
+	
+	@FXML
+	private TextField textFieldLucro;
+	
+	@FXML
+	private TextField textFieldPreçoFinal;
 	
 	@FXML
     private ComboBox<Ingrediente> comboBoxIngredientePrincipal;
@@ -122,6 +132,23 @@ public class FXMLProdutoController implements Initializable {
 		
 		tableViewProduto.getSelectionModel().selectedItemProperty()
 		.addListener((observable, oldValue, newValue) -> selecionarItemTableViewProduto(newValue));
+		
+		textFieldLucro.setText("15.0");
+		textFieldLucro.setOnKeyReleased(event -> {
+			if(event.getCode() == KeyCode.ENTER) {
+				if(!tableViewProduto.getSelectionModel().isEmpty() && textFieldLucro.getText() != "") {
+					Produto produto = tableViewProduto.getSelectionModel().getSelectedItem();
+					
+					Double preçoFinal = Double.valueOf(textFieldLucro.getText()) + Double.valueOf(textFieldCusto.getText());
+					textFieldPreçoFinal.setText(String.valueOf(preçoFinal));
+					produto.setPrecoFinal(preçoFinal);
+				} else {
+					Double preçoFinal = Double.valueOf(textFieldLucro.getText()) + Double.valueOf(textFieldCusto.getText());
+					textFieldPreçoFinal.setText(String.valueOf(preçoFinal));
+				}
+			}
+		});
+		
 	}
 	
 	public void carregarTableViewProdutos() {
@@ -159,6 +186,10 @@ public class FXMLProdutoController implements Initializable {
 			textFieldCodigo.setText(produto.getId().toString());
 			textFieldNome.setText(produto.getNome());
 			carregarTableViewProdutosIngredientes(produto);
+			Double valor = produto.getIngredientes().stream().reduce(0.0,(subtotal, element) -> subtotal + element.getQuantidade()*element.getIngrediente().getValor(),Double::sum);
+			textFieldCusto.setText(String.valueOf(valor));
+			textFieldPreçoFinal.setText(textFieldLucro.getText() == "" ? String.valueOf(produto.getPrecoFinal()) : 
+				String.valueOf(Double.valueOf(textFieldLucro.getText()) + valor));
 		} else {
 			textFieldCodigo.setText("");
 			textFieldNome.setText("");
@@ -245,6 +276,7 @@ public class FXMLProdutoController implements Initializable {
 				produto.getIngredientes().add(prodIngred);
 			}
 			carregarTableViewProdutosIngredientes(produto);
+			adicionarCustoEPrecoFinal(prodIngred.getIngrediente().getValor()*Integer.valueOf(textFieldQuantidadePrincipal.getText()));
 		//Para Inserção de novo Produto
 		} else if(!comboBoxIngredientePrincipal.getSelectionModel().isEmpty() && textFieldQuantidadePrincipal.getText() != ""){
 			ProdutosIngredientes prodIngred = new ProdutosIngredientes(null,
@@ -262,6 +294,7 @@ public class FXMLProdutoController implements Initializable {
 			}else {
 				listProdutosIngredientesPrincipal.add(prodIngred);
 			}
+			adicionarCustoEPrecoFinal(prodIngred.getIngrediente().getValor());
 			carregarTableViewProdutosIngredientes();
 		} else {
 			Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -292,6 +325,7 @@ public class FXMLProdutoController implements Initializable {
 			} else {
 				produto.getIngredientes().add(prodIngred);
 			}
+			adicionarCustoEPrecoFinal(prodIngred.getIngrediente().getValor());
 			carregarTableViewProdutosIngredientes(produto);
 			// Para Inserção de novo Produto
 		} else if (!comboBoxIngredienteSecundario.getSelectionModel().isEmpty()
@@ -311,6 +345,7 @@ public class FXMLProdutoController implements Initializable {
 			} else {
 				listProdutosIngredientesSecundario.add(prodIngred);
 			}
+			adicionarCustoEPrecoFinal(prodIngred.getIngrediente().getValor());
 			carregarTableViewProdutosIngredientes();
 		} else {
 			Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -325,10 +360,12 @@ public class FXMLProdutoController implements Initializable {
 			Produto produto = new Produto();
         	produto.setId(null);
         	produto.setNome(textFieldNome.getText());
-        	produto.setPrecoFinal(0.0);
+        	produto.setPrecoFinal(Double.valueOf(textFieldPreçoFinal.getText()));
         	produto.setIngredientes(Stream.concat(listProdutosIngredientesPrincipal.stream(),
 					 listProdutosIngredientesSecundario.stream())
                    .collect(Collectors.toList()));
+        	
+        	System.out.println(produto.toString());
         	
         	String resultado = produtoService.insert(produto); 
         	exibirMensagemErro(resultado);
@@ -343,7 +380,7 @@ public class FXMLProdutoController implements Initializable {
 		Produto produto = tableViewProduto.getSelectionModel().getSelectedItem();
 		if (produto != null) {
 			produto.setNome(textFieldNome.getText());
-			produto.setPrecoFinal(0.0);
+			produto.setPrecoFinal(Double.valueOf(textFieldPreçoFinal.getText()));
 			produto.setIngredientes(Stream.concat(listProdutosIngredientesPrincipal.stream(),
 					 listProdutosIngredientesSecundario.stream())
                     .collect(Collectors.toList()));
@@ -374,6 +411,24 @@ public class FXMLProdutoController implements Initializable {
         }
         tableViewProduto.getSelectionModel().select(null);
     }
+	
+	public void adicionarCustoEPrecoFinal(Double valorCusto) {
+		Produto produto = tableViewProduto.getSelectionModel().getSelectedItem();
+		if(produto != null) {
+			Double valorCustoInicial = textFieldCusto.getText() == "" ? 0.0 : Double.valueOf(textFieldCusto.getText());
+			textFieldCusto.setText(String.valueOf(valorCustoInicial + valorCusto));
+			
+			Double preçoFinal = valorCustoInicial + valorCusto + Double.valueOf(textFieldLucro.getText());
+			produto.setPrecoFinal(preçoFinal);
+			textFieldPreçoFinal.setText(String.valueOf(produto.getPrecoFinal()));
+		}
+		Double valorCustoInicial = textFieldCusto.getText() == "" ? 0.0 : Double.valueOf(textFieldCusto.getText());
+		textFieldCusto.setText(String.valueOf(valorCustoInicial + valorCusto));
+		
+		Double preçoFinal = valorCustoInicial + valorCusto + (textFieldLucro.getText() == "" ? 0.0 : Double.valueOf(textFieldLucro.getText())); 
+		//produto.setPrecoFinal(preçoFinal);
+		textFieldPreçoFinal.setText(String.valueOf(preçoFinal));
+	}
 	
 	public void exibirMensagemErro(String resultado) {
 		if (!resultado.equals("")) {
