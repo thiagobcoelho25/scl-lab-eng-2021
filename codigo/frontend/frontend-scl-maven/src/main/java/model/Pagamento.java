@@ -19,7 +19,7 @@ public class Pagamento implements Serializable{
 	
 	private Integer id;
 	
-	private Cliente cliente;
+	private Pedido pedido;
 	
 	//private Pedido pedido;
 	
