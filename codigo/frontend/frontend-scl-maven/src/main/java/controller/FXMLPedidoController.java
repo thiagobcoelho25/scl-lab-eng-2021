@@ -4,6 +4,7 @@ import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Observable;
 import java.util.ResourceBundle;
@@ -35,7 +36,9 @@ import model.Produto;
 import model.Usuario;
 import service.ClienteService;
 import service.FuncionarioService;
+import service.GerenteService;
 import service.IngredienteService;
+import service.ItensPedidoService;
 import service.PedidoService;
 import service.ProdutoService;
 
@@ -104,6 +107,9 @@ public class FXMLPedidoController implements Initializable {
 	private final ProdutoService produtoService = new ProdutoService();
 	private final IngredienteService ingredienteService = new IngredienteService();
 	private final FuncionarioService funcionarioService = new  FuncionarioService();
+	private final ItensPedidoService itensPedidoService = new ItensPedidoService();
+	/*eliminar depois*/
+	private final GerenteService gerenteService = new GerenteService();
 	
 	
 	private ObservableList<Cliente> observableCliente;
@@ -144,7 +150,7 @@ public class FXMLPedidoController implements Initializable {
 	}
 	
 	private void carregarUsuarioAtual() {
-		this.usuarioAtual = funcionarioService.listAll().get(0);
+		this.usuarioAtual = gerenteService.listAll().get(0);
 	}
 	
 	private void carregarDataPedido() {
@@ -172,14 +178,63 @@ public class FXMLPedidoController implements Initializable {
 		
 		if(itensPedidoSalvos.size() != 0) {
 			
+			/* Adicionando pedido ao banco de dados */
 			Pedido novoPedido = new Pedido(null, new Date(System.currentTimeMillis()), usuarioAtual, clientePedido);
-			
+			/* criar um find by object no service para pegar o id do produto inserido */
 			pedidoService.insert(novoPedido);
+			
+			/* Pegando o ultimo pedido adicionado com ID */
+			List<Pedido> lista = pedidoService.listAll();
+			novoPedido = lista.get(lista.size()-1);
+			System.out.println("Last peido = " + novoPedido.getId());
+			
+			/* Setando Pedido de cada ItensPedido do novo Pedido */
+			for(ItensPedido item : itensPedidoSalvos) {
+				System.out.println("Item = " + item.getProduto().getNome());
+				item.setPedido(novoPedido);
+				itensPedidoService.insert(item);
+			}
 		}
+//		Pedido ped = new Pedido(null, new Date(System.currentTimeMillis()), usuarioAtual, clientePedido);
+//		pedidoService.insert(ped);
+//		ped.setId(4);
+//		ItensPedido ip1 = new ItensPedido(null, listaProdutos.get(0), ped);
+//		ItensPedido ip2 = new ItensPedido(null, listaProdutos.get(1), ped);
+//		Acrescimos a1 = new Acrescimos();
+//		a1.setIngrediente(listaIngredientes.get(0));
+//		a1.setQuantidade(2);
+//		Acrescimos a2 = new Acrescimos();
+//		a2.setIngrediente(listaIngredientes.get(1));
+//		a2.setQuantidade(1);
+//		System.out.println("Itens Pedido ID = " + ip1.getId());
+//		ip1.setAcrescimos(Arrays.asList(a1, a2));
+//		itensPedidoService.insert(ip1);
+//		itensPedidoService.insert(ip2);
+			
+		/* Listando todos os pedidos ja salvos no banco */
+		List<Pedido> teste = pedidoService.listAll();
+		for (Pedido pedido : teste) {
+			System.out.println("Pedido = " + pedido.getId() + " / " + pedido.getData());
+		}
+	
+		limparAllCampos();
 		
-		for(ItensPedido item : itensPedidoSalvos) {
-			System.out.println("Item = " + item.getProduto().getNome());
-		}
+	}
+	
+	private void limparAllCampos() {
+		combBoxAcrescimo.setValue(null);
+		combBoxProduto.setValue(null);
+		combBoxCliente.setValue(null);
+		textFieldEndereco.clear();
+		textFieldQtd.clear();
+		textFieldFrete.clear();
+		
+		listaProdutosPedido.clear();
+		acrescimosAdicionados.clear();
+		carregarTableViewItensPedido();
+		tableItemsPedido.refresh();
+		
+		System.out.println("Lista Produtos Pedido = " + listaProdutosPedido);
 	}
 	
 	public void onClickAdicionarProduto() {
@@ -222,6 +277,8 @@ public class FXMLPedidoController implements Initializable {
 		
 		tableAcrescimos.setItems(observableIngredienteAcrescimos);
 		tableAcrescimos.refresh();
+		
+		
 		
 		
 //		if(acrescimosAdicionados.size() != 0) {

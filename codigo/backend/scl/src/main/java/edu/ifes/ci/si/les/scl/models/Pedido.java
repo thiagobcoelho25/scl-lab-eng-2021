@@ -64,7 +64,7 @@ public class Pedido implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "usuario_id", nullable = false)
 	// gambiarra abaixo. Isso so funciona pq so precisa do id do usuario e Funcionario tem mais campos que gerente
-	@JsonDeserialize(as = Funcionario.class)
+	//@JsonDeserialize(as = Funcionario.class)
 	private Usuario usuario;
 	
 	//@JsonIgnore

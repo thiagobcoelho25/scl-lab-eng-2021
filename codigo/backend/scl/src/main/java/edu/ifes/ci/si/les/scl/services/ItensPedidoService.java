@@ -37,23 +37,26 @@ public class ItensPedidoService {
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public ItensPedido insert(ItensPedido itensPedido) {
 		
-		Pedido pedido = itensPedido.getPedido();
-		Produto produto = itensPedido.getProduto();
+//		Pedido pedido = itensPedido.getPedido();
+//		Produto produto = itensPedido.getProduto();
+//		
+//		if(pedido.getId() == null || produto.getId() == null) {
+//			throw new DataIntegrityException("Não foi possivel Inserir o objeto Item pedido");
+//		}
 		
-		if(pedido.getId() == null || produto.getId() == null) {
-			throw new DataIntegrityException("Não foi possivel Inserir o objeto Item pedido");
-		}
+
+		itensPedido.setId(null);
 		try {
-			itensPedido.setId(null);
 			for (Acrescimos acrescimo : itensPedido.getAcrescimos()) {
 				acrescimo.setItensPedido(itensPedido);
 			}
 			//itensPedido.setPedido(pedido);
 			//itensPedido.setProduto(produto);
-			return itensPedidoRepository.save(itensPedido);
+			
 		} catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityException("Não foi possivel Inserir o objeto Item pedido");
 		}
+		return itensPedidoRepository.save(itensPedido);
 		
 		
 	}
@@ -90,6 +93,10 @@ public class ItensPedidoService {
 		}catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityException("Item Pedido não existe");
 		}
+	}
+	
+	public List<ItensPedido> findByPedido(Pedido pedido){
+		return (List<ItensPedido>) itensPedidoRepository.findByPedido(pedido);
 	}
 
 }

@@ -27,7 +27,8 @@ import lombok.Setter;
 public class Acrescimos implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-
+	
+	
 	@EmbeddedId
 	private AcrescimosPK id = new AcrescimosPK();
 

@@ -30,6 +30,14 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(of = {"id"})
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@JsonTypeInfo(
+		  use = JsonTypeInfo.Id.NAME, 
+		  include = JsonTypeInfo.As.PROPERTY, 
+		  property = "type")
+		@JsonSubTypes({ 
+		  @Type(value = Gerente.class, name = "gerente"), 
+		  @Type(value = Funcionario.class, name = "funcionario") 
+		})
 public abstract class Usuario implements Serializable{
 
 	private static final long serialVersionUID = 1L;
