@@ -36,17 +36,18 @@ public class PedidoService {
 	
 	public Pedido insert(Pedido pedido) {
 		pedido.setId(null);
+		Pedido retorno = pedidoRepository.save(pedido);
 		try {
 			
 			for (ItensPedido item : pedido.getItensPedido()) {
-				item.setPedido(pedido);
+				item.setPedido(retorno);
 				itensPedidoService.insert(item);
 			}
 			
 		} catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityException("Erro na inserção no Banco");
 		}
-		return pedidoRepository.save(pedido);
+		return retorno;
 	}
 	
 	public Pedido update(Pedido pedido) {
@@ -56,6 +57,11 @@ public class PedidoService {
 	
 	public void delete(Integer id) {
 		try {
+			Pedido p = find(id);
+			List<ItensPedido> itensRemovidos = itensPedidoService.findByPedido(p);
+			for (ItensPedido itensPedido : itensRemovidos) {
+				itensPedidoService.delete(itensPedido.getId());
+			}
 			pedidoRepository.deleteById(id);	
 		}catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityException("Pedido não existe");

@@ -22,7 +22,7 @@ public class Acrescimos implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	@JsonIgnore
+	
 	private AcrescimosPK id = new AcrescimosPK();
 
 	private Integer quantidade;

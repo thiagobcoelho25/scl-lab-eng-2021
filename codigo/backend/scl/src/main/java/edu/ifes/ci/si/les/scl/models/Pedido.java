@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -65,12 +66,17 @@ public class Pedido implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "usuario_id", nullable = false)
 	// gambiarra abaixo. Isso so funciona pq so precisa do id do usuario e Funcionario tem mais campos que gerente
+	//@JsonDeserialize(as = Funcionario.class)
 	private Usuario usuario;
 	
 	//@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "cliente_id", nullable = false)
 	private Cliente cliente;
+	
+	@NotNull(message = "Valor total do pedido deve ser definido")
+	@Min(value = 0)
+	private Double valorTotal;
 	
 	//@JsonIgnore
 //	@OneToOne
