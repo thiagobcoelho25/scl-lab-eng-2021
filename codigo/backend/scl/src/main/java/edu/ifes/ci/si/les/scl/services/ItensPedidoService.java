@@ -61,10 +61,17 @@ public class ItensPedidoService {
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public ItensPedido update(ItensPedido itensPedido) {
 		
-		ItensPedido itensFromBD = itensPedidoRepository.findById(itensPedido.getId()).get();
-		itensFromBD.getAcrescimos().clear();
-		itensFromBD.getAcrescimos().addAll(itensPedido.getAcrescimos());
-		
+		try {
+			ItensPedido itensFromBD = itensPedidoRepository.findById(itensPedido.getId()).get();
+			itensFromBD.getAcrescimos().clear();
+			itensFromBD.getAcrescimos().addAll(itensPedido.getAcrescimos());
+			
+			return itensPedidoRepository.save(itensFromBD);
+		} catch (DataIntegrityViolationException e) {
+			throw new DataIntegrityException("Não foi possivel alterar objeto Item pedido");
+		} catch (IllegalArgumentException e) {
+			throw new ObjectNotFoundException("Item Pedido não existe");
+		}
 //		
 //		find(itensPedido.getId());
 //		Pedido pedido = itensPedido.getPedido();
@@ -80,8 +87,6 @@ public class ItensPedidoService {
 //		} catch (DataIntegrityViolationException e) {
 //			throw new DataIntegrityException("Não foi possivel Atualizar o objeto Item pedido");
 //		}
-		
-		return itensPedidoRepository.save(itensFromBD);
 	}
 	
 	public void delete(Integer id) {

@@ -38,6 +38,8 @@ public class FXMLMainController implements Initializable {
     @FXML
     private MenuItem Estoque;
     @FXML
+    private MenuItem ProcessoEstoque;
+    @FXML
     private AnchorPane AnchorPanePrincipal;
     @FXML
     private AnchorPane AnchorPanePai;
@@ -97,6 +99,13 @@ public class FXMLMainController implements Initializable {
     
     public void handleRealizarPedido() throws IOException{
         AnchorPane anchor = (AnchorPane)FXMLLoader.load(getClass().getResource("/views/FXMLPedido.fxml"));
+        
+        AnchorPanePrincipal.getChildren().setAll(anchor);
+    
+    }
+    
+    public void handleCadastroEstoque() throws IOException{
+        AnchorPane anchor = (AnchorPane)FXMLLoader.load(getClass().getResource("/views/FXMLCadastroEstoque.fxml"));
         
         AnchorPanePrincipal.getChildren().setAll(anchor);
     

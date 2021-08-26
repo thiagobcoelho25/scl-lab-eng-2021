@@ -19,6 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Cliente;
 import model.Pagamento;
+import model.Pedido;
 import service.PagamentoService;
 
 public class FXMLPagamentoController implements Initializable {
@@ -47,7 +48,7 @@ public class FXMLPagamentoController implements Initializable {
 	private TextField textFieldValor;
 
 	@FXML
-	private ComboBox<> comboBoxFormaDePagamento;
+	private ComboBox<String> comboBoxFormaDePagamento;
 
 	@FXML
 	private CheckBox checkbox;

@@ -36,7 +36,7 @@
                <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="776.0" prefWidth="369.0">
                      <children>
-                          <TextField fx:id="textFieldCodigo" layoutX="81.0" layoutY="21.0" prefHeight="30.0" prefWidth="110.0" styleClass="combo-box-popup" />
+                          <TextField fx:id="textFieldCodigo" editable="false" layoutX="81.0" layoutY="21.0" prefHeight="30.0" prefWidth="110.0" styleClass="text-field-Codigo-Obj" stylesheets="@Style.css" />
                           <Text layoutX="10.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label" text="Código:" wrappingWidth="83.0" />
                           <GridPane layoutX="10.0" layoutY="61.0" prefHeight="55.0" prefWidth="273.0">
                               <columnConstraints>

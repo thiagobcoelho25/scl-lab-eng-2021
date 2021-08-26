@@ -91,20 +91,20 @@ public class FXMLEstoqueController implements Initializable {
 	@FXML
     public void handleButtonInserir() throws IOException {
 		String resultado = "";
-		if(!comboBoxIngrediente.getSelectionModel().isEmpty() && textFieldQuantidade.getText() != ""){
+		if(!comboBoxIngrediente.getSelectionModel().isEmpty()){
 			Ingrediente ingrediente = comboBoxIngrediente.getValue();
 			if(ingrediente.getEstoque() != null) {
-				ingrediente.getEstoque().setQuantidade(Integer.parseInt(textFieldQuantidade.getText()));
+				ingrediente.getEstoque().setQuantidade(textFieldQuantidade.getText() == "" ? null : Integer.parseInt(textFieldQuantidade.getText()));
 			} else {
 				Estoque estoque = new Estoque();
 				estoque.setId(null);
-				estoque.setQuantidade(Integer.parseInt(textFieldQuantidade.getText()));
+				estoque.setQuantidade(textFieldQuantidade.getText() == "" ? null : Integer.parseInt(textFieldQuantidade.getText()));
 				ingrediente.setEstoque(estoque);
 			}
 			resultado = ingredienteService.insertEstoque(ingrediente);
 		} else {
 			Alert alert = new Alert(Alert.AlertType.ERROR);
-			alert.setContentText("Por favor, escolha uma Quantidade ou Ingrediente!");
+			alert.setContentText("Por favor, escolha um Ingrediente!");
 			alert.show();
 		}
 		exibirMensagemErro(resultado);

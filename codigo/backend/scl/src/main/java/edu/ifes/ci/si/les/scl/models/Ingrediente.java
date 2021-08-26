@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.validation.Valid;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
@@ -43,6 +44,7 @@ public class Ingrediente implements Serializable{
 	@Digits(integer = 6, fraction = 2, message = "valor deve estar entre 6.2 digitos")
 	private Double valor;
 	
+	@Valid
 	@OneToOne(mappedBy = "ingrediente", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
 	private Estoque estoque;
 	

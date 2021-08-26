@@ -61,6 +61,11 @@
                         <MenuItem fx:id="RealizarPedido" mnemonicParsing="false" onAction="#handleRealizarPedido" text="RealizarPedido" />
                      </items>
                   </Menu>
+                  <Menu mnemonicParsing="false" text="Estoque">
+                    <items>
+                      <MenuItem fx:id="ProcessoEstoque" mnemonicParsing="false" onAction="#handleCadastroEstoque" text="Cadastrar Estoque" />
+                    </items>
+                  </Menu>
             </menus>
           </MenuBar>
             <AnchorPane fx:id="AnchorPanePrincipal" layoutY="27.0" prefHeight="372.0" prefWidth="640.0" styleClass="background" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
