@@ -4,6 +4,10 @@ public enum TipoFormaPagamento {
 
 	cartao,
 
-	dinheiro,;
+	dinheiro,
+	
+	pix,
+	
+	picpay,;
 
 }

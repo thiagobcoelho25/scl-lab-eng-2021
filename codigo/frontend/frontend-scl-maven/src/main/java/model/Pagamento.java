@@ -9,6 +9,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import model.enums.PagamentoStatus;
 import model.enums.TipoFormaPagamento;
 
 @Data
@@ -20,14 +21,20 @@ public class Pagamento implements Serializable{
 	
 	private Integer id;
 	
+	private Double valor;
+	
+	private Double desconto;
+	
+	private TipoFormaPagamento formaDePagamento;
+	
 	private Pedido pedido;
 	
-	//private Pedido pedido;
-	
+	private PagamentoStatus pagamentoStatus;
 //	@OneToOne
 //	@JoinColumn(name = "pedido_id")
 //	private Pedido pedido;
 	
 	
 	public Pagamento() {}
+	
 }

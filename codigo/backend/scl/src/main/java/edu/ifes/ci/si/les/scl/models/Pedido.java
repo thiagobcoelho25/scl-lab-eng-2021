@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.aspectj.weaver.PerTypeWithinTargetTypeMunger;
@@ -64,7 +65,6 @@ public class Pedido implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "usuario_id", nullable = false)
 	// gambiarra abaixo. Isso so funciona pq so precisa do id do usuario e Funcionario tem mais campos que gerente
-	@JsonDeserialize(as = Funcionario.class)
 	private Usuario usuario;
 	
 	//@JsonIgnore
@@ -84,17 +84,21 @@ public class Pedido implements Serializable{
 //	@JoinColumn(name = "entrega_id")
 //	private Entrega entrega;
 //	
+	@NotNull(message = "Valor total do pedido deve ser definido")
+    @Min(value = 0)
+    private Double valorTotal;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "id", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Collection<ItensPedido> itensPedido = new ArrayList<>();
 
 	@Builder
-	public Pedido(Integer id, Date data, Usuario user, Cliente cliente/*, Pagamento pagamento, Entrega entrega*/) {
+	public Pedido(Integer id, Date data, Usuario user, Cliente cliente/*, Pagamento pagamento, Entrega entrega*/, Double valorTotal) {
 		this.id = id;
 		this.data = data;
 		this.usuario  = user;
 		this.cliente = cliente;
+		this.valorTotal = valorTotal;
 //		this.pagamento = pagamento;
 //		this.entrega = entrega;
 	}

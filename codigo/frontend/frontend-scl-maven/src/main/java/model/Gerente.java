@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(of = {"id"})
 
 
-public class Gerente implements Serializable{
+public class Gerente extends Usuario implements Serializable{
 
 		private static final long serialVersionUID = 1L;
 		

@@ -17,8 +17,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import exception.StandardError;
 import model.Pagamento;
 
+
 public class PagamentoService {
-private final String url = "http://localhost:8080/scl/pagamentos";
+private final String url = "http://localhost:8080/scl/pagamento";
 	
 	private final Client client = ClientBuilder.newClient(); 
 	
@@ -43,7 +44,7 @@ private final String url = "http://localhost:8080/scl/pagamentos";
             ObjectMapper mapper = new ObjectMapper();
             String json = mapper.writeValueAsString(Pagamento);
             Response response = target.request().post(Entity.entity(json, "application/json;charset=UTF-8"));
-            if (response.getStatus() != Response.Status.OK.getStatusCode()) {
+            if (response.getStatus() != Response.Status.CREATED.getStatusCode()) {
                 String stringError = response.readEntity(String.class);
                 StandardError standardError = mapper.readValue(stringError, StandardError.class);
                 return construçãoStandardError(standardError);

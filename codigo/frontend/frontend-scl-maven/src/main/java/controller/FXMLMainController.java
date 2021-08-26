@@ -102,6 +102,13 @@ public class FXMLMainController implements Initializable {
     
     }
     
+    public void handleRealizarPagamento() throws IOException{
+        AnchorPane anchor = (AnchorPane)FXMLLoader.load(getClass().getResource("/views/FXMLPagamento.fxml"));
+        
+        AnchorPanePrincipal.getChildren().setAll(anchor);
+    
+    }
+    
     
     
 }

@@ -172,7 +172,7 @@ public class FXMLPedidoController implements Initializable {
 		
 		if(itensPedidoSalvos.size() != 0) {
 			
-			Pedido novoPedido = new Pedido(null, new Date(System.currentTimeMillis()), usuarioAtual, clientePedido);
+			Pedido novoPedido = new Pedido(null, new Date(System.currentTimeMillis()), usuarioAtual, clientePedido, 0.0);
 			
 			pedidoService.insert(novoPedido);
 		}

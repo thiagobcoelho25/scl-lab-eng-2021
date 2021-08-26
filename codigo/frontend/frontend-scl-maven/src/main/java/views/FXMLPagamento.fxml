@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="699.0" styleClass="background" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="699.0" styleClass="background" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLPagamentoController">
    <children>
       <Label layoutX="334.0" layoutY="73.0" stylesheets="@../Style.css" text="Código:" />
       <Label layoutX="334.0" layoutY="115.0" text="Cliente:" />
@@ -19,10 +19,10 @@
       <Label layoutX="334.0" layoutY="284.0" text="Forma de Pagamento:" />
       <Label layoutX="334.0" layoutY="200.0" text="Desconto:" />
       <TextField fx:id="textFieldCodigo" editable="false" layoutX="462.0" layoutY="71.0" prefHeight="30.0" prefWidth="221.0" styleClass="text-field-Codigo-Obj" text="Gerado Automaticamente" />
-      <TextField fx:id="textFieldValor" layoutX="462.0" layoutY="242.0" prefHeight="30.0" prefWidth="221.0" promptText="Gerado Automáticamente" />
-      <Button fx:id="buttonConfirmar" layoutX="334.0" layoutY="355.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="99.0" styleClass="buttonConfirm" text="Inserir" />
-      <Button fx:id="buttonAlterar" layoutX="458.0" layoutY="355.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="99.0" styleClass="buttonPadrao" text="Alterar" />
-      <Button fx:id="buttonRemover" layoutX="583.0" layoutY="355.0" mnemonicParsing="false" styleClass="buttonDecline" text="Remover" />
+      <TextField fx:id="textFieldValor" editable="false" layoutX="462.0" layoutY="242.0" prefHeight="30.0" prefWidth="221.0" promptText="Gerado Automáticamente" />
+      <Button fx:id="buttonConfirmar" layoutX="334.0" layoutY="355.0" mnemonicParsing="false" onAction="#handleButtonInserir" prefHeight="31.0" prefWidth="99.0" styleClass="buttonConfirm" text="Inserir" />
+      <Button fx:id="buttonAlterar" layoutX="458.0" layoutY="355.0" mnemonicParsing="false" onAction="#handleButtonAlterar" prefHeight="31.0" prefWidth="99.0" styleClass="buttonPadrao" text="Alterar" />
+      <Button fx:id="buttonDeletar" layoutX="583.0" layoutY="355.0" mnemonicParsing="false" onAction="#handleButtonDelete" styleClass="buttonDecline" text="Remover" />
       <TextField fx:id="textfieldDesconto" layoutX="462.0" layoutY="199.0" prefHeight="30.0" prefWidth="221.0" promptText="Insira um Desconto" />
       <Line endX="597.0" layoutX="102.0" layoutY="39.0" startX="-102.0" />
       <Label layoutX="13.0" layoutY="7.0" stylesheets="@../Style.css" text="Pagamento" />
@@ -35,7 +35,7 @@
             <TableColumn fx:id="tableColumnCliente" prefWidth="241.0" text="Cliente" />
          </columns>
       </TableView>
-      <CheckBox layoutX="385.0" layoutY="322.0" mnemonicParsing="false" />
+      <CheckBox fx:id="checkbox" layoutX="385.0" layoutY="322.0" mnemonicParsing="false" />
       <Label layoutX="335.0" layoutY="317.0" text="Pago:" />
    </children>
 </AnchorPane>
