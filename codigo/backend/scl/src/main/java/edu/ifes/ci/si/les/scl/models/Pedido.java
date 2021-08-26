@@ -14,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.aspectj.weaver.PerTypeWithinTargetTypeMunger;
@@ -72,6 +74,10 @@ public class Pedido implements Serializable{
 	@JoinColumn(name = "cliente_id", nullable = false)
 	private Cliente cliente;
 	
+	@NotNull(message = "Valor total do pedido deve ser definido")
+	@Min(value = 0)
+	private Double valorTotal;
+	
 	//@JsonIgnore
 //	@OneToOne
 //	@JoinColumn(name = "pagamento_id", referencedColumnName = "id")
@@ -90,11 +96,12 @@ public class Pedido implements Serializable{
 	private Collection<ItensPedido> itensPedido = new ArrayList<>();
 
 	@Builder
-	public Pedido(Integer id, Date data, Usuario user, Cliente cliente/*, Pagamento pagamento, Entrega entrega*/) {
+	public Pedido(Integer id, Date data, Usuario user, Cliente cliente/*, Pagamento pagamento, Entrega entrega*/, Double valorTotal) {
 		this.id = id;
 		this.data = data;
 		this.usuario  = user;
 		this.cliente = cliente;
+		this.valorTotal = valorTotal;
 //		this.pagamento = pagamento;
 //		this.entrega = entrega;
 	}

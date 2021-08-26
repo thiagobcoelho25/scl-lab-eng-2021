@@ -57,11 +57,11 @@ public class PedidoService {
 	
 	public void delete(Integer id) {
 		try {
-//			Pedido p = find(id);
-//			List<ItensPedido> itensRemovidos = itensPedidoService.findByPedido(p);
-//			for (ItensPedido itensPedido : itensRemovidos) {
-//				itensPedidoService.delete(itensPedido.getId());
-//			}
+			Pedido p = find(id);
+			List<ItensPedido> itensRemovidos = itensPedidoService.findByPedido(p);
+			for (ItensPedido itensPedido : itensRemovidos) {
+				itensPedidoService.delete(itensPedido.getId());
+			}
 			pedidoRepository.deleteById(id);	
 		}catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityException("Pedido não existe");

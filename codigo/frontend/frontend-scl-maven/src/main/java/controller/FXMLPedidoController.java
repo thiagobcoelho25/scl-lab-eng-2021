@@ -2,6 +2,8 @@ package controller;
 
 import java.net.URL;
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,6 +11,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.ResourceBundle;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValueBase;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,6 +25,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.util.Callback;
 import model.Acrescimos;
 import model.Bairro;
 import model.Cliente;
@@ -33,6 +37,7 @@ import model.ItensPedido;
 import model.Pagamento;
 import model.Pedido;
 import model.Produto;
+import model.ProdutosIngredientes;
 import model.Usuario;
 import service.ClienteService;
 import service.FuncionarioService;
@@ -43,6 +48,19 @@ import service.PedidoService;
 import service.ProdutoService;
 
 public class FXMLPedidoController implements Initializable {
+	
+	@FXML
+	private TableView<Pedido> tablePedidos;
+	
+	@FXML
+	private TableColumn<Pedido, Integer> tableColumnPedidoID;
+	
+	@FXML
+	private TableColumn<Pedido, String> tableColumnPedidoCliente;
+	
+	@FXML
+	private TableColumn<Pedido, String> tableColumnPedidoData;
+	
 	
 	@FXML
     private TextField textFielCodigo;
@@ -93,10 +111,13 @@ public class FXMLPedidoController implements Initializable {
     private TextField textFieldFrete;
 	
 	@FXML
+    private TextField textFieldValorTotal;
+	
+	@FXML
 	private Button btnDeletar;
 	
 	@FXML
-	private Button btnAlterar;
+	private Button btnLimpar;
 
 	@FXML
 	private Button btnInserir;
@@ -108,9 +129,13 @@ public class FXMLPedidoController implements Initializable {
 	private final IngredienteService ingredienteService = new IngredienteService();
 	private final FuncionarioService funcionarioService = new  FuncionarioService();
 	private final ItensPedidoService itensPedidoService = new ItensPedidoService();
+	
 	/*eliminar depois*/
 	private final GerenteService gerenteService = new GerenteService();
 	
+	
+	private ObservableList<Pedido> observablePedido;
+	private List<Pedido> listaPedido;
 	
 	private ObservableList<Cliente> observableCliente;
 	private List<Cliente> listaCliente;
@@ -128,6 +153,8 @@ public class FXMLPedidoController implements Initializable {
 	
 	private Usuario usuarioAtual;
 	
+	private Double total = 0.0;
+	
 	
 	private ObservableList<IngredienteAcrescimo> observableIngredienteAcrescimos;
 	private ArrayList<IngredienteAcrescimo> acrescimosAdicionados = new ArrayList<>();
@@ -137,6 +164,7 @@ public class FXMLPedidoController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		carregarUsuarioAtual();
+		carregarTableViewPedidos();
 		
 		carregarComboBoxClientes();
 		carregarComboBoxProdutos();
@@ -158,28 +186,49 @@ public class FXMLPedidoController implements Initializable {
 		this.datePickerData.setValue(data);
 	}
 	
+	private void carregarTableViewPedidos() {
+		tableColumnPedidoID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tableColumnPedidoCliente.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCliente().getNome()));
+        
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yy hh:mm:ss");
+        tableColumnPedidoData.setCellValueFactory(cellData -> new SimpleStringProperty(dateFormat.format(cellData.getValue().getData())));
+
+        listaPedido = pedidoService.listAll();
+        
+        observablePedido = FXCollections.observableArrayList(listaPedido);
+        tablePedidos.setItems(observablePedido);
+        tablePedidos.refresh();
+	}
+	
 	private void carregarTableViewItensPedido() {
         
 		tableColumnProduto.setCellValueFactory(new PropertyValueFactory<>("nome"));
 		tableColumnPrecoUnit.setCellValueFactory(new PropertyValueFactory<>("precoFinal"));
 		
-		if(listaProdutosPedido.size() != 0) {
+		//if(listaProdutosPedido.size() != 0) {
 			observableProdutosPedido = FXCollections.observableArrayList(listaProdutosPedido);
 			
 			tableItemsPedido.setItems(observableProdutosPedido);
 			tableItemsPedido.refresh();
-		}
+		//}
 		
     }
 	
-	/* consertar depois. Precisa retirar a dependencia de Pedido com entrega e Pagamento*/
+	public void onClickBtnDeletar() {
+		if(tablePedidos.getSelectionModel().getSelectedItem() != null) {
+			Pedido p = tablePedidos.getSelectionModel().getSelectedItem();
+			pedidoService.delete(p.getId());
+			carregarTableViewPedidos();
+		}
+	}
+	
 	public void onClickBtnSalvar() {
 		Cliente clientePedido = combBoxCliente.getValue();
 		
 		if(itensPedidoSalvos.size() != 0) {
 			
 			/* Adicionando pedido ao banco de dados */
-			Pedido novoPedido = new Pedido(null, new Date(System.currentTimeMillis()), usuarioAtual, clientePedido);
+			Pedido novoPedido = new Pedido(null, new Date(System.currentTimeMillis()), usuarioAtual, clientePedido, total);
 			/* criar um find by object no service para pegar o id do produto inserido */
 			pedidoService.insert(novoPedido);
 			
@@ -195,21 +244,6 @@ public class FXMLPedidoController implements Initializable {
 				itensPedidoService.insert(item);
 			}
 		}
-//		Pedido ped = new Pedido(null, new Date(System.currentTimeMillis()), usuarioAtual, clientePedido);
-//		pedidoService.insert(ped);
-//		ped.setId(4);
-//		ItensPedido ip1 = new ItensPedido(null, listaProdutos.get(0), ped);
-//		ItensPedido ip2 = new ItensPedido(null, listaProdutos.get(1), ped);
-//		Acrescimos a1 = new Acrescimos();
-//		a1.setIngrediente(listaIngredientes.get(0));
-//		a1.setQuantidade(2);
-//		Acrescimos a2 = new Acrescimos();
-//		a2.setIngrediente(listaIngredientes.get(1));
-//		a2.setQuantidade(1);
-//		System.out.println("Itens Pedido ID = " + ip1.getId());
-//		ip1.setAcrescimos(Arrays.asList(a1, a2));
-//		itensPedidoService.insert(ip1);
-//		itensPedidoService.insert(ip2);
 			
 		/* Listando todos os pedidos ja salvos no banco */
 		List<Pedido> teste = pedidoService.listAll();
@@ -217,8 +251,30 @@ public class FXMLPedidoController implements Initializable {
 			System.out.println("Pedido = " + pedido.getId() + " / " + pedido.getData());
 		}
 	
-		limparAllCampos();
+		/* teste quantidade acrescimos */
+		for (ItensPedido item : itensPedidoSalvos) {
+			for (ProdutosIngredientes ingrediente : item.getProduto().getIngredientes()) {
+				System.out.println("Quantidade item ingrediente = " + ingrediente.getQuantidade());
+				System.out.println("Quantidade item ingrediente ID = " + ingrediente.getId().getIngrediente().getId());
+			}
+			for (Acrescimos acrescimo : item.getAcrescimos()) {
+				System.out.println("Quantidade item acrescimo = " + acrescimo.getQuantidade());
+				System.out.println("Quantidade item acrescimo ingrediente ID = " + acrescimo.getIngrediente().getId());
+			}
+		}
 		
+		
+		limparAllCampos();
+		carregarTableViewPedidos();
+		total = 0.0;
+		
+		
+		
+	}
+	
+	public void onClickBtnLimpar() {
+		limparAllCampos();
+		total = 0.0;
 	}
 	
 	private void limparAllCampos() {
@@ -228,14 +284,16 @@ public class FXMLPedidoController implements Initializable {
 		textFieldEndereco.clear();
 		textFieldQtd.clear();
 		textFieldFrete.clear();
+		textFieldValorTotal.clear();
 		
 		listaProdutosPedido.clear();
 		acrescimosAdicionados.clear();
 		carregarTableViewItensPedido();
-		tableItemsPedido.refresh();
+		
 		
 		System.out.println("Lista Produtos Pedido = " + listaProdutosPedido);
 	}
+	
 	
 	public void onClickAdicionarProduto() {
 		if(combBoxProduto.getValue() != null) {
@@ -253,6 +311,11 @@ public class FXMLPedidoController implements Initializable {
 			itensPedidoSalvos.add(novoItem);
 			carregarTableViewItensPedido();
 			
+			// somando ao total pedido
+			total += novoItem.getProduto().getPrecoFinal();
+			// atualizando o total pedido
+			textFieldValorTotal.setText(total.toString());
+			
 			acrescimosAdicionados.clear();
 			carregarTableViewAcrescimos();
 		}
@@ -264,6 +327,15 @@ public class FXMLPedidoController implements Initializable {
 		if(combBoxAcrescimo.getValue() != null && textFieldQtd.getText() != "") {
 			acrescimosAdicionados.add(new IngredienteAcrescimo(combBoxAcrescimo.getValue(),Integer.parseInt(textFieldQtd.getText())));
 			carregarTableViewAcrescimos();
+			
+			/* somando valor dos acrescimos */
+			for (IngredienteAcrescimo ingredienteAcrescimo : acrescimosAdicionados) {
+				System.out.println("Quantidade acrescimo = " + ingredienteAcrescimo.getQuantidade());
+				total += (ingredienteAcrescimo.getValor() * ingredienteAcrescimo.getQuantidade());
+			}
+			
+			// atualizando o total pedido
+			textFieldValorTotal.setText(total.toString());
 		}
 	}
 	
@@ -278,20 +350,6 @@ public class FXMLPedidoController implements Initializable {
 		tableAcrescimos.setItems(observableIngredienteAcrescimos);
 		tableAcrescimos.refresh();
 		
-		
-		
-		
-//		if(acrescimosAdicionados.size() != 0) {
-//			IngredienteAcrescimo aux = acrescimosAdicionados.get(acrescimosAdicionados.size() - 1);
-//			//System.out.println(" Acrescimo = " + aux.nome + "\n Preco = " + aux.valor + "\n Qtd = " + aux.quantidade );
-//			
-//			
-//			
-//			observableIngredienteAcrescimos = FXCollections.observableArrayList(acrescimosAdicionados);
-//			
-//			tableAcrescimos.setItems(observableIngredienteAcrescimos);
-//			tableAcrescimos.refresh();
-//		}
     }
 	
 	private void carregarComboBoxClientes() {
@@ -316,8 +374,14 @@ public class FXMLPedidoController implements Initializable {
 		if(combBoxCliente.getValue() != null) {
 			textFieldEndereco.setText(combBoxCliente.getValue().getBairro().toString());
 			textFieldFrete.setText(combBoxCliente.getValue().getBairro().getFrete().toString());
+			
+			Double frete = combBoxCliente.getValue().getBairro().getFrete();
+			
+			// somando ao total pedido
+			total += frete;
+			// atualizando o total pedido
+			textFieldValorTotal.setText(total.toString());
 		}
-		//System.out.println("Combobox = " + combBoxCliente.getValue().getBairro().toString());
 	}
 	
 	

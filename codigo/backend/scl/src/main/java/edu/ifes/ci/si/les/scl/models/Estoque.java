@@ -36,7 +36,7 @@ public class Estoque implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@NotNull
+	@NotNull(message = "Valor da Quantidade deve ser preenchido")
 	@Min(value = 0L, message = "Deve ser um numero positivo")
 	private Integer quantidade;
 	

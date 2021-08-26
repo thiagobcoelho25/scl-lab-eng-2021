@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import lombok.AllArgsConstructor;
@@ -45,17 +46,20 @@ public class Pedido implements Serializable{
 
 	//private Entrega entrega;
 	
+	private Double valorTotal;
+	
 	@JsonIgnore
 	private Collection<ItensPedido> itensPedido = new ArrayList<>();
 
 	@Builder
-	public Pedido(Integer id, Date data, Usuario user, Cliente cliente/*, Pagamento pagamento, Entrega entrega*/) {
+	public Pedido(Integer id, Date data, Usuario user, Cliente cliente/*, Pagamento pagamento, Entrega entrega*/, Double valorTotal) {
 		this.id = id;
 		this.data = data;
 		this.usuario  = user;
 		this.cliente = cliente;
-		//this.pagamento = pagamento;
-		//this.entrega = entrega;
+		this.valorTotal = valorTotal;
+//		this.pagamento = pagamento;
+//		this.entrega = entrega;
 	}
 	
 	public void setItensPedido(Collection<ItensPedido> itensPedido) {
