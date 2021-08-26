@@ -116,7 +116,7 @@ public class DBService {
 //		Entrega entrega1 = new Entrega(null, LocalDateTime.now(), StatusEntrega.naoEntregue);
 //		Pedido pd1 = new Pedido(null, new Date(), func1, c1, pag1, entrega1);
 		Pedido pd1 = new Pedido(null, new Date(), func1, c1, 100.0);
-		Pagamento pag1 = new Pagamento(null, 38.0, 0.0, TipoFormaPagamento.cartao, pd1);
+		Pagamento pag1 = new Pagamento(null, 38.0, 0.0, TipoFormaPagamento.cartao, PagamentoStatus.pago ,pd1);
 		ArrayList<Pedido> arr = new ArrayList<Pedido>();
 		arr.add(pd1);
 		Entrega entrega1 = new Entrega(null, LocalDateTime.now(), StatusEntrega.naoEntregue, arr);
@@ -127,14 +127,14 @@ public class DBService {
 //		Entrega entrega2 = new Entrega(null, LocalDateTime.now(), StatusEntrega.naoEntregue);
 //		Pedido pd2 = new Pedido(null, new Date(), g1, c2, pag2, entrega1);
 		Pedido pd2 = new Pedido(null, new Date(), g1, c2, 50.0);
-		Pagamento pag2 = new Pagamento(null, 56.0, 0.0, TipoFormaPagamento.cartao, pd2);
+		Pagamento pag2 = new Pagamento(null, 56.0, 0.0, TipoFormaPagamento.cartao, PagamentoStatus.pago,pd2);
 		Entrega entrega2 = new Entrega(null, LocalDateTime.now(), StatusEntrega.naoEntregue, Arrays.asList(pd2));
 		
 //		Pagamento pag3 = new Pagamento(null, 21.0, 3.0, TipoFormaPagamento.cartao);
 //		Entrega entrega3 = new Entrega(null, LocalDateTime.now(), StatusEntrega.entregue);
 //		Pedido pd3 = new Pedido(null, new Date(), func1, c3, pag3, entrega3);
 		Pedido pd3 = new Pedido(null, new Date(), func1, c3, 30.0);
-		Pagamento pag3 = new Pagamento(null, 21.0, 3.0, TipoFormaPagamento.cartao, pd3);
+		Pagamento pag3 = new Pagamento(null, 21.0, 3.0, TipoFormaPagamento.cartao, PagamentoStatus.naoPago ,pd3);
 		Entrega entrega3 = new Entrega(null, LocalDateTime.now(), StatusEntrega.entregue, Arrays.asList(pd3));
 		
 		//Instancia ItensPedido

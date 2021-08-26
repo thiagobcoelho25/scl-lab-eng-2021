@@ -1,32 +1,11 @@
 {
 	"info": {
-		"_postman_id": "1f8d3d50-4527-48a6-8daa-718ab99bfac2",
+		"_postman_id": "76d7993d-40bb-40b1-ba77-1af924e6f0f6",
 		"name": "SCL",
+		"description": "Rotas do Backend SCL - Sistema de Controle de Lanchonete.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
-		{
-			"name": "Estoque",
-			"item": [
-				{
-					"name": "Estoque",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{BaseURL_SCL}}/estoques",
-							"host": [
-								"{{BaseURL_SCL}}"
-							],
-							"path": [
-								"estoques"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
 		{
 			"name": "Ingrediente",
 			"item": [
@@ -36,25 +15,29 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BaseURL_SCL}}/ingredientes",
+							"raw": "http://localhost:8080/scl/ingredientes",
+							"protocol": "http",
 							"host": [
-								"{{BaseURL_SCL}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
+								"scl",
 								"ingredientes"
 							]
-						}
+						},
+						"description": "Retorna uma lista um ingredientes"
 					},
 					"response": []
 				},
 				{
-					"name": "Add Estoque",
+					"name": "Estoque",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"id\": 1,\r\n        \"nome\": \"Carne de Boi\",\r\n        \"valor\": 10.0,\r\n        \"estoque\": {\r\n            \"id\": 1,\r\n            \"quantidade\": 50\r\n        }\r\n    }",
+							"raw": "{\r\n    \"id\": 4,\r\n    \"nome\": \"Macarrao\",\r\n        \"valor\": 5.0,\r\n    \"estoque\": {\r\n        \"quantidade\": 50\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -62,13 +45,46 @@
 							}
 						},
 						"url": {
-							"raw": "{{BaseURL_SCL}}/ingredientes/estoque",
+							"raw": "http://localhost:8080/scl/ingredientes/estoque",
+							"protocol": "http",
 							"host": [
-								"{{BaseURL_SCL}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
+								"scl",
 								"ingredientes",
 								"estoque"
+							]
+						},
+						"description": "Adiciona uma quantidade de estoque para um ingrediente específico. Se o ingrediente já possuir estoque, ele será incrementado.\nSe o id do ingrediente não existir, retornara um erro."
+					},
+					"response": []
+				},
+				{
+					"name": "Ingrediente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"nome\": \"Carne Capivara\",\r\n        \"valor\": 10.0,\r\n        \"estoque\":null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/scl/ingredientes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"scl",
+								"ingredientes"
 							]
 						}
 					},
@@ -77,7 +93,120 @@
 				{
 					"name": "Ingrediente",
 					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/scl/ingredientes/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"scl",
+								"ingredientes",
+								"4"
+							]
+						},
+						"description": "Realiza a exclusão de um Ingrediente a partir de seu ID, caso o ingrediente seja utilizado por algum produto, ou o ingrediente não exista, retorna um erro"
+					},
+					"response": []
+				},
+				{
+					"name": "Ingrediente",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 4,\r\n    \"nome\": \"Carne de Bode\",\r\n    \"valor\": 10.0,\r\n    \"estoque\": {\r\n        \"id\": 3,\r\n        \"quantidade\": 50\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/scl/ingredientes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"scl",
+								"ingredientes"
+							]
+						},
+						"description": "Atualiza um Ingrediente a partir de seu id no objeto passado no body"
+					},
+					"response": []
+				},
+				{
+					"name": "Ingrediente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/scl/ingredientes/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"scl",
+								"ingredientes",
+								"1"
+							]
+						},
+						"description": "Retorna um Ingrediente especifico pelo ID passado como parâmetro na rota, caso não exista, retorna um objeto de erre não encontrado"
+					},
+					"response": []
+				},
+				{
+					"name": "Estoque Erro",
+					"request": {
 						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 4,\r\n    \"nome\": \"Macarrao\",\r\n        \"valor\": 5.0,\r\n    \"estoque\": {\r\n        \"quantidade\": null\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/scl/ingredientes/estoque",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"scl",
+								"ingredientes",
+								"estoque"
+							]
+						},
+						"description": "Inserir um Estoque que não possue quantidade quantidade, retorna um erro."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pagamento",
+			"item": [
+				{
+					"name": "Listar Pagamento",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
 						"header": [],
 						"body": {
 							"mode": "raw",
@@ -89,14 +218,109 @@
 							}
 						},
 						"url": {
-							"raw": "{{BaseURL_SCL}}/ingredientes",
+							"raw": "http://localhost:8080/scl/pagamento",
+							"protocol": "http",
 							"host": [
-								"{{BaseURL_SCL}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
-								"ingredientes"
+								"scl",
+								"pagamento"
 							]
-						}
+						},
+						"description": "Retorna uma lista de pagamentos"
+					},
+					"response": []
+				},
+				{
+					"name": "Adicionar Pagamento",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"valor\": 99,\r\n    \"desconto\": 0,\r\n    \"formaDePagamento\": \"dinheiro\"\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/scl/pagamento",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"scl",
+								"pagamento"
+							]
+						},
+						"description": "Realiza a inserção do pagamento no banco de dados"
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar Pagamento",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 6,\r\n    \"valor\": 21,\r\n    \"desconto\": 3,\r\n    \"formaDePagamento\": \"pix\"\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/scl/pagamento",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"scl",
+								"pagamento"
+							]
+						},
+						"description": "Realiza a alteração de um pagamento"
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar Pagamento",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/scl/pagamento/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"scl",
+								"pagamento",
+								"6"
+							]
+						},
+						"description": "Realiza a exclusão de um pagamento"
 					},
 					"response": []
 				}
@@ -111,14 +335,18 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BaseURL_SCL}}/produtos",
+							"raw": "http://localhost:8080/scl/produtos",
+							"protocol": "http",
 							"host": [
-								"{{BaseURL_SCL}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
+								"scl",
 								"produtos"
 							]
-						}
+						},
+						"description": "Retorna uma lista de todos os produtos cadastrados"
 					},
 					"response": []
 				},
@@ -137,14 +365,18 @@
 							}
 						},
 						"url": {
-							"raw": "{{BaseURL_SCL}}/produtos",
+							"raw": "http://localhost:8080/scl/produtos",
+							"protocol": "http",
 							"host": [
-								"{{BaseURL_SCL}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
+								"scl",
 								"produtos"
 							]
-						}
+						},
+						"description": "Cria um novo produto"
 					},
 					"response": []
 				},
@@ -155,7 +387,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 3,\r\n    \"nome\": \"X-Tudo\",\r\n    \"precoFinal\": 99.0,\r\n    \"ingredientes\": [\r\n        {\r\n            \"quantidade\": 2,\r\n            \"tipo\": \"principal\",\r\n            \"ingrediente\": {\r\n                \"id\": 1,\r\n                \"nome\": \"Carne de Boi\",\r\n                \"valor\": 10.0,\r\n                \"estoque\": {\r\n                    \"id\": 1,\r\n                    \"quantidade\": 50\r\n                }\r\n            }\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"id\": 3,\r\n    \"nome\": \"X-Tudo\",\r\n    \"precoFinal\": 99.0,\r\n    \"ingredientes\": [\r\n        {\r\n            \"quantidade\": 3,\r\n            \"tipo\": \"principal\",\r\n            \"ingrediente\": {\r\n                \"id\": 1,\r\n                \"nome\": \"Carne de Boi\",\r\n                \"valor\": 10.0,\r\n                \"estoque\": {\r\n                    \"id\": 1,\r\n                    \"quantidade\": 50\r\n                }\r\n            }\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -163,14 +395,18 @@
 							}
 						},
 						"url": {
-							"raw": "{{BaseURL_SCL}}/produtos",
+							"raw": "http://localhost:8080/scl/produtos",
+							"protocol": "http",
 							"host": [
-								"{{BaseURL_SCL}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
+								"scl",
 								"produtos"
 							]
-						}
+						},
+						"description": "Atualiza um produto"
 					},
 					"response": []
 				},
@@ -181,7 +417,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{   \r\n    \"id\": 3,\r\n    \"nome\": \"X-Tudo\",\r\n    \"precoFinal\": 99.0,\r\n    \"ingredientes\": [\r\n        {\r\n            \"quantidade\": 5,\r\n            \"tipo\": \"secundario\",\r\n            \"ingrediente\": {\r\n                \"id\": 1,\r\n                \"nome\": \"Carne de Boi\",\r\n                \"valor\": 10.0,\r\n                \"estoque\": {\r\n                    \"id\": 1,\r\n                    \"quantidade\": 50\r\n                }\r\n            }\r\n        }\r\n    ]\r\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -189,13 +425,378 @@
 							}
 						},
 						"url": {
-							"raw": "{{BaseURL_SCL}}/produtos/3",
+							"raw": "http://localhost:8080/scl/produtos/3",
+							"protocol": "http",
 							"host": [
-								"{{BaseURL_SCL}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
+								"scl",
 								"produtos",
 								"3"
+							]
+						},
+						"description": "Deleta um produto, caso ele já seja usado em um pedido, retorna um erro."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Entrega",
+			"item": [
+				{
+					"name": "Listar Entregas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/scl/entregas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"scl",
+								"entregas"
+							]
+						},
+						"description": "Requisição get de entregas salvas no banco de dados"
+					},
+					"response": []
+				},
+				{
+					"name": "Inserir Entrega",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"id\": 4,\r\n        \"horaSaida\": \"2021-08-25T20:08:18.927884\",\r\n        \"status\": \"naoEntregue\",\r\n        \"pedidos\": [\r\n            {\r\n                \"id\": 4,\r\n                \"data\": \"2021-08-25\",\r\n                \"usuario\": {\r\n                    \"id\": 2,\r\n                    \"nome\": \"Jhon\",\r\n                    \"rua\": \"Rua Joaquim Afonso\",\r\n                    \"numero\": 7,\r\n                    \"bairro\": {\r\n                        \"id\": 2,\r\n                        \"nome\": \"Aeroporto\",\r\n                        \"frete\": 5.0,\r\n                        \"entregavel\": \"sim\"\r\n                    },\r\n                    \"login\": \"admin\",\r\n                    \"senha\": \"123\",\r\n                    \"cargo\": \"Atendente\",\r\n                    \"salario\": 1500.0,\r\n                    \"foto\": null\r\n                },\r\n                \"cliente\": {\r\n                    \"id\": 1,\r\n                    \"nome\": \"Thiago\",\r\n                    \"rua\": \"Rua sem nome\",\r\n                    \"numero\": 5,\r\n                    \"pontoReferencia\": \"perto da fabrica C&M\",\r\n                    \"bairro\": {\r\n                        \"id\": 1,\r\n                        \"nome\": \"BNH\",\r\n                        \"frete\": 0.0,\r\n                        \"entregavel\": \"nao\"\r\n                    }\r\n                }\r\n            }\r\n        ]\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/scl/entregas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"scl",
+								"entregas"
+							]
+						},
+						"description": "Inserção Post de uma entrega no banco de dados. Lembrando que precisa de um novo pedido para ter uma entrega dele."
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar Entrega",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"id\": 4,\r\n        \"horaSaida\": \"2021-08-25T20:08:18.927884\",\r\n        \"status\": \"entregue\",\r\n        \"pedidos\": [\r\n            {\r\n                \"id\": 4,\r\n                \"data\": \"2021-08-25\",\r\n                \"usuario\": {\r\n                    \"id\": 2,\r\n                    \"nome\": \"Jhon\",\r\n                    \"rua\": \"Rua Joaquim Afonso\",\r\n                    \"numero\": 7,\r\n                    \"bairro\": {\r\n                        \"id\": 2,\r\n                        \"nome\": \"Aeroporto\",\r\n                        \"frete\": 5.0,\r\n                        \"entregavel\": \"sim\"\r\n                    },\r\n                    \"login\": \"admin\",\r\n                    \"senha\": \"123\",\r\n                    \"cargo\": \"Atendente\",\r\n                    \"salario\": 1500.0,\r\n                    \"foto\": null\r\n                },\r\n                \"cliente\": {\r\n                    \"id\": 1,\r\n                    \"nome\": \"Thiago\",\r\n                    \"rua\": \"Rua sem nome\",\r\n                    \"numero\": 5,\r\n                    \"pontoReferencia\": \"perto da fabrica C&M\",\r\n                    \"bairro\": {\r\n                        \"id\": 1,\r\n                        \"nome\": \"BNH\",\r\n                        \"frete\": 0.0,\r\n                        \"entregavel\": \"nao\"\r\n                    }\r\n                }\r\n            }\r\n        ]\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/scl/entregas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"scl",
+								"entregas"
+							]
+						},
+						"description": "Alteração do objeto Entrega do banco de dados."
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar Entrega",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/scl/entregas/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"scl",
+								"entregas",
+								"4"
+							]
+						},
+						"description": "Remoção de um objeto entrega do banco de dados"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Itens Pedido",
+			"item": [
+				{
+					"name": "get All Itens Pedido",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/scl/itenspedido",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"scl",
+								"itenspedido"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Itens Pedido by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/scl/itenspedido/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"scl",
+								"itenspedido",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post Itens Pedido",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": null,\r\n    \"produto\": {\r\n        \"id\": 2,\r\n        \"nome\": \"Fritas & Frango\",\r\n        \"precoFinal\": 13.0,\r\n        \"ingredientes\": [\r\n            {\r\n                \"quantidade\": 1,\r\n                \"tipo\": \"principal\",\r\n                \"ingrediente\": {\r\n                    \"id\": 2,\r\n                    \"nome\": \"Batata\",\r\n                    \"valor\": 5.0,\r\n                    \"estoque\": {\r\n                        \"id\": 2,\r\n                        \"quantidade\": 10\r\n                    }\r\n                }\r\n            },\r\n            {\r\n                \"quantidade\": 2,\r\n                \"tipo\": \"secundario\",\r\n                \"ingrediente\": {\r\n                    \"id\": 3,\r\n                    \"nome\": \"Frango Empanado\",\r\n                    \"valor\": 8.0,\r\n                    \"estoque\": null\r\n                }\r\n            }\r\n        ]\r\n    },\r\n    \"pedido\": {\r\n        \"id\": 3,\r\n        \"data\": \"2021-08-26\",\r\n        \"usuario\": {\r\n            \"type\": \"funcionario\",\r\n            \"id\": 2,\r\n            \"nome\": \"Jhon\",\r\n            \"rua\": \"Rua Joaquim Afonso\",\r\n            \"numero\": 7,\r\n            \"bairro\": {\r\n                \"id\": 2,\r\n                \"nome\": \"Aeroporto\",\r\n                \"frete\": 5.0,\r\n                \"entregavel\": \"sim\"\r\n            },\r\n            \"login\": \"admin\",\r\n            \"senha\": \"123\",\r\n            \"cargo\": \"Atendente\",\r\n            \"salario\": 1500.0,\r\n            \"foto\": null\r\n        },\r\n        \"cliente\": {\r\n            \"id\": 3,\r\n            \"nome\": \"Thalis\",\r\n            \"rua\": \"Rua do aeroporto\",\r\n            \"numero\": 24,\r\n            \"pontoReferencia\": \"perto da marbrasa\",\r\n            \"bairro\": {\r\n                \"id\": 2,\r\n                \"nome\": \"Aeroporto\",\r\n                \"frete\": 5.0,\r\n                \"entregavel\": \"sim\"\r\n            }\r\n        },\r\n        \"valorTotal\": 30.0\r\n    },\r\n    \"acrescimos\": [\r\n        {\r\n            \"id\": {\r\n                \"ingrediente\": {\r\n                    \"id\": 2,\r\n                    \"nome\": \"Batata\",\r\n                    \"valor\": 5.0,\r\n                    \"estoque\": {\r\n                        \"id\": 2,\r\n                        \"quantidade\": 10\r\n                    }\r\n                }\r\n            },\r\n            \"quantidade\": 1\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/scl/itenspedido/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"scl",
+								"itenspedido",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "put Itens Pedido",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 6,\r\n    \"produto\": {\r\n        \"id\": 1,\r\n        \"nome\": \"Fritas & Frango\",\r\n        \"precoFinal\": 13.0,\r\n        \"ingredientes\": [\r\n            {\r\n                \"quantidade\": 1,\r\n                \"tipo\": \"principal\",\r\n                \"ingrediente\": {\r\n                    \"id\": 2,\r\n                    \"nome\": \"Batata\",\r\n                    \"valor\": 5.0,\r\n                    \"estoque\": {\r\n                        \"id\": 2,\r\n                        \"quantidade\": 10\r\n                    }\r\n                }\r\n            },\r\n            {\r\n                \"quantidade\": 3,\r\n                \"tipo\": \"secundario\",\r\n                \"ingrediente\": {\r\n                    \"id\": 3,\r\n                    \"nome\": \"Frango Empanado\",\r\n                    \"valor\": 8.0,\r\n                    \"estoque\": null\r\n                }\r\n            }\r\n        ]\r\n    },\r\n    \"pedido\": {\r\n        \"id\": 3,\r\n        \"data\": \"2021-08-26\",\r\n        \"usuario\": {\r\n            \"type\": \"funcionario\",\r\n            \"id\": 2,\r\n            \"nome\": \"Jhon\",\r\n            \"rua\": \"Rua Joaquim Afonso\",\r\n            \"numero\": 7,\r\n            \"bairro\": {\r\n                \"id\": 2,\r\n                \"nome\": \"Aeroporto\",\r\n                \"frete\": 5.0,\r\n                \"entregavel\": \"sim\"\r\n            },\r\n            \"login\": \"admin\",\r\n            \"senha\": \"123\",\r\n            \"cargo\": \"Atendente\",\r\n            \"salario\": 1500.0,\r\n            \"foto\": null\r\n        },\r\n        \"cliente\": {\r\n            \"id\": 3,\r\n            \"nome\": \"Thalis\",\r\n            \"rua\": \"Rua do aeroporto\",\r\n            \"numero\": 24,\r\n            \"pontoReferencia\": \"perto da marbrasa\",\r\n            \"bairro\": {\r\n                \"id\": 2,\r\n                \"nome\": \"Aeroporto\",\r\n                \"frete\": 5.0,\r\n                \"entregavel\": \"sim\"\r\n            }\r\n        },\r\n        \"valorTotal\": 30.0\r\n    },\r\n    \"acrescimos\": [\r\n        {\r\n            \"id\": {\r\n                \"ingrediente\": {\r\n                    \"id\": 2,\r\n                    \"nome\": \"Batata\",\r\n                    \"valor\": 5.0,\r\n                    \"estoque\": {\r\n                        \"id\": 2,\r\n                        \"quantidade\": 10\r\n                    }\r\n                }\r\n            },\r\n            \"quantidade\": 1\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/scl/itenspedido/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"scl",
+								"itenspedido",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete Itens Pedido by ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/scl/itenspedido/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"scl",
+								"itenspedido",
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pedidos",
+			"item": [
+				{
+					"name": "get All Pedidos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/scl/pedidos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"scl",
+								"pedidos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Pedido by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/scl/pedidos/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"scl",
+								"pedidos",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post Pedido",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": null,\r\n    \"data\": \"2021-08-25\",\r\n    \"usuario\": {\r\n        \"type\": \"gerente\",\r\n        \"id\": 1,\r\n        \"nome\": \"Israel\",\r\n        \"rua\": \"rua de Muqui\",\r\n        \"numero\": 25,\r\n        \"bairro\": {\r\n            \"id\": 2,\r\n            \"nome\": \"Aeroporto\",\r\n            \"frete\": 5.0,\r\n            \"entregavel\": \"sim\"\r\n        },\r\n        \"login\": \"admin\",\r\n        \"senha\": \"123\"\r\n    },\r\n    \"cliente\": {\r\n        \"id\": 2,\r\n        \"nome\": \"Maria\",\r\n        \"rua\": \"C. Dias Lopes\",\r\n        \"numero\": 10,\r\n        \"pontoReferencia\": \"perto da rodoviaria\",\r\n        \"bairro\": {\r\n            \"id\": 3,\r\n            \"nome\": \"Gilberto Machado\",\r\n            \"frete\": 6.0,\r\n            \"entregavel\": \"sim\"\r\n        }\r\n    }, \r\n    \"valorTotal\": 200.0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/scl/pedidos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"scl",
+								"pedidos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "put Pedido",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 4,\r\n    \"data\": \"2021-07-25\",\r\n    \"usuario\": {\r\n        \"id\": 2,\r\n        \"nome\": \"Jhon\",\r\n        \"rua\": \"Rua Joaquim Afonso\",\r\n        \"numero\": 7,\r\n        \"bairro\": {\r\n            \"id\": 2,\r\n            \"nome\": \"Aeroporto\",\r\n            \"frete\": 5.0,\r\n            \"entregavel\": \"sim\"\r\n        },\r\n        \"login\": \"admin\",\r\n        \"senha\": \"123\",\r\n        \"cargo\": \"Atendente\",\r\n        \"salario\": 1500.0,\r\n        \"foto\": null\r\n    },\r\n    \"cliente\": {\r\n        \"id\": 3,\r\n        \"nome\": \"Thalis\",\r\n        \"rua\": \"Rua do aeroporto\",\r\n        \"numero\": 24,\r\n        \"pontoReferencia\": \"perto da marbrasa\",\r\n        \"bairro\": {\r\n            \"id\": 2,\r\n            \"nome\": \"Aeroporto\",\r\n            \"frete\": 5.0,\r\n            \"entregavel\": \"sim\"\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/scl/pedidos/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"scl",
+								"pedidos",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete Pedido",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/scl/pedidos/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"scl",
+								"pedidos",
+								"4"
 							]
 						}
 					},
