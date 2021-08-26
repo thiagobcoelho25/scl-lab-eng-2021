@@ -2,7 +2,10 @@ package model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,13 +26,12 @@ public class Entrega implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 
+	//@JsonFormat(pattern = "HH-mm")
 	private LocalDateTime horaSaida;
 
 	private StatusEntrega status;
 	
-	//@OneToMany
-	//@Column(name = "pedido_id")
-	//private List<Pedido> dados = new ArrayList<Pedido>();
+	private Collection<Pedido> pedidos = new ArrayList<>();
 	
 	public Entrega()  {}
 }

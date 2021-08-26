@@ -10,38 +10,38 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="445.0" prefWidth="847.0" styleClass="background" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="445.0" prefWidth="830.0" styleClass="background" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLEntregaController">
    <children>
-      <Label layoutX="307.0" layoutY="69.0" text="Código: " />
-      <Label layoutX="307.0" layoutY="127.0" text="Pedido:" />
-      <Label layoutX="307.0" layoutY="182.0" text="Dados:" />
-      <Label layoutX="304.0" layoutY="335.0" text="Hora de Saída:" />
-      <Label layoutX="307.0" layoutY="394.0" text="Status:" />
-      <TextField editable="false" layoutX="443.0" layoutY="68.0" prefHeight="30.0" prefWidth="173.0" styleClass="text-field-Codigo-Obj" text="Gerado Automaticamente" />
-      <TextField layoutX="443.0" layoutY="334.0" prefHeight="30.0" prefWidth="173.0" promptText="Digite um Horário de Saída" />
-      <Button layoutX="797.0" layoutY="126.0" mnemonicParsing="false" styleClass="buttonAdd" text="+">
+      <Label layoutX="307.0" layoutY="67.0" text="Código: " />
+      <Label layoutX="307.0" layoutY="125.0" text="Pedido:" />
+      <Label layoutX="307.0" layoutY="180.0" text="Dados:" />
+      <Label layoutX="304.0" layoutY="333.0" text="Hora de Saída:" />
+      <Label layoutX="307.0" layoutY="392.0" text="Status:" />
+      <TextField fx:id="textFieldCodigo" editable="false" layoutX="443.0" layoutY="68.0" prefHeight="30.0" prefWidth="173.0" styleClass="text-field-Codigo-Obj" text="Gerado Automaticamente" />
+      <TextField fx:id="textFieldHoraSaida" layoutX="443.0" layoutY="334.0" prefHeight="30.0" prefWidth="173.0" promptText="Digite um Horário de Saída" />
+      <Button fx:id="buttonAdicionar" layoutX="797.0" layoutY="126.0" mnemonicParsing="false" onAction="#handleButtonAdicionar" styleClass="buttonAdd" text="+">
          <font>
             <Font size="13.0" />
          </font>
       </Button>
-      <TableView layoutX="443.0" layoutY="182.0" prefHeight="129.0" prefWidth="382.0">
+      <TableView fx:id="tabbleViewDados" layoutX="443.0" layoutY="182.0" prefHeight="129.0" prefWidth="382.0">
         <columns>
-          <TableColumn prefWidth="195.0" text="Pedido" />
-          <TableColumn prefWidth="186.0" text="Cliente" />
+          <TableColumn fx:id="tabbleColumnPedidoId" prefWidth="195.0" text="Pedido" />
+          <TableColumn fx:id="tabbleColumnCliente" prefWidth="186.0" text="Cliente" />
         </columns>
       </TableView>
-      <ComboBox layoutX="443.0" layoutY="395.0" prefHeight="25.0" prefWidth="173.0" promptText="Selecione um Status " />
-      <Button layoutX="728.0" layoutY="318.0" mnemonicParsing="false" styleClass="buttonConfirm" text="Confirmar" />
-      <Button layoutX="728.0" layoutY="404.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="113.0" styleClass="buttonDecline" text="Cancelar" />
+      <ComboBox fx:id="comboBoxStatus" layoutX="443.0" layoutY="395.0" prefHeight="25.0" prefWidth="173.0" promptText="Selecione um Status " />
+      <Button fx:id="buttonConfirmar" layoutX="711.0" layoutY="318.0" mnemonicParsing="false" onAction="#handleButtonInserir" styleClass="buttonConfirm" text="Confirmar" />
+      <Button fx:id="buttonCancelar" layoutX="711.0" layoutY="404.0" mnemonicParsing="false" onAction="#handleButtonDeletar" prefHeight="35.0" prefWidth="113.0" styleClass="buttonDecline" text="Deletar" />
       <Label layoutX="17.0" layoutY="7.0" text="Entrega" />
       <Line endX="833.0" layoutX="14.0" layoutY="41.0" startX="-14.0" />
-      <TableView layoutX="14.0" layoutY="68.0" prefHeight="349.0" prefWidth="277.0">
+      <TableView fx:id="tabbleViewEntregas" layoutX="14.0" layoutY="68.0" prefHeight="349.0" prefWidth="277.0">
         <columns>
-          <TableColumn prefWidth="128.0" text="Id" />
-          <TableColumn prefWidth="148.0" text="Cliente" />
+          <TableColumn fx:id="tabbleColumnEntregaId" prefWidth="128.0" text="Id" />
+          <TableColumn fx:id="tabbleColumnEntregaCliente" prefWidth="148.0" text="Cliente" />
         </columns>
       </TableView>
-      <ComboBox layoutX="443.0" layoutY="128.0" prefHeight="25.0" prefWidth="341.0" promptText="Selecione um Pedido" />
-      <Button layoutX="728.0" layoutY="362.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="113.0" styleClass="buttonPadrao" text="Alterar" />
+      <ComboBox fx:id="comboboxPedido" layoutX="443.0" layoutY="128.0" prefHeight="25.0" prefWidth="341.0" promptText="Selecione um Pedido" />
+      <Button fx:id="buttonAlterar" layoutX="711.0" layoutY="362.0" mnemonicParsing="false" onAction="#handleButtonAlterar" prefHeight="35.0" prefWidth="113.0" styleClass="buttonPadrao" text="Alterar" />
    </children>
 </AnchorPane>

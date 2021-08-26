@@ -102,6 +102,10 @@ public class FXMLMainController implements Initializable {
     
     }
     
+    public void handleRealizarEntrega() throws IOException{
+        AnchorPane anchor = (AnchorPane)FXMLLoader.load(getClass().getResource("/views/FXMLEntrega.fxml"));
+        
+        AnchorPanePrincipal.getChildren().setAll(anchor);
     
-    
+    }
 }
