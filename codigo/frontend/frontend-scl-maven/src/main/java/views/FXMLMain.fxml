@@ -40,7 +40,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="VBoxPai" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLMainController">
+<VBox fx:id="VBoxPai" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLMainController">
   <children>
     <AnchorPane fx:id="AnchorPanePai" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
@@ -61,10 +61,10 @@
                         <MenuItem fx:id="RealizarPedido" mnemonicParsing="false" onAction="#handleRealizarPedido" text="RealizarPedido" />
                      </items>
                   </Menu>
-                  <Menu mnemonicParsing="false" text="Pagamento">
-                     <items>
-                        <MenuItem fx:id="Ingrediente1" mnemonicParsing="false" onAction="#handleRealizarPagamento" text="Realizar Pagamento" />
-                     </items>
+                  <Menu mnemonicParsing="false" text="Entrega">
+                    <items>
+                      <MenuItem fx:id="RealizarEntrega" mnemonicParsing="false" onAction="#handleRealizarEntrega" text="RealizarEntrega" />
+                    </items>
                   </Menu>
             </menus>
           </MenuBar>
