@@ -104,8 +104,8 @@ public class FXMLMainController implements Initializable {
     
     }
     
-    public void handleCadastroEstoque() throws IOException{
-        AnchorPane anchor = (AnchorPane)FXMLLoader.load(getClass().getResource("/views/FXMLCadastroEstoque.fxml"));
+    public void handleRealizarPagamento() throws IOException{
+        AnchorPane anchor = (AnchorPane)FXMLLoader.load(getClass().getResource("/views/FXMLPagamento.fxml"));
         
         AnchorPanePrincipal.getChildren().setAll(anchor);
     

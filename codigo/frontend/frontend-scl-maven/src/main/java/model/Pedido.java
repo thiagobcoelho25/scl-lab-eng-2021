@@ -42,14 +42,17 @@ public class Pedido implements Serializable{
 
 	//private Entrega entrega;
 	
+	private Double valorTotal;
+	
 	private Collection<ItensPedido> itensPedido = new ArrayList<>();
 
 	@Builder
-	public Pedido(Integer id, Date data, Usuario user, Cliente cliente/*, Pagamento pagamento, Entrega entrega*/) {
+	public Pedido(Integer id, Date data, Usuario user, Cliente cliente/*, Pagamento pagamento, Entrega entrega*/, Double valorTotal) {
 		this.id = id;
 		this.data = data;
 		this.usuario  = user;
 		this.cliente = cliente;
+		this.valorTotal = valorTotal;
 		//this.pagamento = pagamento;
 		//this.entrega = entrega;
 	}
@@ -58,6 +61,9 @@ public class Pedido implements Serializable{
 		this.itensPedido = itensPedido;
 	}
 
+	public String toString() {
+		return this.id.toString();
+	}
 
 
 }

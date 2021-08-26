@@ -47,6 +47,9 @@ public class Pagamento implements Serializable{
 	@Enumerated(EnumType.STRING)
 	private TipoFormaPagamento formaDePagamento;
 	
+	@Enumerated(EnumType.STRING)
+	private PagamentoStatus pagamentoStatus;
+	
 	@OneToOne
 	@JoinColumn(name = "pedido_id")
 	private Pedido pedido;
