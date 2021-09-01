@@ -40,6 +40,7 @@ import model.Produto;
 import model.ProdutosIngredientes;
 import model.Usuario;
 import service.ClienteService;
+import service.EstoqueService;
 import service.FuncionarioService;
 import service.GerenteService;
 import service.IngredienteService;
@@ -129,6 +130,7 @@ public class FXMLPedidoController implements Initializable {
 	private final IngredienteService ingredienteService = new IngredienteService();
 	private final FuncionarioService funcionarioService = new  FuncionarioService();
 	private final ItensPedidoService itensPedidoService = new ItensPedidoService();
+	private final EstoqueService estoqueService = new EstoqueService();
 	
 	/*eliminar depois*/
 	private final GerenteService gerenteService = new GerenteService();
@@ -205,12 +207,12 @@ public class FXMLPedidoController implements Initializable {
 		tableColumnProduto.setCellValueFactory(new PropertyValueFactory<>("nome"));
 		tableColumnPrecoUnit.setCellValueFactory(new PropertyValueFactory<>("precoFinal"));
 		
-		//if(listaProdutosPedido.size() != 0) {
-			observableProdutosPedido = FXCollections.observableArrayList(listaProdutosPedido);
-			
-			tableItemsPedido.setItems(observableProdutosPedido);
-			tableItemsPedido.refresh();
-		//}
+	
+		observableProdutosPedido = FXCollections.observableArrayList(listaProdutosPedido);
+		
+		tableItemsPedido.setItems(observableProdutosPedido);
+		tableItemsPedido.refresh();
+
 		
     }
 	
@@ -245,21 +247,15 @@ public class FXMLPedidoController implements Initializable {
 			}
 		}
 			
-		/* Listando todos os pedidos ja salvos no banco */
-		List<Pedido> teste = pedidoService.listAll();
-		for (Pedido pedido : teste) {
-			System.out.println("Pedido = " + pedido.getId() + " / " + pedido.getData());
-		}
-	
-		/* teste quantidade acrescimos */
+		/* Diminuindo Ingredientes do Estoque */
 		for (ItensPedido item : itensPedidoSalvos) {
 			for (ProdutosIngredientes ingrediente : item.getProduto().getIngredientes()) {
 				System.out.println("Quantidade item ingrediente = " + ingrediente.getQuantidade());
-				System.out.println("Quantidade item ingrediente ID = " + ingrediente.getId().getIngrediente().getId());
+				System.out.println("Quantidade item ingrediente ID = " + ingrediente.getIngrediente().getId());
+				estoqueService.diminuirQtdEstoque(ingrediente.getQuantidade(), ingrediente.getIngrediente().getId());
 			}
 			for (Acrescimos acrescimo : item.getAcrescimos()) {
-				System.out.println("Quantidade item acrescimo = " + acrescimo.getQuantidade());
-				System.out.println("Quantidade item acrescimo ingrediente ID = " + acrescimo.getIngrediente().getId());
+				estoqueService.diminuirQtdEstoque(acrescimo.getQuantidade(), acrescimo.getIngrediente().getId());
 			}
 		}
 		
@@ -286,6 +282,7 @@ public class FXMLPedidoController implements Initializable {
 		textFieldFrete.clear();
 		textFieldValorTotal.clear();
 		
+		itensPedidoSalvos.clear();
 		listaProdutosPedido.clear();
 		acrescimosAdicionados.clear();
 		carregarTableViewItensPedido();
@@ -359,7 +356,8 @@ public class FXMLPedidoController implements Initializable {
 	}
 	
 	private void carregarComboBoxProdutos() {
-		listaProdutos = produtoService.listAll();
+		// carregando apens produtos disponiveis no estoque
+		listaProdutos = produtoService.listAllDisponiveis();
 		observableProduto = FXCollections.observableArrayList(listaProdutos);
 		combBoxProduto.setItems(observableProduto);
 	}

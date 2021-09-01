@@ -31,6 +31,11 @@ public class ProdutoController {
 		return ResponseEntity.ok().body(produtoService.listAll());
 	}
 	
+	@GetMapping("/findDisponiveis")
+	public ResponseEntity<List<Produto>> listAllDisponiveis(){
+		return ResponseEntity.ok().body(produtoService.listAllDisponiveis());
+	}
+	
 	@GetMapping("/{id}")
 	public ResponseEntity<Produto> find(@PathVariable Integer id){
 		return ResponseEntity.ok().body(produtoService.find(id));

@@ -24,6 +24,10 @@ public class ProdutoService {
 	public List<Produto> listAll() {
 		return produtoRepository.findAll();
 	}
+	
+	public List<Produto> listAllDisponiveis() {
+		return (List<Produto>) produtoRepository.findAllDisponiveis();
+	}
 
 	public Produto find(Integer id) {
 		return produtoRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Produto não existe"));

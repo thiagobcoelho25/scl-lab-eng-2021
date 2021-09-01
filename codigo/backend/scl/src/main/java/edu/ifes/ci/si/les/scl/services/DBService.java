@@ -80,8 +80,12 @@ public class DBService {
 		Ingrediente ingred3 = new Ingrediente(null, "Frango Empanado", 8.0);
 		Ingrediente ingred4 = new Ingrediente(null, "Macarrao", 5.0);
 		
+//		Estoque estoq1 = new Estoque(null, 50,ingred1);
+//		Estoque estoq2 = new Estoque(null, 10,ingred2);
 		Estoque estoq1 = new Estoque(null, 50,ingred1);
 		Estoque estoq2 = new Estoque(null, 10,ingred2);
+		Estoque estoq3 = new Estoque(null, 100,ingred3);
+		Estoque estoq4 = new Estoque(null, 40,ingred4);
 		
 		
 		//Instancia Bairro
@@ -156,7 +160,7 @@ public class DBService {
 		funcionarioRepository.saveAll(Arrays.asList(func1,func2));
 		
 		ingredienteRepository.saveAll(Arrays.asList(ingred1,ingred2,ingred3,ingred4));
-		estoqueRepository.saveAll(Arrays.asList(estoq1,estoq2));
+		estoqueRepository.saveAll(Arrays.asList(estoq1,estoq2,estoq3,estoq4));
 		//estoqueRepository.saveAll(Arrays.asList(estoq1,estoq2));
 		//ingredienteRepository.saveAll(Arrays.asList(ingred1,ingred2,ingred3));
 		produtoRepository.saveAll(Arrays.asList(p1,p2,p3));

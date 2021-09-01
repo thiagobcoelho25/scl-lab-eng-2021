@@ -37,6 +37,22 @@ private final String url = "http://localhost:8080/scl/produtos";
 		return null;
 	}
 	
+	// buscando apenas produtos com ingredientes principais disponiveis no estoque
+	public List<Produto> listAllDisponiveis(){
+		try {
+            WebTarget target = client.target(url + "/findDisponiveis");
+            String json = target.request().get(String.class);
+            ObjectMapper mapper = new ObjectMapper();
+            TypeReference<List<Produto>> mapType = new TypeReference<List<Produto>>() {
+            };
+            List<Produto> lista = mapper.readValue(json, mapType);
+            return lista;
+        } catch (IOException ex) {
+            Logger.getLogger(BairroService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		return null;
+	}
+	
 	public String insert(Produto produto) {
 		try {
             WebTarget target = client.target(url);

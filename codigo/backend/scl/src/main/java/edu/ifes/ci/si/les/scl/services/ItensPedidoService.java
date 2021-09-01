@@ -44,7 +44,7 @@ public class ItensPedidoService {
 //			throw new DataIntegrityException("Não foi possivel Inserir o objeto Item pedido");
 //		}
 		
-
+		
 		itensPedido.setId(null);
 		try {
 			for (Acrescimos acrescimo : itensPedido.getAcrescimos()) {

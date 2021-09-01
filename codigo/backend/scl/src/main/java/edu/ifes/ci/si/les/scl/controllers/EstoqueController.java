@@ -29,4 +29,10 @@ public class EstoqueController {
 		return ResponseEntity.ok().body(estoqueService.find(id));
 	}
 	
+	@GetMapping("/diminuirQtdEstoque/{quantidade}/{ingredienteID}")
+	public ResponseEntity<Void> diminuirQtdEstoquePedido(@PathVariable(name = "quantidade") Integer quantidade, @PathVariable(name = "ingredienteID") Integer ingredienteID){
+		estoqueService.diminuirQtdEstoquePedido(quantidade, ingredienteID);
+		return ResponseEntity.noContent().build();
+	}
+	
 }
