@@ -76,6 +76,11 @@
                       <MenuItem fx:id="ProcessoPagamento" mnemonicParsing="false" onAction="#handleRealizarPagamento" text="Realizar Pagamento" />
                     </items>
                   </Menu>
+                  <Menu mnemonicParsing="false" text="Relatorio">
+                     <items>
+                        <MenuItem fx:id="ProcessoPagamento1" mnemonicParsing="false" onAction="#handleListarBairros" text="Listar Bairros" />
+                     </items>
+                  </Menu>
             </menus>
           </MenuBar>
             <AnchorPane fx:id="AnchorPanePrincipal" layoutY="27.0" prefHeight="372.0" prefWidth="640.0" styleClass="background" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">

@@ -130,4 +130,11 @@ public class FXMLMainController implements Initializable {
         AnchorPanePrincipal.getChildren().setAll(anchor);
     
     }
+    
+    public void handleListarBairros() throws IOException{
+        AnchorPane anchor = (AnchorPane)FXMLLoader.load(getClass().getResource("/views/FXMLListarBairros.fxml"));
+        
+        AnchorPanePrincipal.getChildren().setAll(anchor);
+    
+    }
 }
