@@ -51,4 +51,9 @@ public class ClienteController {
         clienteService.delete(id);
         return ResponseEntity.noContent().build();
     }
+    
+    @RequestMapping(value = "/relatorios/{idBairro}")
+    public ResponseEntity<List<Cliente>> findByBairro(@PathVariable Integer idBairro) {
+        return ResponseEntity.ok().body(clienteService.findByBairro(idBairro));
+    }
 }
