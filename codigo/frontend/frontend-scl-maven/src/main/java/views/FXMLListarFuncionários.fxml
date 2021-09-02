@@ -8,17 +8,17 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLListarFuncionariosController">
    <children>
       <Label layoutX="58.0" layoutY="59.0" text="Bairro:" />
-      <TableView layoutX="58.0" layoutY="113.0" prefHeight="204.0" prefWidth="487.0">
+      <TableView fx:id="tableFuncionarios" layoutX="58.0" layoutY="113.0" prefHeight="204.0" prefWidth="487.0">
         <columns>
-          <TableColumn prefWidth="335.0" text="Nome" />
-          <TableColumn prefWidth="151.0" text="CPF" />
+          <TableColumn fx:id="tableColumnNome" prefWidth="335.0" text="Nome" />
+          <TableColumn fx:id="tableColumnCargo" prefWidth="151.0" text="Cargo" />
         </columns>
       </TableView>
       <Button layoutX="258.0" layoutY="341.0" mnemonicParsing="false" styleClass="buttonPadrao" text="Voltar" />
-      <ComboBox layoutX="152.0" layoutY="60.0" prefHeight="25.0" prefWidth="395.0" />
+      <ComboBox fx:id="comboBoxBairro" layoutX="152.0" layoutY="60.0" prefHeight="25.0" prefWidth="395.0" />
       <Line endX="499.0" layoutX="101.0" layoutY="33.0" startX="-100.0" />
       <Label layoutX="11.0" layoutY="4.0" text="Lista de Funcionários" />
    </children>

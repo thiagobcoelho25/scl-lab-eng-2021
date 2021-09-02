@@ -46,9 +46,13 @@ public class FXMLMainController implements Initializable {
     @FXML
     private MenuItem RealizarPedido;
     @FXML
+    private MenuItem ListagemFuncionarios;
+    @FXML
     private AnchorPane AnchorPanePrincipal;
     @FXML
     private AnchorPane AnchorPanePai;
+    
+    
     @FXML
     private VBox VBoxPai;
 
@@ -126,6 +130,13 @@ public class FXMLMainController implements Initializable {
     
     public void handleRealizarPagamento() throws IOException{
         AnchorPane anchor = (AnchorPane)FXMLLoader.load(getClass().getResource("/views/FXMLPagamento.fxml"));
+        
+        AnchorPanePrincipal.getChildren().setAll(anchor);
+    
+    }
+    
+    public void handleListarFuncionarios() throws IOException{
+        AnchorPane anchor = (AnchorPane)FXMLLoader.load(getClass().getResource("/views/FXMLListarFuncionarios.fxml"));
         
         AnchorPanePrincipal.getChildren().setAll(anchor);
     
