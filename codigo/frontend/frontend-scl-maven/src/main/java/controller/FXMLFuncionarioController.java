@@ -112,6 +112,8 @@ public class FXMLFuncionarioController implements Initializable {
 		
 	}
 	
+	
+	
 	public void carregarTableViewFuncionario() {
         colunaID.setCellValueFactory(new PropertyValueFactory<>("id"));
         colunaNome.setCellValueFactory(new PropertyValueFactory<>("nome"));

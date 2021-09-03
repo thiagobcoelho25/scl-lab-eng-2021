@@ -15,6 +15,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import exception.StandardError;
+import model.Bairro;
 import model.Funcionario;
 
 public class FuncionarioService {
@@ -98,6 +99,20 @@ public class FuncionarioService {
 				+ standardError.getStatus() + "\n"
 				+ standardError.getError() + "\n";
 	}
+	
+	public List<Funcionario> findByBairro(Bairro bairro) {
+        try {
+            WebTarget target = client.target(url + "/findByBairro/"+ bairro.getId());
+            String json = target.request().get(String.class);
+            ObjectMapper mapper = new ObjectMapper();
+            TypeReference<List<Funcionario>> mapType = new TypeReference<List<Funcionario>>() {};
+            List<Funcionario> lista = mapper.readValue(json, mapType);
+            return lista;
+        } catch (IOException ex) {
+            Logger.getLogger(ClienteService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 	
 	
 
