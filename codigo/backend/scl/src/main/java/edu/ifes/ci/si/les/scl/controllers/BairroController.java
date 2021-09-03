@@ -1,5 +1,6 @@
 package edu.ifes.ci.si.les.scl.controllers;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.ifes.ci.si.les.scl.models.Bairro;
@@ -33,6 +35,11 @@ public class BairroController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<Bairro> findById(@PathVariable Integer id){
         return ResponseEntity.ok().body(bairroService.findById(id));
+    }
+    
+    @GetMapping(value = "/relatorios")
+    public ResponseEntity<List<Bairro>> findByEntregavel(@RequestParam String entregavel){
+        return ResponseEntity.ok().body(bairroService.findByEntregavel(entregavel));
     }
 
     @PostMapping()

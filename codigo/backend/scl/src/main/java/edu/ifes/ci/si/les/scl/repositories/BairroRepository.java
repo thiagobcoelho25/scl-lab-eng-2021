@@ -1,10 +1,11 @@
 package edu.ifes.ci.si.les.scl.repositories;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-import edu.ifes.ci.si.les.scl.models.Bairro;
+import java.util.Collection;
+import java.util.List;
 
-@Repository
-public interface BairroRepository extends JpaRepository<Bairro, Integer> {		
-	
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+	@Query(value = "SELECT * FROM BAIRRO where entregavel = ?1 order by entregavel = 'sim' desc", nativeQuery = true)
+	public List<Bairro> findByEntregavel(String entregavel);
 }
