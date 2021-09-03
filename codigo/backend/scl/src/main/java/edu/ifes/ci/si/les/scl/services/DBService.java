@@ -79,6 +79,7 @@ public class DBService {
 		Ingrediente ingred2 = new Ingrediente(null, "Batata", 5.0);
 		Ingrediente ingred3 = new Ingrediente(null, "Frango Empanado", 8.0);
 		Ingrediente ingred4 = new Ingrediente(null, "Macarrao", 5.0);
+		Ingrediente ingred5 = new Ingrediente(null, "Camarão", 15.0);
 		
 //		Estoque estoq1 = new Estoque(null, 50,ingred1);
 //		Estoque estoq2 = new Estoque(null, 10,ingred2);
@@ -159,7 +160,7 @@ public class DBService {
 		gerenteRepository.save(g1);
 		funcionarioRepository.saveAll(Arrays.asList(func1,func2));
 		
-		ingredienteRepository.saveAll(Arrays.asList(ingred1,ingred2,ingred3,ingred4));
+		ingredienteRepository.saveAll(Arrays.asList(ingred1,ingred2,ingred3,ingred4,ingred5));
 		estoqueRepository.saveAll(Arrays.asList(estoq1,estoq2,estoq3,estoq4));
 		//estoqueRepository.saveAll(Arrays.asList(estoq1,estoq2));
 		//ingredienteRepository.saveAll(Arrays.asList(ingred1,ingred2,ingred3));

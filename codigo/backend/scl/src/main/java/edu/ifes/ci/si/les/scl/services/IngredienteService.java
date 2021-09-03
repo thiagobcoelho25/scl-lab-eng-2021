@@ -92,5 +92,9 @@ public class IngredienteService {
 			throw new ObjectNotFoundException("Objeto Ingrediente não existe");
 		}
 	}
+	
+	public List<Ingrediente> listagemIngredientePorQuantidadeMaximaNoEstoque(Integer quantidade){
+		return ingredienteRepository.listOfIngredientesThatHaveEstoqueQuantidadeGreaterThan(quantidade);
+	}
 
 }

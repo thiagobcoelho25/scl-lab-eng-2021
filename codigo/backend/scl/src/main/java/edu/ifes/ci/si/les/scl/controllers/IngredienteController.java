@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.ifes.ci.si.les.scl.models.Ingrediente;
@@ -52,9 +53,13 @@ public class IngredienteController {
         return ResponseEntity.noContent().build();
     }
 
-	
 	@PostMapping("/estoque")
 	public ResponseEntity<Ingrediente> insertEstoqueIngrediente(@Valid @RequestBody Ingrediente ingrediente){
 		return ResponseEntity.status(HttpStatus.CREATED).body(ingredienteService.insertEstoqueIngrediente(ingrediente));
+	}
+	
+	@GetMapping("/relatorio")
+	public ResponseEntity<List<Ingrediente>> RelatorioIngrediente(@RequestParam(required = true) Integer quantidade){
+		return ResponseEntity.ok().body(ingredienteService.listagemIngredientePorQuantidadeMaximaNoEstoque(quantidade));
 	}
 }

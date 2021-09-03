@@ -46,6 +46,8 @@ public class FXMLMainController implements Initializable {
     @FXML
     private MenuItem RealizarPedido;
     @FXML
+    private MenuItem RelatorioIngredientes;
+    @FXML
     private AnchorPane AnchorPanePrincipal;
     @FXML
     private AnchorPane AnchorPanePai;
@@ -126,6 +128,13 @@ public class FXMLMainController implements Initializable {
     
     public void handleRealizarPagamento() throws IOException{
         AnchorPane anchor = (AnchorPane)FXMLLoader.load(getClass().getResource("/views/FXMLPagamento.fxml"));
+        
+        AnchorPanePrincipal.getChildren().setAll(anchor);
+    
+    }
+    
+    public void handleRelatoriosIngredientes() throws IOException{
+        AnchorPane anchor = (AnchorPane)FXMLLoader.load(getClass().getResource("/views/FXMLListaIngredientes.fxml"));
         
         AnchorPanePrincipal.getChildren().setAll(anchor);
     

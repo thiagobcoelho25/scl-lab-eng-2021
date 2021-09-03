@@ -16,6 +16,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import edu.ifes.ci.si.les.scl.exceptions.BusinessRuleException;
@@ -75,6 +76,21 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(DataIntegrityException.class)
 	public ResponseEntity<StandardError> dataIntegrity(DataIntegrityException e, HttpServletRequest request){
 		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.INTERNAL_SERVER_ERROR.value(),"Erro Integridade dos dados",e.getMessage(),request.getRequestURI());
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(err);
+	}
+	
+	// Ambiguous @ExceptionHandler method mapped for
+	/*@ExceptionHandler(MissingServletRequestParameterException.class)
+	protected ResponseEntity<StandardError> handleMissingServletRequestParameter(MissingServletRequestParameterException e, HttpServletRequest request) {
+		String errorString = "Parametro " + e.getParameterName() + " faltando!";
+		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.INTERNAL_SERVER_ERROR.value(),"Erro Integridade dos dados",errorString,request.getRequestURI());
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(err);
+	}*/
+	
+	@ExceptionHandler(MethodArgumentTypeMismatchException.class)
+	public ResponseEntity<StandardError> handleArgumentTypeParams(MethodArgumentTypeMismatchException e, HttpServletRequest request) {
+		String errorString = "Parametro " + e.getValue() + " diferente do que se esperava " + e.getRequiredType();
+		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.INTERNAL_SERVER_ERROR.value(),"Erro Tipo de parametro",errorString,request.getRequestURI());
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(err);
 	}
 
