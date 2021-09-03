@@ -54,6 +54,9 @@ public class FXMLMainController implements Initializable {
     
     
     @FXML
+    private MenuItem RelatorioClientePorBairro;
+    @FXML
+    
     private VBox VBoxPai;
 
     /**
@@ -134,9 +137,8 @@ public class FXMLMainController implements Initializable {
         AnchorPanePrincipal.getChildren().setAll(anchor);
     
     }
-    
-    public void handleListarFuncionarios() throws IOException{
-        AnchorPane anchor = (AnchorPane)FXMLLoader.load(getClass().getResource("/views/FXMLListarFuncionarios.fxml"));
+    public void handleListarClientesPorBairro() throws IOException{
+        AnchorPane anchor = (AnchorPane)FXMLLoader.load(getClass().getResource("/views/FXMLListarClientesPorBairro.fxml"));
         
         AnchorPanePrincipal.getChildren().setAll(anchor);
     
