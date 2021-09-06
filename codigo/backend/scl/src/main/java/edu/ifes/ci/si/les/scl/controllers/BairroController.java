@@ -1,6 +1,5 @@
 package edu.ifes.ci.si.les.scl.controllers;
 
-import java.util.Collection;
 import java.util.List;
 
 import javax.validation.Valid;

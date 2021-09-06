@@ -4,7 +4,6 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -59,8 +58,6 @@ public class FXMLListarBairrosController implements Initializable {
 	@FXML
 	public void verificaMarcacao() {
 		listBairros = bairroService.findByEntregavel(checkbox.isSelected() == true ? EntregavelStatus.sim.toString() : EntregavelStatus.nao.toString());
-		
-		System.out.println(listBairros);
 		
 		observableListBairros = FXCollections.observableArrayList(listBairros);
 		tableViewBairros.setItems(observableListBairros);

@@ -15,7 +15,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import exception.StandardError;
 import model.Estoque;
-import model.Funcionario;
 
 public class EstoqueService {
 	private final String url = "http://localhost:8080/scl/estoques";

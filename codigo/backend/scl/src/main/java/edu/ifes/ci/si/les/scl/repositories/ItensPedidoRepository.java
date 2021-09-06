@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import antlr.collections.List;
 import edu.ifes.ci.si.les.scl.models.ItensPedido;
 import edu.ifes.ci.si.les.scl.models.Pedido;
 

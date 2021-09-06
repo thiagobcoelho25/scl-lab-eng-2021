@@ -2,18 +2,15 @@ package edu.ifes.ci.si.les.scl.services;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 
 import edu.ifes.ci.si.les.scl.exceptions.DataIntegrityException;
 import edu.ifes.ci.si.les.scl.exceptions.ObjectNotFoundException;
 import edu.ifes.ci.si.les.scl.models.ItensPedido;
 import edu.ifes.ci.si.les.scl.models.Pedido;
-import edu.ifes.ci.si.les.scl.models.ProdutosIngredientes;
 import edu.ifes.ci.si.les.scl.repositories.PedidoRepository;
 
 @Service

@@ -5,7 +5,6 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,13 +17,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import model.Bairro;
 import model.Entrega;
 import model.Pedido;
-import model.Produto;
 import model.enums.StatusEntrega;
-import model.enums.TipoIngrediente;
-import service.ClienteService;
 import service.EntregaService;
 import service.PedidoService;
 

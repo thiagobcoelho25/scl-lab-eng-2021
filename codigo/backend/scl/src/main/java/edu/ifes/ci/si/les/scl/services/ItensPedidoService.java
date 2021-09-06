@@ -11,11 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import edu.ifes.ci.si.les.scl.exceptions.DataIntegrityException;
 import edu.ifes.ci.si.les.scl.exceptions.ObjectNotFoundException;
 import edu.ifes.ci.si.les.scl.models.Acrescimos;
-import edu.ifes.ci.si.les.scl.models.Ingrediente;
 import edu.ifes.ci.si.les.scl.models.ItensPedido;
 import edu.ifes.ci.si.les.scl.models.Pedido;
-import edu.ifes.ci.si.les.scl.models.Produto;
-import edu.ifes.ci.si.les.scl.models.ProdutosIngredientes;
 import edu.ifes.ci.si.les.scl.repositories.ItensPedidoRepository;
 
 @Service
