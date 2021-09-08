@@ -23,8 +23,8 @@ public interface ProdutoRepository extends JpaRepository<Produto, Integer>{
 	
 	@Transactional(readOnly = true)
 	@Query(value = "SELECT * FROM PRODUTO \r\n"
-			+ "   WHERE PRECO_FINAL > :?1 ", nativeQuery = true)
-	public Collection<Produto> findAllProdutosPrecoMaiorQue(@Param("?1") Double valorMinimo);
+			+ "   WHERE PRECO_FINAL > ?1 ", nativeQuery = true)
+	public Collection<Produto> findAllProdutosPrecoMaiorQue(Double valorMinimo);
 	
 			  
 

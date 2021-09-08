@@ -55,7 +55,7 @@ private final String url = "http://localhost:8080/scl/produtos";
 	
 	public List<Produto> listAllProdutosMaiorQue(Double valor){
 		try {
-            WebTarget target = client.target(url + "/findPrecoMaiorQue/" + valor);
+            WebTarget target = client.target(url + "/findPrecoMaiorQue/" + valor.toString());
             String json = target.request().get(String.class);
             ObjectMapper mapper = new ObjectMapper();
             TypeReference<List<Produto>> mapType = new TypeReference<List<Produto>>() {

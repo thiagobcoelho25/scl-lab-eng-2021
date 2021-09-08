@@ -440,6 +440,27 @@
 						"description": "Deleta um produto, caso ele já seja usado em um pedido, retorna um erro."
 					},
 					"response": []
+				},
+				{
+					"name": "Find disponiveis",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/scl/produtos/findDisponiveis",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"scl",
+								"produtos",
+								"findDisponiveis"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -797,6 +818,149 @@
 								"scl",
 								"pedidos",
 								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Estoque",
+			"item": [
+				{
+					"name": "Diminuir  Qtd Estoque {qtd}/{ingredienteID}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Relatorios",
+			"item": [
+				{
+					"name": "Ingredientes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/scl/ingredientes/relatorio?quantidade=0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"scl",
+								"ingredientes",
+								"relatorio"
+							],
+							"query": [
+								{
+									"key": "quantidade",
+									"value": "0"
+								}
+							]
+						},
+						"description": "Passa um valor como parametro de query para ser filtrada entre os ingredientes que possuem estoque igual ou acima desse valor em quantidade.\nCaso esse valor não seja um inteiro ex: string, lança um erro do tipo \"Erro Tipo de parametro\"."
+					},
+					"response": []
+				},
+				{
+					"name": "Clientes por Bairro",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/scl/clientes/relatorios/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"scl",
+								"clientes",
+								"relatorios",
+								"1"
+							]
+						},
+						"description": "Listagem de Clientes por Bairro, onde foi criada uma rota dentro de clienteController (/clientes/relatorios/id) para acessar a tabela Bairro utilizando o campo BAIRRO_ID presente no cliente."
+					},
+					"response": []
+				},
+				{
+					"name": "Bairros",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/scl/bairros/relatorios?entregavel=sim",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"scl",
+								"bairros",
+								"relatorios"
+							],
+							"query": [
+								{
+									"key": "entregavel",
+									"value": "sim"
+								}
+							]
+						},
+						"description": "Retorna uma lista de bairros a partir da filtragem do atributo entregavel na entidade Bairro. Essa filtragem se da pela string \"sim\" ou \"nao\" na query param. Caso a query param não seja uma string, retorna um error do tipo \"Erro Tipo de parametro\"."
+					},
+					"response": []
+				},
+				{
+					"name": "Produto, Find Preco maior que",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/scl/produtos//findPrecoMaiorQue/20.0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"scl",
+								"produtos",
+								"",
+								"findPrecoMaiorQue",
+								"20.0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Funcionario, Find by Bairro",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/scl/funcionario/findByBairro/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"scl",
+								"funcionario",
+								"findByBairro",
+								"2"
 							]
 						}
 					},
