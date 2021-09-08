@@ -28,6 +28,10 @@ public class BairroService {
     public Bairro findById(Integer id){
         return bairroRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Objeto Bairro Nao encontrado com id = " + id));
     }
+    
+    public List<Bairro> findByEntregavel(String entregavel) {
+    	return bairroRepository.findByEntregavel(entregavel);
+    }
 
     public Bairro insert(Bairro bairro){
         bairro.setId(null);

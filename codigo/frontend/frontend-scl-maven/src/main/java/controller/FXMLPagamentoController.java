@@ -23,7 +23,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Cliente;
-import model.Funcionario;
 import model.Pagamento;
 import model.Pedido;
 import model.enums.PagamentoStatus;

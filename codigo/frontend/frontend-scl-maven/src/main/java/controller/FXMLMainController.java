@@ -45,8 +45,16 @@ public class FXMLMainController implements Initializable {
     private MenuItem RealizarEntrega;
     @FXML
     private MenuItem RealizarPedido;
+    
     @FXML
     private MenuItem ListagemFuncionarios;
+    @FXML
+    private MenuItem ListagemBairros;
+    @FXML
+    private MenuItem ListagemClientes;
+    @FXML
+    private MenuItem ListagemIngrediente;
+    
     @FXML
     private AnchorPane AnchorPanePrincipal;
     @FXML
@@ -54,6 +62,9 @@ public class FXMLMainController implements Initializable {
     
     
     @FXML
+    private MenuItem RelatorioClientePorBairro;
+    @FXML
+    
     private VBox VBoxPai;
 
     /**
@@ -139,6 +150,23 @@ public class FXMLMainController implements Initializable {
         AnchorPane anchor = (AnchorPane)FXMLLoader.load(getClass().getResource("/views/FXMLListarFuncionarios.fxml"));
         
         AnchorPanePrincipal.getChildren().setAll(anchor);
+    }
+ 
+    public void handleListarBairros() throws IOException{
+        AnchorPane anchor = (AnchorPane)FXMLLoader.load(getClass().getResource("/views/FXMLListarBairros.fxml"));
+        
+        AnchorPanePrincipal.getChildren().setAll(anchor);
+    }
     
+    public void handleListarIngredientes() throws IOException{
+        AnchorPane anchor = (AnchorPane)FXMLLoader.load(getClass().getResource("/views/FXMLListaIngredientes.fxml"));
+        
+        AnchorPanePrincipal.getChildren().setAll(anchor);
+    }
+    
+    public void handleListarClientes() throws IOException{
+        AnchorPane anchor = (AnchorPane)FXMLLoader.load(getClass().getResource("/views/FXMLListarClientesPorBairro.fxml"));
+        
+        AnchorPanePrincipal.getChildren().setAll(anchor);
     }
 }

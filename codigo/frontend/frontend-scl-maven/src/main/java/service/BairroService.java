@@ -14,6 +14,7 @@ import javax.ws.rs.core.Response;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+
 import exception.StandardError;
 import model.Bairro;
 
@@ -25,6 +26,21 @@ private final String url = "http://localhost:8080/scl/bairros";
 	public List<Bairro> listAll(){
 		try {
             WebTarget target = client.target(url);
+            String json = target.request().get(String.class);
+            ObjectMapper mapper = new ObjectMapper();
+            TypeReference<List<Bairro>> mapType = new TypeReference<List<Bairro>>() {
+            };
+            List<Bairro> lista = mapper.readValue(json, mapType);
+            return lista;
+        } catch (IOException ex) {
+            Logger.getLogger(BairroService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		return null;
+	}
+	
+	public List<Bairro> findByEntregavel(String entregavel){
+		try {
+            WebTarget target = client.target(url+"/relatorios?entregavel="+entregavel);
             String json = target.request().get(String.class);
             ObjectMapper mapper = new ObjectMapper();
             TypeReference<List<Bairro>> mapType = new TypeReference<List<Bairro>>() {

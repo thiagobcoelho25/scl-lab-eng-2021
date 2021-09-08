@@ -105,6 +105,22 @@ private final String url = "http://localhost:8080/scl/ingredientes";
         return "";
     }
 	
+	public List<Ingrediente> relatorioIngredinete(Integer quantidade){
+		try {
+            WebTarget target = client.target(url + "/relatorio" + "?quantidade=" + quantidade);
+            System.out.println(target);
+            String json = target.request().get(String.class);
+            ObjectMapper mapper = new ObjectMapper();
+            TypeReference<List<Ingrediente>> mapType = new TypeReference<List<Ingrediente>>() {
+            };
+            List<Ingrediente> lista = mapper.readValue(json, mapType);
+            return lista;
+        } catch (IOException ex) {
+            Logger.getLogger(BairroService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		return null;
+	}
+	
 	public String construçãoStandardError(StandardError standardError) {
 		return standardError.getMessage() == null ? standardError.getTimestamp() + "\n"
 				+ standardError.getStatus() + "\n"

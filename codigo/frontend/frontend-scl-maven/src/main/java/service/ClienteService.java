@@ -13,8 +13,8 @@ import javax.ws.rs.core.Response;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import exception.StandardError;
+import model.Bairro;
 import model.Cliente;
 
 public class ClienteService {
@@ -97,4 +97,18 @@ public class ClienteService {
 				+ standardError.getStatus() + "\n"
 				+ standardError.getError() + "\n";
 	}
+	
+	public List<Cliente> findByBairro(Bairro bairro) {
+    	try {
+            WebTarget target = client.target(url + "/relatorios/"+bairro.getId());
+            String json = target.request().get(String.class);
+            ObjectMapper mapper = new ObjectMapper();
+            TypeReference<List<Cliente>> mapType = new TypeReference<List<Cliente>>() {};
+            List<Cliente> lista = mapper.readValue(json, mapType);
+            return lista;
+        } catch (IOException ex) {
+            Logger.getLogger(ClienteService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }

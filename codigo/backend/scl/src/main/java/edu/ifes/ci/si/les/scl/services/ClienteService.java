@@ -46,7 +46,9 @@ public class ClienteService {
 	                throw new DataIntegrityException("Não foi possivel Excluir o objeto Cliente");
 	        }
 	    }
-	
-	
+	 
+	 public List<Cliente> findByBairro(Integer idBairro) {
+			return clienteRepository.findByBairro(idBairro);
+		}
 	
 }

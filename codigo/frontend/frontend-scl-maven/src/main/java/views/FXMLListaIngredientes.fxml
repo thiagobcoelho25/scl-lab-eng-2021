@@ -8,20 +8,20 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.reports.FXMLListaIngredientesController">
    <children>
       <Label layoutX="14.0" layoutY="14.0" text="Lista de Ingredientes" />
       <Label layoutX="22.0" layoutY="70.0" text="Quantidade maior que:" />
-      <TableView layoutX="54.0" layoutY="151.0" prefHeight="200.0" prefWidth="494.0">
+      <TableView fx:id="tableViewIngrediente" layoutX="54.0" layoutY="151.0" prefHeight="200.0" prefWidth="494.0">
          <columns>
-            <TableColumn prefWidth="237.0" text="Nome Ingrediente" />
-            <TableColumn prefWidth="256.0" text="Quantidade" />
+            <TableColumn fx:id="tableColumnNome" prefWidth="237.0" text="Nome Ingrediente" />
+            <TableColumn fx:id="tableColumnQuantidade" prefWidth="256.0" text="Quantidade" />
          </columns>
       </TableView>
       <Button layoutX="258.0" layoutY="355.0" mnemonicParsing="false" styleClass="buttonPadrao" text="Voltar" />
-      <TextField layoutX="221.0" layoutY="69.0" prefHeight="30.0" prefWidth="254.0" />
+      <TextField fx:id="textFieldQuantidade" layoutX="221.0" layoutY="69.0" prefHeight="30.0" prefWidth="254.0" />
       <Line endX="586.0" layoutX="14.0" layoutY="48.0" startX="-14.0" />
-      <Button layoutX="488.0" layoutY="68.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="69.0" styleClass="buttonPadrao" text="OK" />
+      <Button fx:id="buttonConfirmar" layoutX="488.0" layoutY="68.0" mnemonicParsing="false" onAction="#handleButtonConfirmar" prefHeight="31.0" prefWidth="69.0" styleClass="buttonPadrao" text="OK" />
       <Label layoutX="181.0" layoutY="116.0" text="Ingredientes por Quantidade" />
    </children>
 </AnchorPane>

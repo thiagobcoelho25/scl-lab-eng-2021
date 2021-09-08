@@ -4,13 +4,11 @@ import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import antlr.collections.List;
 import edu.ifes.ci.si.les.scl.model.enums.EntregavelStatus;
 import edu.ifes.ci.si.les.scl.model.enums.PagamentoStatus;
 import edu.ifes.ci.si.les.scl.model.enums.StatusEntrega;
@@ -79,6 +77,10 @@ public class DBService {
 		Ingrediente ingred2 = new Ingrediente(null, "Batata", 5.0);
 		Ingrediente ingred3 = new Ingrediente(null, "Frango Empanado", 8.0);
 		Ingrediente ingred4 = new Ingrediente(null, "Macarrao", 5.0);
+		Ingrediente ingred5 = new Ingrediente(null, "Camarão", 15.0);
+		Ingrediente ingred6 = new Ingrediente(null, "Lagosta", 30.0);
+		Ingrediente ingred7 = new Ingrediente(null, "Linguiça", 5.0);
+		Ingrediente ingred8 = new Ingrediente(null, "Lombo", 8.0);
 		
 //		Estoque estoq1 = new Estoque(null, 50,ingred1);
 //		Estoque estoq2 = new Estoque(null, 10,ingred2);
@@ -86,22 +88,34 @@ public class DBService {
 		Estoque estoq2 = new Estoque(null, 10,ingred2);
 		Estoque estoq3 = new Estoque(null, 100,ingred3);
 		Estoque estoq4 = new Estoque(null, 40,ingred4);
+		Estoque estoq6 = new Estoque(null, 5,ingred6);
+		Estoque estoq7 = new Estoque(null, 500,ingred7);
 		
 		
 		//Instancia Bairro
 		Bairro b1 = new Bairro(null, "BNH", 0.0, EntregavelStatus.nao);
 		Bairro b2 = new Bairro(null, "Aeroporto", 5.0, EntregavelStatus.sim);
 		Bairro b3 = new Bairro(null, "Gilberto Machado", 6.0, EntregavelStatus.sim);
+		Bairro b4 = new Bairro(null, "Gilson Carone", 0.0, EntregavelStatus.nao);
+		Bairro b5 = new Bairro(null, "Village", 5.0, EntregavelStatus.nao);
+		Bairro b6 = new Bairro(null, "Centro", 6.0, EntregavelStatus.sim);
+		
 		
 		//Instancia Gerente
 		Gerente g1 = new Gerente(null, "Israel", "rua de Muqui", 25, b2, "admin", "123");
 		Funcionario func1 = new Funcionario(null, "Jhon", "Rua Joaquim Afonso", 7, b2, "admin", "123", "Atendente", 1500.0);
 		Funcionario func2 = new Funcionario(null, "Gabriel", "Av F. Lacerda de Aguiar", 16, b3, "admin", "123", "Chapeiro", 1600.0);
+		Funcionario func3 = new Funcionario(null, "Big Jhoe", "Rua Sem Saida", 9, b5, "admin", "123", "Atendente", 1500.0);
+		Funcionario func4 = new Funcionario(null, "Carl Jhonson", "Av Principal", 20, b6, "admin", "123", "Chapeiro", 1600.0);
+		Funcionario func5 = new Funcionario(null, "Big smoke", "Beco", 5, b5, "admin", "123", "Entregador", 1500.0);
 		
 		//Instancia Cliente
 		Cliente c1 = new Cliente(null, "Thiago", "Rua sem nome", 5, "perto da fabrica C&M", b1);
 		Cliente c2 = new Cliente(null, "Maria", "C. Dias Lopes", 10, "perto da rodoviaria", b3);
 		Cliente c3 = new Cliente(null, "Thalis", "Rua do aeroporto", 24, "perto da marbrasa", b2);
+		Cliente c4 = new Cliente(null, "Sebastiana", "Rua Sem Saida", 5, "perto da fabrica C&M", b6);
+		Cliente c5 = new Cliente(null, "Jorgizel", "C. Dias Lopes", 10, "perto da rodoviaria", b5);
+		Cliente c6 = new Cliente(null, "Carmozina", "Rua do aeroporto", 24, "perto da marbrasa", b4);
 		
 		//Instancia Produto
 		Produto p1 = new Produto(null, "Hamburgue", 25.0);
@@ -154,13 +168,13 @@ public class DBService {
 		
 		
 		//------------------------------------------------------------------------------------------
-		bairroRep.saveAll(Arrays.asList(b1,b2,b3));
-		clienteRepository.saveAll(Arrays.asList(c1,c2,c3));
+		bairroRep.saveAll(Arrays.asList(b1,b2,b3,b4,b5,b6));
+		clienteRepository.saveAll(Arrays.asList(c1,c2,c3,c4,c5,c6));
 		gerenteRepository.save(g1);
-		funcionarioRepository.saveAll(Arrays.asList(func1,func2));
+		funcionarioRepository.saveAll(Arrays.asList(func1,func2,func3,func4,func5));
 		
-		ingredienteRepository.saveAll(Arrays.asList(ingred1,ingred2,ingred3,ingred4));
-		estoqueRepository.saveAll(Arrays.asList(estoq1,estoq2,estoq3,estoq4));
+		ingredienteRepository.saveAll(Arrays.asList(ingred1,ingred2,ingred3,ingred4,ingred5,ingred6,ingred7,ingred8));
+		estoqueRepository.saveAll(Arrays.asList(estoq1,estoq2,estoq3,estoq4,estoq6,estoq7));
 		//estoqueRepository.saveAll(Arrays.asList(estoq1,estoq2));
 		//ingredienteRepository.saveAll(Arrays.asList(ingred1,ingred2,ingred3));
 		produtoRepository.saveAll(Arrays.asList(p1,p2,p3));
