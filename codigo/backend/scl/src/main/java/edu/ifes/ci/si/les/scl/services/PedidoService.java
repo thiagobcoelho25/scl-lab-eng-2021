@@ -1,5 +1,6 @@
 package edu.ifes.ci.si.les.scl.services;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -66,6 +67,14 @@ public class PedidoService {
 		}catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityException("Pedido não existe");
 		}
+	}
+	
+	public Collection<?> findPedidoByClienteID(Integer clienteID){
+		return pedidoRepository.findPedidoByClienteID(clienteID);
+	}
+	
+	public Collection<?> findPedidoByBairroID(Integer bairroID){
+		return pedidoRepository.findPedidoByClienteID(bairroID);
 	}
 
 }

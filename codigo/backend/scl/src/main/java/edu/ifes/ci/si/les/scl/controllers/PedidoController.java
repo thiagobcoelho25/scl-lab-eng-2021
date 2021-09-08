@@ -1,5 +1,6 @@
 package edu.ifes.ci.si.les.scl.controllers;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -51,6 +52,18 @@ public class PedidoController {
 	public ResponseEntity<Void> delete(@PathVariable Integer id){
 		pedidoService.delete(id);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@GetMapping("/findPedidoByCliente/{id}")
+	public ResponseEntity<Collection<?>> findPedidoByCliente(@PathVariable Integer id){
+		Collection<?> collectionRetorno = pedidoService.findPedidoByClienteID(id);
+		return ResponseEntity.ok().body(collectionRetorno);
+	}
+	
+	@GetMapping("/findPedidoByBairro/{id}")
+	public ResponseEntity<Collection<?>> findPedidoByBairro(@PathVariable Integer id){
+		Collection<?> collectionRetorno = pedidoService.findPedidoByBairroID(id);
+		return ResponseEntity.ok().body(collectionRetorno);
 	}
 
 }
