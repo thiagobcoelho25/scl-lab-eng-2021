@@ -169,4 +169,11 @@ public class FXMLMainController implements Initializable {
         
         AnchorPanePrincipal.getChildren().setAll(anchor);
     }
+    
+    public void handleListarProdutos() throws IOException{
+        AnchorPane anchor = (AnchorPane)FXMLLoader.load(getClass().getResource("/views/FXMLListaProdutos.fxml"));
+        
+        AnchorPanePrincipal.getChildren().setAll(anchor);
+    }
+    
 }

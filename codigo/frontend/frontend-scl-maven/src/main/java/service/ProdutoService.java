@@ -53,6 +53,21 @@ private final String url = "http://localhost:8080/scl/produtos";
 		return null;
 	}
 	
+	public List<Produto> listAllProdutosMaiorQue(Double valor){
+		try {
+            WebTarget target = client.target(url + "/findPrecoMaiorQue/" + valor);
+            String json = target.request().get(String.class);
+            ObjectMapper mapper = new ObjectMapper();
+            TypeReference<List<Produto>> mapType = new TypeReference<List<Produto>>() {
+            };
+            List<Produto> lista = mapper.readValue(json, mapType);
+            return lista;
+        } catch (IOException ex) {
+            Logger.getLogger(BairroService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		return null;
+	}
+	
 	public String insert(Produto produto) {
 		try {
             WebTarget target = client.target(url);

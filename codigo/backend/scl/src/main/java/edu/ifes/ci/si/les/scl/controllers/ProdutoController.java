@@ -1,5 +1,6 @@
 package edu.ifes.ci.si.les.scl.controllers;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -56,4 +57,9 @@ public class ProdutoController {
 		produtoService.delete(id);
         return ResponseEntity.noContent().build();
     }
+	
+	@GetMapping("/findPrecoMaiorQue/{valorMinimo}")
+	public ResponseEntity<Collection<Produto>> findAllProdutosPrecoMaiorQue(@PathVariable("valorMinimo") Double valor){
+		return ResponseEntity.ok().body(produtoService.findAllProdutosPrecoMaiorQue(valor));
+	}
 }

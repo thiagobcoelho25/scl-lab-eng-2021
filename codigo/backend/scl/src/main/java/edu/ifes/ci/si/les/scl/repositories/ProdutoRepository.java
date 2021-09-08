@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +20,11 @@ public interface ProdutoRepository extends JpaRepository<Produto, Integer>{
 			+ "   INNER JOIN ESTOQUE e ON i.ID = e.INGREDIENTE_ID\r\n"
 			+ "   WHERE pi.TIPO = 'principal' AND e.quantidade > 0\r\n", nativeQuery = true)
 	public Collection<Produto> findAllDisponiveis();
+	
+	@Transactional(readOnly = true)
+	@Query(value = "SELECT * FROM PRODUTO \r\n"
+			+ "   WHERE PRECO_FINAL > :?1 ", nativeQuery = true)
+	public Collection<Produto> findAllProdutosPrecoMaiorQue(@Param("?1") Double valorMinimo);
 	
 			  
 

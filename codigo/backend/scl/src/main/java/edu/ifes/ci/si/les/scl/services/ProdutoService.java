@@ -1,5 +1,6 @@
 package edu.ifes.ci.si.les.scl.services;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,5 +80,9 @@ public class ProdutoService {
 		} catch (EmptyResultDataAccessException e) {
 			throw new ObjectNotFoundException("Produto não existe");
 		}
+	}
+	
+	public Collection<Produto> findAllProdutosPrecoMaiorQue(Double valorMinimo){
+		return produtoRepository.findAllProdutosPrecoMaiorQue(valorMinimo);
 	}
 }
